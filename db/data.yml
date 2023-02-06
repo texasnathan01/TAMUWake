@@ -1,0 +1,36 @@
+
+---
+ar_internal_metadata:
+  columns:
+  - key
+  - value
+  - created_at
+  - updated_at
+  records: 
+  - - environment
+    - development
+    - 2023-02-06 00:05:28.845342000 Z
+    - 2023-02-06 00:05:28.845342000 Z
+
+---
+receipts:
+  columns:
+  - id
+  - value
+  - driver
+  - date
+  - created_at
+  - updated_at
+  records: 
+  - - 1
+    - 12.44
+    - Nathan
+    - '2023-02-05'
+    - 2023-02-06 00:06:06.601179000 Z
+    - 2023-02-06 00:06:06.601179000 Z
+  - - 2
+    - 98.22
+    - Paul
+    - '2023-02-23'
+    - 2023-02-06 00:12:36.979838000 Z
+    - 2023-02-06 00:12:36.979838000 Z
