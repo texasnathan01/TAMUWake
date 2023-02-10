@@ -14,6 +14,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_214435) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "author"
+    t.integer "price"
+    t.date "published_date"
+  end
+
   create_table "receipts", force: :cascade do |t|
     t.float "value"
     t.string "driver"
@@ -31,6 +40,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_214435) do
     t.boolean "isDriver"
     t.boolean "isAdmin"
     t.boolean "isTreasurer"
+  end
+
+  create_table "wakeboard_sets", force: :cascade do |t|
+    t.integer "rider_limit"
+    t.integer "current_rider_count"
+    t.datetime "scheduled_date", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

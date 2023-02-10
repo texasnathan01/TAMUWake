@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @wakeboard_set %>
+
+<div>
+  <%= link_to "Edit this wakeboard set", edit_wakeboard_set_path(@wakeboard_set) %> |
+  <%= link_to "Back to wakeboard sets", wakeboard_sets_path %>
+
+  <%= button_to "Destroy this wakeboard set", @wakeboard_set, method: :delete %>
+</div>

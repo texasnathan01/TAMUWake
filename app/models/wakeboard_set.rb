@@ -1,0 +1,2 @@
+class WakeboardSet < ApplicationRecord
+end
