@@ -56,13 +56,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_204913) do
     t.index ["wakeboard_set_id"], name: "index_set_riders_on_wakeboard_set_id"
   end
 
-  create_table "user_books", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "book_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "firstname"
