@@ -51,4 +51,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_220352) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "wakeboard_sets", force: :cascade do |t|
+    t.integer "rider_limit"
+    t.integer "current_rider_count"
+    t.datetime "scheduled_date", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end

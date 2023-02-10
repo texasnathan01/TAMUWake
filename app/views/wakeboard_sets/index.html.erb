@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Wakeboard sets</h1>
+
+<div id="wakeboard_sets">
+  <% @wakeboard_sets.each do |wakeboard_set| %>
+    <%= render wakeboard_set %>
+    <p>
+      <%= link_to "Show this wakeboard set", wakeboard_set %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New wakeboard set", new_wakeboard_set_path %>
