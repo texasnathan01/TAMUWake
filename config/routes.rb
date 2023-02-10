@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :wakeboard_sets
+  resources :wakeboard_sets, :path => "/sets"
   resources :receipts
   resources :users
 
