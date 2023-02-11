@@ -1,11 +1,19 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  receipt_id: 1
+  user_id: 1
   value: 1.5
-  driver: MyString
-  date: 2023-02-06
+  date_made: 2023-02-11
+  date_approved: 2023-02-11
+  date_refunded: 2023-02-11
+  stage: 1
 
 two:
+  receipt_id: 1
+  user_id: 1
   value: 1.5
-  driver: MyString
-  date: 2023-02-06
+  date_made: 2023-02-11
+  date_approved: 2023-02-11
+  date_refunded: 2023-02-11
+  stage: 1

@@ -12,18 +12,38 @@
   <% end %>
 
   <div>
+    <%= form.label :receipt_id, style: "display: block" %>
+    <%= form.number_field :receipt_id %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.number_field :user_id %>
+  </div>
+
+  <div>
     <%= form.label :value, style: "display: block" %>
     <%= form.text_field :value %>
   </div>
 
   <div>
-    <%= form.label :driver, style: "display: block" %>
-    <%= form.text_field :driver %>
+    <%= form.label :date_made, style: "display: block" %>
+    <%= form.date_field :date_made %>
   </div>
 
   <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date %>
+    <%= form.label :date_approved, style: "display: block" %>
+    <%= form.date_field :date_approved %>
+  </div>
+
+  <div>
+    <%= form.label :date_refunded, style: "display: block" %>
+    <%= form.date_field :date_refunded %>
+  </div>
+
+  <div>
+    <%= form.label :stage, style: "display: block" %>
+    <%= form.number_field :stage %>
   </div>
 
   <div>
