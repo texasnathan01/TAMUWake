@@ -1,14 +1,49 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Receipts</h1>
+<h1>Treasury</h1>
 
-<div id="receipts">
-  <% @receipts.each do |receipt| %>
-    <%= render receipt %>
-    <p>
-      <%= link_to "Show this receipt", receipt %>
-    </p>
+<%= link_to "New receipt", new_receipt_path %>
+
+<div id="stage_1">
+  <h2> Pending Treasurer Approval (Stage 1)</h2>
+  <% @receipts.where(stage: 1).each do |receipt| %>
+      <p>
+        <strong>Receipt ID:</strong>
+        <%= receipt.id %>
+        </br>
+        <%= link_to "Show this receipt", receipt %>
+      </p>
+
+  <% end %>
+</div>
+
+<div id="stage_2">
+  <h2> Approved By Treasurer, Awaiting Refund (Stage 2)</h2>
+  <% @receipts.where(stage: 2).each do |receipt| %>
+      <p>
+        <strong>Receipt ID:</strong>
+        <%= receipt.id %>
+        </br>
+        <%= link_to "Show this receipt", receipt %>
+      </p>
+
+  <% end %>
+</div>
+
+<div id="stage_3">
+  <h2> Refund Received (Stage 3)</h2>
+  <% @receipts.where(stage: 3).each do |receipt| %>
+      <p>
+        <strong>Receipt ID:</strong>
+        <%= receipt.id %>
+        </br>
+        <%= link_to "Show this receipt", receipt %>
+      </p>
+
   <% end %>
 </div>
 
 <%= link_to "New receipt", new_receipt_path %>
+<br>
+<%= link_to "Users index", users_path %>
+

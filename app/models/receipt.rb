@@ -1,2 +1,3 @@
 class Receipt < ApplicationRecord
+    
 end

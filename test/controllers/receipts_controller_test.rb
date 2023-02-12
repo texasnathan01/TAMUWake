@@ -17,7 +17,7 @@ class ReceiptsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create receipt" do
     assert_difference("Receipt.count") do
-      post receipts_url, params: { receipt: { date: @receipt.date, driver: @receipt.driver, value: @receipt.value } }
+      post receipts_url, params: { receipt: { date_approved: @receipt.date_approved, date_made: @receipt.date_made, date_refunded: @receipt.date_refunded, receipt_id: @receipt.receipt_id, stage: @receipt.stage, user_id: @receipt.user_id, value: @receipt.value } }
     end
 
     assert_redirected_to receipt_url(Receipt.last)
@@ -34,7 +34,7 @@ class ReceiptsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update receipt" do
-    patch receipt_url(@receipt), params: { receipt: { date: @receipt.date, driver: @receipt.driver, value: @receipt.value } }
+    patch receipt_url(@receipt), params: { receipt: { date_approved: @receipt.date_approved, date_made: @receipt.date_made, date_refunded: @receipt.date_refunded, receipt_id: @receipt.receipt_id, stage: @receipt.stage, user_id: @receipt.user_id, value: @receipt.value } }
     assert_redirected_to receipt_url(@receipt)
   end
 

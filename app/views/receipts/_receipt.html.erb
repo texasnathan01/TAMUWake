@@ -1,17 +1,38 @@
 <div id="<%= dom_id receipt %>">
+
   <p>
-    <strong>Value:</strong>
+    <strong>Receipt ID:</strong>
+    <%= receipt.id %>
+  </p>
+
+  <p>
+    <strong>User ID:</strong>
+    <%= receipt.user_id %>
+  </p>
+
+  <p>
+    <strong>Receipt Value:</strong>
     <%= receipt.value %>
   </p>
 
   <p>
-    <strong>Driver:</strong>
-    <%= receipt.driver %>
+    <strong>Date made:</strong>
+    <%= receipt.date_made %>
   </p>
 
   <p>
-    <strong>Date:</strong>
-    <%= receipt.date %>
+    <strong>Date approved:</strong>
+    <%= receipt.date_approved %>
+  </p>
+
+  <p>
+    <strong>Date refunded:</strong>
+    <%= receipt.date_refunded %>
+  </p>
+
+  <p>
+    <strong>Stage:</strong>
+    <%= receipt.stage %>
   </p>
 
 </div>
