@@ -5,11 +5,11 @@
 <%= link_to "New receipt", new_receipt_path %>
 
 <div id="stage_1">
-  <h2> Pending Treasurer Approval </h2>
+  <h2> Pending Treasurer Approval (Stage 1)</h2>
   <% @receipts.where(stage: 1).each do |receipt| %>
       <p>
         <strong>Receipt ID:</strong>
-        <%= receipt.receipt_id %>
+        <%= receipt.id %>
         </br>
         <%= link_to "Show this receipt", receipt %>
       </p>
@@ -18,11 +18,11 @@
 </div>
 
 <div id="stage_2">
-  <h2> Approved By Treasurer, Awaiting Refund </h2>
+  <h2> Approved By Treasurer, Awaiting Refund (Stage 2)</h2>
   <% @receipts.where(stage: 2).each do |receipt| %>
       <p>
         <strong>Receipt ID:</strong>
-        <%= receipt.receipt_id %>
+        <%= receipt.id %>
         </br>
         <%= link_to "Show this receipt", receipt %>
       </p>
@@ -31,11 +31,11 @@
 </div>
 
 <div id="stage_3">
-  <h2> Refund Received </h2>
+  <h2> Refund Received (Stage 3)</h2>
   <% @receipts.where(stage: 3).each do |receipt| %>
       <p>
         <strong>Receipt ID:</strong>
-        <%= receipt.receipt_id %>
+        <%= receipt.id %>
         </br>
         <%= link_to "Show this receipt", receipt %>
       </p>

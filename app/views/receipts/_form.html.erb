@@ -12,12 +12,7 @@
   <% end %>
 
   <div>
-    <%= form.label :receipt_id, style: "display: block" %>
-    <%= form.number_field :receipt_id %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
+    <%= form.label :user_id, 'User ID', style: "display: block"%>
     <%= form.number_field :user_id %>
   </div>
 
@@ -42,7 +37,7 @@
   </div>
 
   <div>
-    <%= form.label :stage, style: "display: block" %>
+    <%= form.label :stage, "Stage (1-3)", style: "display: block" %>
     <%= form.number_field :stage %>
   </div>
 
