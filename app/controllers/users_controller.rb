@@ -57,6 +57,7 @@ class UsersController < ApplicationController
     end
   end
 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -67,4 +68,9 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:email, :firstname, :lastname, :password, :isRider, :isDriver, :isAdmin, :isTreasurer)
     end
+
+    def delete
+      @users = User.find(params[:id])
+    end
+
 end
