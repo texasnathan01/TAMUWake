@@ -37,8 +37,8 @@
   </div>
 
   <div>
-    <%= form.label :stage, "Stage (1-3)", style: "display: block" %>
-    <%= form.number_field :stage %>
+    <%= form.label :stage, "Status", style: "display: block" %>
+    <%= form.select :stage,  [["Pending Treasurer Approval (Stage 1)", 1], ["Approved By Treasurer, Awaiting Refund (Stage 2)", 2], ["Refund Received (Stage 3)", 3]]%>
   </div>
 
   <div>
