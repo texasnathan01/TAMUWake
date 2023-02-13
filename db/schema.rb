@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_11_214435) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_12_204913) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -27,6 +27,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_214435) do
     t.float "value"
     t.string "driver"
     t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "riders", force: :cascade do |t|
+    t.boolean "documents_signed"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_riders_on_user_id"
+  end
+
+  create_table "set_riders", force: :cascade do |t|
+    t.datetime "date_registered", precision: nil
+    t.bigint "rider_id", null: false
+    t.bigint "wakeboard_set_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rider_id"], name: "index_set_riders_on_rider_id"
+    t.index ["wakeboard_set_id"], name: "index_set_riders_on_wakeboard_set_id"
+  end
+
+  create_table "user_books", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "book_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -48,6 +73,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_214435) do
     t.datetime "scheduled_date", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_wakeboard_sets_on_user_id"
   end
 
+  add_foreign_key "riders", "users"
+  add_foreign_key "set_riders", "riders"
+  add_foreign_key "set_riders", "wakeboard_sets"
+  add_foreign_key "wakeboard_sets", "users"
 end

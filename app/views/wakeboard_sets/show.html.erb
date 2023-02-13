@@ -3,8 +3,34 @@
 <%= render @wakeboard_set %>
 
 <div>
-  <%= link_to "Edit this wakeboard set", edit_wakeboard_set_path(@wakeboard_set) %> |
-  <%= link_to "Back to wakeboard sets", wakeboard_sets_path %>
+  <%= form_with url: join_wakeboard_set_path, method: "post" do |form| %>
+    <% users = User.where("id != ?", @wakeboard_set.user_id).order(:firstname) %>
+    <%= form.select :user_id, users.map { |user| [user.firstname, user.id] } %>
+    <%= form.submit "Join", disabled: @wakeboard_set.rider_limit <= @wakeboard_set.current_rider_count %>
+  <% end %>
+</div>
 
-  <%= button_to "Destroy this wakeboard set", @wakeboard_set, method: :delete %>
+<br>
+
+<div>
+  <h3>Current Riders</h3>
+  <table>
+    <tr>
+      <th>Name</th>
+    </tr>
+    <% @riders.each do |rider| %>
+      <tr>
+        <td><%= rider.user.firstname + " " + rider.user.lastname %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
+<br>
+
+<div>
+  <%= link_to "Edit set", edit_wakeboard_set_path(@wakeboard_set) %> |
+  <%= link_to "Back to set list", wakeboard_sets_path %>
+
+  <%= button_to "Delete this set", @wakeboard_set, method: :delete %>
 </div>
