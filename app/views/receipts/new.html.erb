@@ -1,10 +1,148 @@
-<h1>New receipt</h1>
+<style>
 
-<%= render "form", receipt: @receipt %>
+	body {
+		background-image: url("pexels-photo-1001682.jpeg");
+		background-size: cover;
+	}
+	
+	a:link {
+		color: black;
+	}
+	a:visited { 
+	    color: black;
+	}
+	
+	.navbar {
+	  padding-left: 50px;
+	  padding-right: 50px;
+	  padding-top: 30px;
+	  padding-bottom: 30px;
+	  background-color: #3696d1;
+	  display: inline;
+	  text-align: center;
+	  color: black;
+	  font-size: 25px;
+	  float: right;
+	  border-right-style: solid;
+	  border-color: black;
+	}
 
-<br>
+	.navbar:hover {
+		background-color: #094169;
+	}
+	
+	.navbarSettings {
+	  border-radius: 0px 25px 25px 0px;
+	  margin-right: 25px;
+	}
+	
+	.navbarHome {
+	  border-radius: 25px 0px 0px 25px;
+	  border-left-style: solid;
+	}
+	
+	.currentPage {
+		background-color: #206C9D;
+	}
+	
+	banner {
+	  border-style: solid;
+	  border-radius: 25px;
+	  margin-top: 25px;
+	  margin-left: -5px;
+	  padding-left: 50px;
+	  padding-right: 50px;
+	  padding-top: 30px;
+	  padding-bottom: 30px;
+	  float: left;
+	  background-color: #3696d1;
+	  font-size: 80px;
+	}
+	
+	.bannerBox { 
+	  padding-top: 110px;
+	  padding-bottom: 140px;
+	  display: block;
+	}
+	
+	.itemDisplay {
+	  background-color: white;
+	  opacity: .75;
+	  width: 85%;
+	  height: 60%;
+	  margin-left: 5%;
+	  position: absolute;
+	  align: center;
+	  font-size: 50px;
+	  overflow-y: auto;
+	  margin-top: 100px;
+	}
 
-<div>
-  <%= link_to "Back to receipts", receipts_path %> |
+	.itemDisplay a {
+	  background-color: #eee;
+	  color: black;
+	  display: block;
+	  padding: 12px;
+	  text-decoration: none;
+	}
+
+	.itemDisplay a:hover {
+	  background-color: #ccc;
+	}
+	
+	headerBox {
+	  border-style: solid;
+	  border-radius: 25px 25px 0px 0px;
+	  margin-top: 25px;
+	  margin-left: 5.1%;
+	  width: 84%;
+	  padding-left: 20px;
+	  padding-right: 50px;
+	  padding-top: 10px;
+	  padding-bottom: 0px;
+	  float: left;
+	  background-color: #3696d1;
+	  font-size: 50px;
+	}
+
+	
+</style>
+
+<ul>
+
+  <a href="#"><banner>TAMU WAKE</banner></a>
   
-</div>
+    <a href="#"><p class="navbar navbarSettings">Settings</p></a>
+  <a href="#"><p class="navbar currentPage"><%= link_to "Reciepts Index", receipts_path %></p></a>
+  <a href="#"><p class="navbar"><%= link_to "Users index", users_path %></p></a>
+  <a href="#"><p class="navbar">Account</p></a>
+  <!-- <a href="#"><p class="navbar"><%= link_to "Wakeboard sets", wakeboard_sets_path %></p></a> -->
+  <a href="#"><p class="navbar">Rides</p></a>
+  <a href="#"><p class="navbar navbarHome">Home</p></a>
+  
+  <p class="bannerBox"></p>
+  
+
+  <h1>New receipt</h1>
+
+	<%= render "form", receipt: @receipt %>
+
+	<br>
+
+	<div>
+	<%= link_to "Back to receipts", receipts_path %> |
+  
+	</div>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
