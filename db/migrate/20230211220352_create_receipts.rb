@@ -1,5 +1,6 @@
 class CreateReceipts < ActiveRecord::Migration[7.0]
   def change
+    drop_table :receipts
     create_table :receipts do |t|
       t.integer :receipt_id
       t.integer :user_id
