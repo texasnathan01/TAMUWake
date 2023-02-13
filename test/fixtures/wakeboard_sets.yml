@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rider_limit: 1
+  current_rider_count: 1
+  scheduled_date: 2023-02-10 15:26:24
+
+two:
+  rider_limit: 1
+  current_rider_count: 1
+  scheduled_date: 2023-02-10 15:26:24
