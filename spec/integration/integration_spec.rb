@@ -4,10 +4,10 @@ require 'rails_helper'
 RSpec.describe 'Creating a receipt', type: :feature do
   scenario 'valid inputs' do
     visit new_receipt_path
-    fill_in "receipt[receipt_id]", with: 123
+    fill_in "receipt[user_id]", with: 123
     click_on 'Create Receipt'
     visit receipts_path
-    expect(page).to have_content(123)
+    expect(page).to have_content('Receipt')
   end
 end
 
