@@ -1,14 +1,28 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Wakeboard sets</h1>
+<h1>Sets this Week</h1>
 
-<div id="wakeboard_sets">
-  <% @wakeboard_sets.each do |wakeboard_set| %>
-    <%= render wakeboard_set %>
-    <p>
-      <%= link_to "Show this wakeboard set", wakeboard_set %>
-    </p>
-  <% end %>
-</div>
+<table id="wakeboard_sets">
+  <thead>
+    <tr>
+      <th>Set Date</th>
+      <th>Driver</th>
+      <th>Spots Available</th>
+      <th>Join Set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @wakeboard_sets.each do |set| %>
+      <tr>
+        <td>
+          <%= set.scheduled_date.strftime("%A at %l:%M %P") %>
+        </td>
+        <td><%= set.user.firstname.capitalize + " " + set.user.lastname.capitalize.chr + "." %></td>
+        <td><%= set.rider_limit - set.current_rider_count %></td>
+        <td><%= link_to "Join", set %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
 <%= link_to "New wakeboard set", new_wakeboard_set_path %>

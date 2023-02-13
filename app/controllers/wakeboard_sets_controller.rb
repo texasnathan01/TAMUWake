@@ -3,11 +3,15 @@ class WakeboardSetsController < ApplicationController
 
   # GET /wakeboard_sets or /wakeboard_sets.json
   def index
-    @wakeboard_sets = WakeboardSet.all
+    @wakeboard_sets = WakeboardSet.where("scheduled_date >= ? AND scheduled_date <= ?",
+      DateTime.current.beginning_of_week(start_date = :sunday), 
+      DateTime.current.end_of_week(start_date = :sunday)
+    ).joins(:user)
   end
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
+    @riders = Rider.includes(:user).joins(:set_rider).where("wakeboard_set_id = ?", params[:id])
   end
 
   # GET /wakeboard_sets/new
@@ -57,14 +61,55 @@ class WakeboardSetsController < ApplicationController
     end
   end
 
+  # POST /sets/:id/join
+  def join
+    setID = params[:id]
+    @set = WakeboardSet.find(setID)
+    user = params[:user_id]
+    rider = Rider.find_by(:user_id => user)
+
+    respond_to do |format|
+      # if there are no spots available send an error
+      if @set.current_rider_count >= @set.rider_limit
+        @set.errors.add(:current_rider_count, message: ": The set is currently full")
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: @set.errors, status: :unprocessable_entity }
+      end
+
+      # first make a rider if not already made
+      if !rider
+        rider = Rider.new(documents_signed: false, user_id: user)
+        if !rider.save
+          rider.errors.add(:id, message: ": Rider couldn't be saved")
+          format.html { render :show, status: :unprocessable_entity }
+          format.json { render json: rider.errors, status: :unprocessable_entity }
+        end
+      end
+
+      # next add the rider to the set
+      setrider = SetRider.new(date_registered: DateTime.current, rider_id: rider.id, wakeboard_set_id: setID)
+      @set.current_rider_count = @set.current_rider_count + 1
+      if setrider.save && @set.save
+        format.html { redirect_to wakeboard_set_url(@set), notice: "Successfully joined set." }
+        format.json { render :show, status: :ok, location: @set }
+      end
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wakeboard_set
-      @wakeboard_set = WakeboardSet.find(params[:id])
+      @wakeboard_set = WakeboardSet.includes(:user).find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def wakeboard_set_params
-      params.require(:wakeboard_set).permit(:rider_limit, :current_rider_count, :scheduled_date)
+      params.require(:wakeboard_set).permit(
+        :rider_limit, 
+        :current_rider_count, 
+        :scheduled_date, 
+        :user_id
+      )
     end
 end
