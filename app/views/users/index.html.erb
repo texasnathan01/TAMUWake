@@ -6,7 +6,7 @@
   <% @users.each do |user| %>
     <%= render user %>
     <p>
-      <%= link_to "Show this user", user %>
+      <%= link_to "Show this user", user %> | <%= link_to "Destroy this user", @user, method: :delete, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
     </p>
   <% end %>
 </div>
@@ -14,3 +14,4 @@
 <%= link_to "New user", new_user_path %>
 <br>
 <%= link_to "Reciepts Index", receipts_path %>
+<br>

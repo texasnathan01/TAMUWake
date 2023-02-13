@@ -1,9 +1,13 @@
 class CreateReceipts < ActiveRecord::Migration[7.0]
   def change
     create_table :receipts do |t|
+      t.integer :receipt_id
+      t.integer :user_id
       t.float :value
-      t.string :driver
-      t.date :date
+      t.date :date_made
+      t.date :date_approved
+      t.date :date_refunded
+      t.integer :stage
 
       t.timestamps
     end
