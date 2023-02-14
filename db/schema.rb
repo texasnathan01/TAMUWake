@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2023_02_12_204913) do
-=======
-ActiveRecord::Schema[7.0].define(version: 2023_02_11_220352) do
->>>>>>> main
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -30,7 +26,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_220352) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
   create_table "riders", force: :cascade do |t|
     t.boolean "documents_signed"
     t.bigint "user_id", null: false
@@ -49,8 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_220352) do
     t.index ["wakeboard_set_id"], name: "index_set_riders_on_wakeboard_set_id"
   end
 
-=======
->>>>>>> main
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "firstname"
@@ -64,7 +57,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_220352) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
   create_table "wakeboard_sets", force: :cascade do |t|
     t.integer "rider_limit"
     t.integer "current_rider_count", default: 0
@@ -79,6 +71,4 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_11_220352) do
   add_foreign_key "set_riders", "riders"
   add_foreign_key "set_riders", "wakeboard_sets"
   add_foreign_key "wakeboard_sets", "users"
-=======
->>>>>>> main
 end
