@@ -14,18 +14,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_204913) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "admins", force: :cascade do |t|
-    t.string "email", null: false
-    t.string "full_name"
-    t.string "uid"
-    t.string "avatar_url"
-    t.boolean "is_approved", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "role_id", default: 0
-    t.index ["email"], name: "index_admins_on_email", unique: true
-  end
-
   create_table "receipts", force: :cascade do |t|
     t.integer "receipt_id"
     t.integer "user_id"
