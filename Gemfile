@@ -30,6 +30,8 @@ gem "jbuilder"
 gem "rexml"
 
 gem 'seed_dump'
+
+gem 'simplecov', :require => false
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
