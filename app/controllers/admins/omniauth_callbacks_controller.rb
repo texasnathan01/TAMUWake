@@ -1,7 +1,18 @@
 class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def google_oauth2
       admin = Admin.from_google(**from_google_params)
-    
+      
+      user = User.find_by(:email => admin.email)
+
+      if !user
+        user = User.new(firstname: admin.full_name,lastname: admin.full_name,email: admin.email)
+        if !user.save
+          user.errors.add(:id, message: ": User couldn't be saved")
+          format.html { render :show, status: :unprocessable_entity }
+          format.json { render json: rider.errors, status: :unprocessable_entity }
+        end
+      end
+
       if admin.present?
         sign_out_all_scopes
         flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
