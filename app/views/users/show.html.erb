@@ -104,7 +104,6 @@
 	  background-color: #3696d1;
 	  font-size: 50px;
 	}
-
 	
 </style>
 
@@ -113,35 +112,26 @@
   <a href="#"><banner>TAMU WAKE</banner></a>
   
     <a href="#"><p class="navbar navbarSettings">Settings</p></a>
-  <a href="#"><p class="navbar currentPage"><%= link_to "Reciepts Index", receipts_path %></p></a>
-  <a href="#"><p class="navbar"><%= link_to "Users index", users_path %></p></a>
+  <a href="#"><p class="navbar"><%= link_to "Reciepts Index", receipts_path %></p></a>
+  <a href="#"><p class="navbar currentPage"><%= link_to "Users index", users_path %></p></a>
   <a href="#"><p class="navbar">Account</p></a>
   <a href="#"><p class="navbar"><%= link_to "Wakeboard sets", wakeboard_sets_path %></p></a>
   <a href="#"><p class="navbar navbarHome">Home</p></a>
   
   <p class="bannerBox"></p>
+
+	
+<p style="color: green"><%= notice %></p>
+
+<%= render @user %>
+
+<div>
+  <%= link_to "Edit this user", edit_user_path(@user) %> |
+  <%= link_to "Back to users", users_path %>
+  <%= link_to "Destroy this user", @user, method: :delete, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+</div>
   
-
-  <h1>New receipt</h1>
-
-	<%= render "form", receipt: @receipt %>
-
-	<br>
-
-	<div>
-	<%= link_to "Back to receipts", receipts_path %> |
-  
-	</div>
-
 </ul>
-
-
-
-
-
-
-
-
 
 
 

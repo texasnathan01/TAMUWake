@@ -104,7 +104,6 @@
 	  background-color: #3696d1;
 	  font-size: 50px;
 	}
-
 	
 </style>
 
@@ -112,36 +111,45 @@
 
   <a href="#"><banner>TAMU WAKE</banner></a>
   
-    <a href="#"><p class="navbar navbarSettings">Settings</p></a>
-  <a href="#"><p class="navbar currentPage"><%= link_to "Reciepts Index", receipts_path %></p></a>
+  <a href="#"><p class="navbar navbarSettings">Settings</p></a>
+  <a href="#"><p class="navbar"><%= link_to "Reciepts Index", receipts_path %></p></a>
   <a href="#"><p class="navbar"><%= link_to "Users index", users_path %></p></a>
   <a href="#"><p class="navbar">Account</p></a>
-  <a href="#"><p class="navbar"><%= link_to "Wakeboard sets", wakeboard_sets_path %></p></a>
+  <a href="#"><p class="navbar currentPage"><%= link_to "Wakeboard sets", wakeboard_sets_path %></p></a>
   <a href="#"><p class="navbar navbarHome">Home</p></a>
   
   <p class="bannerBox"></p>
   
 
-  <h1>New receipt</h1>
-
-	<%= render "form", receipt: @receipt %>
-
-	<br>
-
-	<div>
-	<%= link_to "Back to receipts", receipts_path %> |
   
-	</div>
-
 </ul>
 
 
+<p style="color: green"><%= notice %></p>
 
+<h1>Sets this Week</h1>
 
+<table id="wakeboard_sets">
+  <thead>
+    <tr>
+      <th>Set Date</th>
+      <th>Driver</th>
+      <th>Spots Available</th>
+      <th>Join Set</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @wakeboard_sets.each do |set| %>
+      <tr>
+        <td>
+          <%= set.scheduled_date.strftime("%A at %l:%M %P") %>
+        </td>
+        <td><%= set.user.firstname.capitalize + " " + set.user.lastname.capitalize.chr + "." %></td>
+        <td><%= set.rider_limit - set.current_rider_count %></td>
+        <td><%= link_to "Join", set %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-
-
-
-
-
-
+<%= link_to "New wakeboard set", new_wakeboard_set_path %>

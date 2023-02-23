@@ -30,6 +30,7 @@ gem "jbuilder"
 gem "rexml"
 gem "omniauth-rails_csrf_protection"
 
+gem 'seed_dump'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 

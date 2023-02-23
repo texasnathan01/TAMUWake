@@ -14,8 +14,12 @@ class ReceiptsTest < ApplicationSystemTestCase
     visit receipts_url
     click_on "New receipt"
 
-    fill_in "Date", with: @receipt.date
-    fill_in "Driver", with: @receipt.driver
+    fill_in "Date approved", with: @receipt.date_approved
+    fill_in "Date made", with: @receipt.date_made
+    fill_in "Date refunded", with: @receipt.date_refunded
+    fill_in "Receipt", with: @receipt.receipt_id
+    fill_in "Stage", with: @receipt.stage
+    fill_in "User", with: @receipt.user_id
     fill_in "Value", with: @receipt.value
     click_on "Create Receipt"
 
@@ -27,8 +31,12 @@ class ReceiptsTest < ApplicationSystemTestCase
     visit receipt_url(@receipt)
     click_on "Edit this receipt", match: :first
 
-    fill_in "Date", with: @receipt.date
-    fill_in "Driver", with: @receipt.driver
+    fill_in "Date approved", with: @receipt.date_approved
+    fill_in "Date made", with: @receipt.date_made
+    fill_in "Date refunded", with: @receipt.date_refunded
+    fill_in "Receipt", with: @receipt.receipt_id
+    fill_in "Stage", with: @receipt.stage
+    fill_in "User", with: @receipt.user_id
     fill_in "Value", with: @receipt.value
     click_on "Update Receipt"
 

@@ -104,7 +104,6 @@
 	  background-color: #3696d1;
 	  font-size: 50px;
 	}
-
 	
 </style>
 
@@ -113,8 +112,8 @@
   <a href="#"><banner>TAMU WAKE</banner></a>
   
     <a href="#"><p class="navbar navbarSettings">Settings</p></a>
-  <a href="#"><p class="navbar currentPage"><%= link_to "Reciepts Index", receipts_path %></p></a>
-  <a href="#"><p class="navbar"><%= link_to "Users index", users_path %></p></a>
+  <a href="#"><p class="navbar"><%= link_to "Reciepts Index", receipts_path %></p></a>
+  <a href="#"><p class="navbar currentPage"><%= link_to "Users index", users_path %></p></a>
   <a href="#"><p class="navbar">Account</p></a>
   <a href="#"><p class="navbar"><%= link_to "Wakeboard sets", wakeboard_sets_path %></p></a>
   <a href="#"><p class="navbar navbarHome">Home</p></a>
@@ -122,26 +121,17 @@
   <p class="bannerBox"></p>
   
 
-  <h1>New receipt</h1>
+<h1>Editing user</h1>
 
-	<%= render "form", receipt: @receipt %>
+<%= render "form", user: @user %>
 
-	<br>
+<br>
 
-	<div>
-	<%= link_to "Back to receipts", receipts_path %> |
+<div>
+  <%= link_to "Show this user", @user %> |
+  <%= link_to "Back to users", users_path %>
+</div>
   
-	</div>
-
 </ul>
-
-
-
-
-
-
-
-
-
 
 
