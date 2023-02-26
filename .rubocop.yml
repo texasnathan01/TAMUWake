@@ -79,7 +79,11 @@ Layout/ClassStructure:
         - private_methods
 
 Layout/IndentationWidth:
-    Width: 2
+    Width: 5
+
+Metrics/LineLength:
+  Max: 100
+
 
 Layout/EmptyLineAfterMultilineCondition:
     Enabled: true
@@ -266,6 +270,7 @@ Metrics/BlockLength:
         - "**/factories/**/*"
         - "**/config/routes.rb"
 
+
 Metrics/ClassLength:
     CountAsOne: ["array", "hash"]
     Max: 150
@@ -302,6 +307,17 @@ Naming/InclusiveLanguage: # (new in 1.18)
 
 Naming/PredicateName:
   Enabled: true
+
+Naming/VariableName:
+    Enabled: true
+    EnforcedStyle: snake_case
+
+Naming/ClassAndModuleCamelCase:
+  Enabled: true
+
+Naming/MethodName:
+  Enabled: true
+  EnforcedStyle: camelCase
 
 ###########################################################
 ######################## Style ############################
