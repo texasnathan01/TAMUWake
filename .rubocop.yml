@@ -81,10 +81,6 @@ Layout/ClassStructure:
 Layout/IndentationWidth:
     Width: 5
 
-Metrics/LineLength:
-  Max: 100
-
-
 Layout/EmptyLineAfterMultilineCondition:
     Enabled: true
 
@@ -108,11 +104,6 @@ Layout/FirstHashElementLineBreak:
 
 Layout/LineEndStringConcatenationIndentation: # (new in 1.18)
     Enabled: true
-
-Layout/LineLength:
-    Max: 150
-    Exclude:
-        - "**/spec/**/*"
 
 Layout/MultilineArrayBraceLayout:
     EnforcedStyle: new_line
@@ -140,6 +131,11 @@ Layout/SpaceBeforeBrackets: # (new in 1.7)
 
 Layout/SpaceInLambdaLiteral:
     EnforcedStyle: require_space
+
+Layout/LineLength:
+    Max: 100
+    Exclude:
+        - "**/spec/**/*"
 
 ###########################################################
 ######################## Lint #############################
@@ -294,6 +290,7 @@ Metrics/ParameterLists:
 
 Metrics/PerceivedComplexity:
     Max: 10
+
 
 ###########################################################
 ######################## Naming ###########################
