@@ -118,7 +118,6 @@
   <a href="#"><p class="navbar">Account</p></a>
   <a href="#"><p class="navbar"><%= link_to "Wakeboard sets", wakeboard_sets_path %></p></a>
   <a href="#"><p class="navbar navbarHome">Home</p></a>
-  
   <p class="bannerBox"></p>
 
 
@@ -131,7 +130,7 @@
   <% @users.each do |user| %>
     <%= render user %>
     <p>
-      <%= link_to "Show this user", user %> | <%= link_to "Destroy this user", @user, method: :delete, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+      <%= link_to "Show this user", user %> |<%= link_to 'Edit', edit_user_path(user) %>|<%= button_to 'Destroy', user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
     </p>
   <% end %>
 </div>

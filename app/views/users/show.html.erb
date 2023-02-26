@@ -128,7 +128,7 @@
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>
-  <%= link_to "Destroy this user", @user, method: :delete, data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+  <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
 </div>
   
 </ul>

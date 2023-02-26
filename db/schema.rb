@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_12_204913) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_25_201809) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,12 +60,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_12_204913) do
     t.string "firstname"
     t.string "lastname"
     t.string "password"
-    t.boolean "isRider"
-    t.boolean "isDriver"
-    t.boolean "isAdmin"
-    t.boolean "isTreasurer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "documents_signed", default: false
+    t.integer "role_id", default: 0
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
   create_table "wakeboard_sets", force: :cascade do |t|

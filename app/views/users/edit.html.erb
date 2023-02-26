@@ -128,6 +128,7 @@
 <br>
 
 <div>
+  <%= link_to 'Destroy', @user, method: :delete, data: {confirm: "Are you sure"}%>
   <%= link_to "Show this user", @user %> |
   <%= link_to "Back to users", users_path %>
 </div>
