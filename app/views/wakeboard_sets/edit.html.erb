@@ -1,111 +1,6 @@
-<style>
-
-	body {
-		background-image: url("pexels-photo-1001682.jpeg");
-		background-size: cover;
-	}
-	
-	a:link {
-		color: black;
-	}
-	a:visited { 
-	    color: black;
-	}
-	
-	.navbar {
-	  padding-left: 50px;
-	  padding-right: 50px;
-	  padding-top: 30px;
-	  padding-bottom: 30px;
-	  background-color: #3696d1;
-	  display: inline;
-	  text-align: center;
-	  color: black;
-	  font-size: 25px;
-	  float: right;
-	  border-right-style: solid;
-	  border-color: black;
-	}
-
-	.navbar:hover {
-		background-color: #094169;
-	}
-	
-	.navbarSettings {
-	  border-radius: 0px 25px 25px 0px;
-	  margin-right: 25px;
-	}
-	
-	.navbarHome {
-	  border-radius: 25px 0px 0px 25px;
-	  border-left-style: solid;
-	}
-	
-	.currentPage {
-		background-color: #206C9D;
-	}
-	
-	banner {
-	  border-style: solid;
-	  border-radius: 25px;
-	  margin-top: 25px;
-	  margin-left: -5px;
-	  padding-left: 50px;
-	  padding-right: 50px;
-	  padding-top: 30px;
-	  padding-bottom: 30px;
-	  float: left;
-	  background-color: #3696d1;
-	  font-size: 80px;
-	}
-	
-	.bannerBox { 
-	  padding-top: 110px;
-	  padding-bottom: 140px;
-	  display: block;
-	}
-	
-	.itemDisplay {
-	  background-color: white;
-	  opacity: .75;
-	  width: 85%;
-	  height: 60%;
-	  margin-left: 5%;
-	  position: absolute;
-	  align: center;
-	  font-size: 50px;
-	  overflow-y: auto;
-	  margin-top: 100px;
-	}
-
-	.itemDisplay a {
-	  background-color: #eee;
-	  color: black;
-	  display: block;
-	  padding: 12px;
-	  text-decoration: none;
-	}
-
-	.itemDisplay a:hover {
-	  background-color: #ccc;
-	}
-	
-	headerBox {
-	  border-style: solid;
-	  border-radius: 25px 25px 0px 0px;
-	  margin-top: 25px;
-	  margin-left: 5.1%;
-	  width: 84%;
-	  padding-left: 20px;
-	  padding-right: 50px;
-	  padding-top: 10px;
-	  padding-bottom: 0px;
-	  float: left;
-	  background-color: #3696d1;
-	  font-size: 50px;
-	}
-	
-</style>
+<head>
+	<%= stylesheet_link_tag "styles.css" %>
+</head>
 
 <ul>
 
@@ -121,15 +16,13 @@
   <p class="bannerBox"></p>
   <h1>Editing wakeboard set</h1>
 
-<%= render "form", wakeboard_set: @wakeboard_set %>
+  <%= render "form", wakeboard_set: @wakeboard_set %>
 
-<br>
+  <br>
 
-<div>
-  <%= link_to "Show this wakeboard set", @wakeboard_set %> |
-  <%= link_to "Back to wakeboard sets", wakeboard_sets_path %>
-</div>
-
-  
+  <div>
+    <%= link_to "Show this wakeboard set", @wakeboard_set %> |
+    <%= link_to "Back to wakeboard sets", wakeboard_sets_path %>
+  </div>
+ 
 </ul>
-
