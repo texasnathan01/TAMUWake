@@ -41,7 +41,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_28_173325) do
 
   create_table "set_riders", force: :cascade do |t|
     t.datetime "date_registered", precision: nil
-    t.bigint "rider_id", null: false
     t.bigint "wakeboard_set_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
