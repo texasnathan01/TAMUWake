@@ -10,10 +10,8 @@ class UsersController < ApplicationController
     # else
     #   @is_admin = false
     #   redirect_to user_url(@user)
-    @user = User.all
-    end
-
-    # @users = User.all
+    # end
+    @users = User.all
   end
 
   # GET /users/1 or /users/1.json
