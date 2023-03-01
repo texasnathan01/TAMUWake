@@ -8,7 +8,6 @@ class CreateReceipts < ActiveRecord::Migration[7.0]
       t.date :date_approved
       t.date :date_refunded
       t.integer :stage
-
       t.timestamps
     end
   end
