@@ -4,14 +4,14 @@ class WakeboardSetsController < ApplicationController
   # GET /wakeboard_sets or /wakeboard_sets.json
   def index
     @wakeboard_sets = WakeboardSet.where("scheduled_date >= ? AND scheduled_date <= ?",
-      DateTime.current.beginning_of_week(start_date = :sunday), 
-      DateTime.current.end_of_week(start_date = :sunday)
+      DateTime.current.beginning_of_week(start_date = :sunday).advance(hours: 8), 
+      DateTime.current.end_of_week(start_date = :sunday).advance(hours: -4)
     ).joins(:user)
   end
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
-    @riders = Rider.includes(:user).joins(:set_rider).where("wakeboard_set_id = ?", params[:id])
+    @riders = User.joins(:set_rider).where("wakeboard_set_id = ?", params[:id])
   end
 
   # GET /wakeboard_sets/new
@@ -106,10 +106,13 @@ class WakeboardSetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def wakeboard_set_params
       params.require(:wakeboard_set).permit(
-        :rider_limit, 
-        :current_rider_count, 
+        :dib_count,
+        :dib_limit,
+        :chib_count,
+        :chib_limit,
+        :driver_count,
+        :driver_limit,
         :scheduled_date, 
-        :user_id
       )
     end
 end
