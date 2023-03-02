@@ -28,6 +28,7 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem "rexml"
+gem "omniauth-rails_csrf_protection"
 
 gem 'seed_dump'
 
@@ -46,6 +47,11 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
 
 # Use Sass to process CSS
 # gem "sassc-rails"

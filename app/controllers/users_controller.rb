@@ -3,6 +3,14 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
+    # need to check the role of the user
+    # @user = User.find_by(:email => current_admin.email)
+    # if @user.role_id == 1
+    #   @users = User.all
+    # else
+    #   @is_admin = false
+    #   redirect_to user_url(@user)
+    # end
     @users = User.all
   end
 
