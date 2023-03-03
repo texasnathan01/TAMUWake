@@ -17,11 +17,17 @@
   
   <h1> Treasury </h1>
   
+  <div>
+    <%= @user = User.find_by(:email => current_admin.email) %>
+    <p> <%= @user.id %> </p>
+  </div>
+
+
   <%= link_to "New receipt", new_receipt_path %>
  
   <div id="stage_1">
   <h2> Pending Treasurer Approval (Stage 1)</h2>
-  <% @receipts.where(stage: 1).each do |receipt| %>
+  <% @receipts.where(stage: 1, user_id: @user.id).each do |receipt| %>
       <p>
         <strong>Receipt ID:</strong>
         <%= receipt.id %>
@@ -34,7 +40,7 @@
   
   <div id="stage_2">
     <h2> Approved By Treasurer, Awaiting Refund (Stage 2)</h2>
-    <% @receipts.where(stage: 2).each do |receipt| %>
+    <% @receipts.where(stage: 2, user_id: @user.id).each do |receipt| %>
       <p>
         <strong>Receipt ID:</strong>
         <%= receipt.id %>
@@ -47,7 +53,7 @@
 
   <div id="stage_3">
     <h2> Refund Received (Stage 3)</h2>
-    <% @receipts.where(stage: 3).each do |receipt| %>
+    <% @receipts.where(stage: 3, user_id: @user.id).each do |receipt| %>
       <p>
         <strong>Receipt ID:</strong>
         <%= receipt.id %>
