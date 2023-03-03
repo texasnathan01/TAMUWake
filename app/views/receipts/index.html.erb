@@ -22,6 +22,7 @@
 
   <% if @user.role_id == 1 %>
     <h2> Receipts for <%= @user.firstname%> <%= @user.lastname%> </h2>
+    <h3> User ID: <%= @user.id%></h3>
 
     <%= link_to "New receipt", new_receipt_path %>
  
