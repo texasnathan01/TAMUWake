@@ -3,6 +3,14 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
+    # need to check the role of the user
+    # @user = User.find_by(:email => current_admin.email)
+    # if @user.role_id == 1
+    #   @users = User.all
+    # else
+    #   @is_admin = false
+    #   redirect_to user_url(@user)
+    # end
     @users = User.all
   end
 
@@ -50,7 +58,6 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy
-
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
@@ -66,7 +73,7 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email, :firstname, :lastname, :password, :isRider, :isDriver, :isAdmin, :isTreasurer)
+      params.require(:user).permit(:email, :firstname, :lastname, :password,:role_id ,:is_approved)
     end
 
     def delete
