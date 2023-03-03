@@ -2,7 +2,7 @@ class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     def google_oauth2
       admin = Admin.from_google(**from_google_params)
       
-      user = User.find_by(:email => admin.email)
+      @user = User.find_by(:email => admin.email)
 
       if !user
         user = User.new(firstname: admin.full_name.split[0],lastname: admin.full_name.split[1],email: admin.email)
