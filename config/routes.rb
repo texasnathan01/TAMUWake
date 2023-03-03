@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :set_roles
   resources :roles
   resources :wakeboard_sets, :path => "/sets" do
     member do
