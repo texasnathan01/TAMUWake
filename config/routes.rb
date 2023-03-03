@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :roles
   resources :wakeboard_sets, :path => "/sets" do
     member do
       post 'join'
