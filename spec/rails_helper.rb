@@ -29,21 +29,6 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
-# config.include Devise::Test::IntegrationHelpers, type: :feature
-OmniAuth.config.test_mode = true
-OmniAuth.config.mock_auth[:google] = OmniAuth::AuthHash.new({
-  :provider => 'google',
-  :info => {
-    :name => "chris pasala",
-    :email => "chrispasala@tamu.edu"
-  },
-  :credentials => {
-    :token => "token",
-    :secret => "secret"
-  }
-})
-
-
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -53,7 +38,9 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-
+  config.include Devise::Test::IntegrationHelpers, type: :feature
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
@@ -76,7 +63,4 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-
-  Rails.application.env_config["devise.mapping"] = Devise.mappings[:admin] # If using Devise
-  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
 end

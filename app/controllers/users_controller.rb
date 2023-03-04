@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     else
       @is_admin = false
       respond_to do |format|
-        format.html { redirect_to account_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
+        format.html { redirect_to accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
       end
     end
   end

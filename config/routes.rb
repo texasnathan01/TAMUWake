@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :receipts
   resources :users
   
-  get 'account', to: 'account#index', as: :account
+  get 'account', to: 'account#index', as: :accounts
 
   root 'receipts#index'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }

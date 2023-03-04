@@ -1,22 +1,19 @@
 # location: spec/feature/integration_spec.rb
 require 'rails_helper'
 
-def login
-  Rails.application.env_config["omniauth.auth"] = OmniAuth.config.mock_auth[:google]
-  visit root_path
-  click_link 'Sign in with Google'
-end
 
-
-setup do
-  OmniAuth.config.test_mode = true
-  Rails.application.env_config["devise.mapping"] = Devise.mappings[:user]
-  Rails.application.env_config["omniauth.auth"]  = google_oauth2_mock
-end
 
 RSpec.describe 'Creating a receipt', type: :feature do
+  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
+  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 1)}
+
+  before :each do
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
+    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+  end
+
   scenario 'valid inputs' do
-    login
     visit new_receipt_path
     fill_in "receipt[user_id]", with: 123
     click_on 'Create Receipt'
@@ -25,34 +22,18 @@ RSpec.describe 'Creating a receipt', type: :feature do
   end
 end
 
-RSpec.describe 'Creating a user', type: :feature do
-  scenario 'valid inputs' do
-    login
-    visit new_user_path
-    fill_in "user[firstname]", with: 'team'
-    fill_in "user[lastname]", with: 'team'
-    fill_in "user[email]", with: 'team'
-    click_on 'Create User'
-    visit users_path
-    expect(page).to have_content('team')
+RSpec.describe 'Account Pages', type: :feature do
+  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
+  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 1)}
+
+  before :each do
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
+    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
   end
 
-  private
-
-    def google_oauth2_mock
-        OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
-        provider: "google_oauth2",
-        uid: "12345678910",
-        info: { 
-            email: "fakeemail@gmail-fake.com",
-            first_name: "David",
-            last_name: "McDonald"
-        },
-        credentials: {
-            token: "abcdefgh12345",
-            refresh_token: "12345abcdefgh",
-            expires_at: DateTime.now
-        }
-      })
+  scenario 'visiting account page ' do
+    visit accounts_path
+    expect(page).to have_content('Email:')
   end
 end
