@@ -16,7 +16,7 @@
   <div id="<%= dom_id receipt %>">
 
   <div hidden>
-    <%= @receipt_user = User.find_by(:id => receipt.user_id) %>
+    <%= @receipt_user = current_user%>
   </div>
 
   <p>

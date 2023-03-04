@@ -8,7 +8,7 @@ class UsersController < ApplicationController
     if @user.role_id == 1
       @users = User.all
     else
-      @is_admin = false
+      # redirect to account if they do not have permission
       respond_to do |format|
         format.html { redirect_to accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
       end
