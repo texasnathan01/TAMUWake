@@ -15,18 +15,27 @@
 
   <div id="<%= dom_id receipt %>">
 
+  <div hidden>
+    <%= @receipt_user = User.find_by(:id => receipt.user_id) %>
+  </div>
+
   <p>
     <strong>Receipt ID:</strong>
     <%= receipt.id %>
   </p>
 
   <p>
-    <strong>User ID:</strong>
+    <strong>Receipt Uploader's User ID:</strong>
     <%= receipt.user_id %>
   </p>
 
   <p>
-    <strong>Receipt Value:</strong>
+    <strong>Receipt's Uploader's Name:</strong>
+    <%= @receipt_user.firstname %> <%= @receipt_user.lastname %>
+  </p>
+
+  <p>
+    <strong>Receipt Value: $</strong>
     <%= receipt.value %>
   </p>
 

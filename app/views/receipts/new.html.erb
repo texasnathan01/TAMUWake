@@ -12,10 +12,26 @@
   <a href="#"><p class="navbar navbarLeftEnd"><%= link_to "Rides", wakeboard_sets_path %></p></a>
   
   <p class="bannerBox"></p>
+
+  <div hidden>
+    <%= @user = User.find_by(:email => current_admin.email) %>
+    <p> <%= @user.id %> </p>
+  </div>
   
   <h1>New receipt</h1>
 
-  <%= render "form", receipt: @receipt %>
+  <!-- This section will only be shown if the user is a driver (code 1) -->
+  <% if @user.role_id == 1 %>
+    <%= render "form_driver", receipt: @receipt %>
+  
+  <!-- This section will only be shown if the user is a driver (code 1) -->
+  <% elsif @user.role_id == 3 %>
+    <%= render "form", receipt: @receipt %>
+
+  <!-- This section will only be shown if non driver or treasurer attempts to make -->
+  <% else %>
+    <h1> Only drivers and treasurer can make receipts </h1>
+  <% end %>
 
   <br>
 
