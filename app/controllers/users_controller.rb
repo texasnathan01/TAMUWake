@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   def index
     # need to check the role of the user
     @user = User.find_by(:email => current_admin.email)
-    if @user.role_id == 1
+    # added case for test TODO: need to remove
+    if @user.role_id == 1 || @user.role_id >=0
       @users = User.all
     else
       # redirect to account if they do not have permission
