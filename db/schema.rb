@@ -46,6 +46,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_01_202335) do
     t.index ["user_id"], name: "index_riders_on_user_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.integer "role_id", null: false
+    t.string "role_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "set_riders", force: :cascade do |t|
     t.datetime "date_registered", precision: nil
     t.bigint "rider_id", null: false
