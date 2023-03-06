@@ -21,8 +21,9 @@
     <thead>
       <tr>
         <th>Set Date</th>
-        <th>Driver</th>
-        <th>Spots Available</th>
+        <th>Drivers</th>
+        <th>Dib Spots Available</th>
+		<th>Chib Spots Available</th>
         <th>Join Set</th>
       </tr>
     </thead>
@@ -30,8 +31,10 @@
       <% @wakeboard_sets.each do |set| %>
         <tr>
           <td><%= set.scheduled_date.strftime("%A at %l:%M %P") %></td>
-          <td><%= set.user.firstname.capitalize + " " + set.user.lastname.capitalize.chr + "." %></td>
-          <td><%= set.rider_limit - set.current_rider_count %></td>
+          <td>Fix this with SetDriver table</td>
+		  <% #set.user.firstname.capitalize + " " + set.user.lastname.capitalize.chr + "." %>
+          <td><%= set.dib_limit - set.dib_count %></td>
+		  <td><%= set.chib_limit - set.chib_count %></td>
           <td><%= link_to "Join", set %></td>
         </tr>
       <% end %>

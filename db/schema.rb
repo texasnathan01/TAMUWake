@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_020939) do
     t.boolean "is_approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role_id", default: 0
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
@@ -55,11 +56,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_020939) do
 
   create_table "set_riders", force: :cascade do |t|
     t.datetime "date_registered", precision: nil
-    t.bigint "rider_id", null: false
     t.bigint "wakeboard_set_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rider_id"], name: "index_set_riders_on_rider_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_set_riders_on_user_id"
     t.index ["wakeboard_set_id"], name: "index_set_riders_on_wakeboard_set_id"
   end
 
@@ -76,17 +77,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_020939) do
   end
 
   create_table "wakeboard_sets", force: :cascade do |t|
-    t.integer "rider_limit"
-    t.integer "current_rider_count", default: 0
     t.datetime "scheduled_date", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.integer "dib_count", default: 0
+    t.integer "dib_limit", default: 4
+    t.integer "chib_count", default: 0
+    t.integer "chib_limit", default: 3
+    t.integer "driver_count", default: 0
+    t.integer "driver_limit", default: 2
     t.index ["user_id"], name: "index_wakeboard_sets_on_user_id"
   end
 
-  add_foreign_key "riders", "users"
-  add_foreign_key "set_riders", "riders"
+  add_foreign_key "set_riders", "users"
   add_foreign_key "set_riders", "wakeboard_sets"
   add_foreign_key "wakeboard_sets", "users"
 end

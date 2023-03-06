@@ -20,6 +20,7 @@
     <p> <%= @user.id %> </p>
   </div>
 
+  <!-- This section will only be shown if the user is a driver (code 1) -->
   <% if @user.role_id == 1 %>
     <h2> Receipts for <%= @user.firstname%> <%= @user.lastname%> </h2>
     <h3> User ID: <%= @user.id%></h3>
@@ -62,6 +63,7 @@
       <% end %>
     </div>
   
+  <!-- This section will only be shown if the user is a treasurer (code 3) -->
   <% elsif @user.role_id == 3 %>
     <h2> Treasurer Page, Showing All Receipts </h2>
 
@@ -103,6 +105,7 @@
       <% end %>
     </div>
 
+  <!-- This section will only be shown if the user isn't -->
   <% else %>
     <h2> Welcome to the treasury! Only drivers or the treasurer can see this page. If you think you should be seeing this page but cannot, please contact your administrator </h2>
 

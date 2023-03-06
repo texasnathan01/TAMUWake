@@ -12,19 +12,10 @@
   <% end %>
 
   <div>
-    <%= form.label :rider_limit, style: "display: block" %>
-    <%= form.number_field :rider_limit %>
-  </div>
-
-  <div>
     <%= form.label :scheduled_date, style: "display: block" %>
     <%= form.datetime_field :scheduled_date %>
   </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.select :user_id, User.where(:isDriver => true).order(:firstname).map { |user| [user.firstname, user.id] } %>
-  </div>
 
   <div>
     <%= form.submit %>

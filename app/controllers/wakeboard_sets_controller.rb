@@ -3,15 +3,18 @@ class WakeboardSetsController < ApplicationController
 
   # GET /wakeboard_sets or /wakeboard_sets.json
   def index
-    @wakeboard_sets = WakeboardSet.where("scheduled_date >= ? AND scheduled_date <= ?",
-      DateTime.current.beginning_of_week(start_date = :sunday), 
-      DateTime.current.end_of_week(start_date = :sunday)
-    ).joins(:user)
+    @wakeboard_sets = WakeboardSet.limit(10)
+    
+    #.where("scheduled_date >= ? AND scheduled_date <= ?",
+    #  DateTime.current.beginning_of_week(start_date = :sunday).advance(hours: 8), 
+    #  DateTime.current.end_of_week(start_date = :sunday).advance(hours: -4)
+    #)
   end
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
-    @riders = Rider.includes(:user).joins(:set_rider).where("wakeboard_set_id = ?", params[:id])
+    @joinable = !SetRider.rider_exists(current_admin.id, params[:id])
+    @riders = SetRider.where("wakeboard_set_id = ?", params[:id]).joins(:user).select(:firstname, :lastname, :as_dib)
   end
 
   # GET /wakeboard_sets/new
@@ -25,7 +28,7 @@ class WakeboardSetsController < ApplicationController
 
   # POST /wakeboard_sets or /wakeboard_sets.json
   def create
-    @wakeboard_set = WakeboardSet.new(wakeboard_set_params)
+    @wakeboard_set = WakeboardSet.new(wakeboard_set_params.merge(driver_count: 1))
 
     respond_to do |format|
       if @wakeboard_set.save
@@ -68,35 +71,19 @@ class WakeboardSetsController < ApplicationController
   end
 
   # POST /sets/:id/join
+  # This action is called whenever a rider attempts to join
+  # a set either from the set itself or from the sets table
+  # on the sets page
   def join
-    setID = params[:id]
-    @set = WakeboardSet.find(setID)
-    user = params[:user_id]
-    rider = Rider.find_by(:user_id => user)
+    @set = WakeboardSet.find(params[:id])
+    user = current_admin.id
 
     respond_to do |format|
-      # if there are no spots available send an error
-      if @set.current_rider_count >= @set.rider_limit
-        @set.errors.add(:current_rider_count, message: ": The set is currently full")
-        format.html { render :show, status: :unprocessable_entity }
-        format.json { render json: @set.errors, status: :unprocessable_entity }
-      end
-
-      # first make a rider if not already made
-      if !rider
-        rider = Rider.new(documents_signed: false, user_id: user)
-        if !rider.save
-          rider.errors.add(:id, message: ": Rider couldn't be saved")
-          format.html { render :show, status: :unprocessable_entity }
-          format.json { render json: rider.errors, status: :unprocessable_entity }
-        end
-      end
-
-      # next add the rider to the set
-      setrider = SetRider.new(date_registered: DateTime.current, rider_id: rider.id, wakeboard_set_id: setID)
-      @set.current_rider_count = @set.current_rider_count + 1
-      if setrider.save && @set.save
-        format.html { redirect_to wakeboard_set_url(@set), notice: "Successfully joined set." }
+      if !@set.join(user, params[:as_dib])
+        format.html { render :show, status: :expectation_failed }
+        format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
+      else
+        format.html { redirect_to wakeboard_set_url(@set), notice: "Successfully joined set" }
         format.json { render :show, status: :ok, location: @set }
       end
     end
@@ -106,16 +93,19 @@ class WakeboardSetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_wakeboard_set
-      @wakeboard_set = WakeboardSet.includes(:user).find(params[:id])
+      @wakeboard_set = WakeboardSet.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def wakeboard_set_params
       params.require(:wakeboard_set).permit(
-        :rider_limit, 
-        :current_rider_count, 
+        :dib_count,
+        :dib_limit,
+        :chib_count,
+        :chib_limit,
+        :driver_count,
+        :driver_limit,
         :scheduled_date, 
-        :user_id
       )
     end
 end
