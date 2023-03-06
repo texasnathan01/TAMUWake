@@ -38,6 +38,12 @@ class WakeboardSetsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @wakeboard_set.errors, status: :unprocessable_entity }
       end
+	 
+	  setID = params[:id]
+	  @set = WakeboardSet.find(setID)
+	  user = params[:user_id]
+	  rider = Rider.find_by(:user_id => user)
+	  setdriver = SetDriver.new(date_registered: DateTime.current, rider_id: rider.id, wakeboard_set_id: setID)
     end
   end
 
