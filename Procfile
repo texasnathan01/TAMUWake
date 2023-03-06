@@ -1,1 +1,1 @@
-release: rails db:load && rails db:migrate
+release: rails db:migrate
