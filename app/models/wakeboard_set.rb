@@ -1,5 +1,5 @@
 class WakeboardSet < ApplicationRecord
-  has_many :set_rider
+  has_many :set_rider, dependent: :destroy
 
   validates :dib_count, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :chib_count, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
@@ -28,7 +28,7 @@ class WakeboardSet < ApplicationRecord
   # open spots (max 4 dibs, 3 chibs) and the rider
   # joins an open set (i.e. the set is not in the past)
   def rider_can_join(user_id, as_dib)
-    if !user_id || as_dib == nil
+    if !user_id || user_id < 1 || as_dib == nil
       return false
     end
 
@@ -70,7 +70,7 @@ class WakeboardSet < ApplicationRecord
       as_dib: as_dib
     )
 
-    if (as_dib)
+    if as_dib == true
       self.dib_count += 1
     else
       self.chib_count += 1
@@ -82,6 +82,33 @@ class WakeboardSet < ApplicationRecord
     end
 
     return true
+  rescue ActiveRecord::Rollback
+    return false
+  end
+
+  # leave method which attempts to remove the record
+  # of the rider being on the set
+  def leave(user_id)
+    rider = SetRider.find_by(user_id: user_id, wakeboard_set_id: self.id)
+    
+    # rider isn't on set or set has been completed
+    if !rider || DateTime.current > self.scheduled_date
+      return false
+    end
+
+    self.transaction do
+      rider.destroy
+      if rider.as_dib
+        self.dib_count -= 1
+      else
+        self.chib_count -= 1
+      end
+      self.save!
+    end
+
+    # successfully removed rider
+    return true
+    
   rescue ActiveRecord::Rollback
     return false
   end

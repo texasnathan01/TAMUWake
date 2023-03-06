@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :wakeboard_sets, :path => "/sets" do
     member do
       post 'join'
+      post 'leave'
     end
   end
   resources :receipts
