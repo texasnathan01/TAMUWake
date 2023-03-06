@@ -32,18 +32,18 @@ class WakeboardSetsController < ApplicationController
 
     respond_to do |format|
       if @wakeboard_set.save
+	    # setID = params[:id]
+	    # @set = WakeboardSet.find(setID)
+	    user = params[:id]
+	    rider = User.find_by(:id => user)
+	    setdriver = SetDriver.new(date_registered: DateTime.current, rider_id: rider.id, wakeboard_set_id: params[:id])
+		
         format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully created." }
         format.json { render :show, status: :created, location: @wakeboard_set }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @wakeboard_set.errors, status: :unprocessable_entity }
       end
-	 
-	  setID = params[:id]
-	  @set = WakeboardSet.find(setID)
-	  user = params[:user_id]
-	  rider = Rider.find_by(:user_id => user)
-	  setdriver = SetDriver.new(date_registered: DateTime.current, rider_id: rider.id, wakeboard_set_id: setID)
     end
   end
 
