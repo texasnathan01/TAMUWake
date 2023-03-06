@@ -4,16 +4,14 @@ class UsersController < ApplicationController
   # GET /users or /users.json
   def index
     # need to check the role of the user
-    @user = User.find_by(:email => current_admin.email)
-    # added case for test TODO: need to remove
-    if @user.role_id == 1 || @user.role_id >=0
-      @users = User.all
-    else
-      # redirect to account if they do not have permission
-      respond_to do |format|
-        format.html { redirect_to accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
-      end
-    end
+    # @user = User.find_by(:email => current_admin.email)
+    # if @user.role_id == 1
+    #   @users = User.all
+    # else
+    #   @is_admin = false
+    #   redirect_to user_url(@user)
+    # end
+    @users = User.all
   end
 
   # GET /users/1 or /users/1.json
