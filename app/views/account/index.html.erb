@@ -2,25 +2,18 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
+<%= link_to "Sign Out", destroy_admin_session_path %>
 <ul>
 
   <a href="#"><banner>TAMU WAKE</banner></a>
   
   <a href="#"><p class="navbar navbarRightEnd"><%= link_to "Reciepts", receipts_path %></p></a>
-  <a href="#"><p class="navbar currentPage"><%= link_to "Members", users_path %></p></a>
-  <a href="#"><p class="navbar">Account <%= link_to "Account", accounts_path %></p></a>
+  <a href="#"><p class="navbar"><%= link_to "Members", users_path %></p></a>
+  <a href="#"><p class="navbar currentPage"><%= link_to "Account", accounts_path %></p></a>
   <a href="#"><p class="navbar navbarLeftEnd"><%= link_to "Rides", wakeboard_sets_path %></p></a>
   
   <p class="bannerBox"></p>
-  
-  <h1>New user</h1>
 
-  <%= render "form", user: @user %>
-
-  <br>
-
-  <div>
-    <%= link_to "Back to users", users_path %>
-  </div>
+  <%= render @user %>
   
 </ul>
