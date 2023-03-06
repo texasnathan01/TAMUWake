@@ -7,7 +7,5 @@ class ApplicationController < ActionController::Base
     def current_user
         # grabbing current userwho is logged in  
         User.find_by(:email => current_admin.email)
-    end
-    
-        
+    end   
 end
