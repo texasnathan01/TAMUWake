@@ -20,9 +20,9 @@
 
 <%= render @wakeboard_set %>
 
-<% if SetRider.rider_exists(current_admin.id, @wakeboard_set.id) %>
+<% if SetRider.rider_exists?(current_admin.id, @wakeboard_set.id) %>
   <div>
-    <%= button_to "Leave set", leave_wakeboard_set_path %>
+    <%= button_to "Leave Set", leave_wakeboard_set_path %>
   </div>
 <% else %>
   <div style="display: flex;">
@@ -39,7 +39,7 @@
   <div style="display: flex; flex-direction: row; justify-content: center;">
     <div style="margin: 0 1.5rem;">
       <h3 style="text-align: center">Dibs</h3>
-      <table id="#dib-table">
+      <table id="dib-table">
         <% (@riders.select {|r| r.as_dib}).each do |rider| %>
           <% i = 1%>
           <tr>
@@ -52,7 +52,7 @@
 
     <div style="margin: 0 1.5rem;">
       <h3 style="text-align: center">Chibs</h3>
-      <table id="#chib-table">
+      <table id="chib-table">
         <% (@riders.select {|r| !r.as_dib}).each do |rider| %>
           <tr>
             <td><%=  rider.firstname + " " + rider.lastname %></td>

@@ -9,7 +9,7 @@ class SetRider < ApplicationRecord
   # this method returns a boolean value, true
   # if the array returned by a where query has
   # a size greater than 0
-  def self.rider_exists(user, set)
+  def self.rider_exists?(user, set)
     if !user || !set
       return false
     end

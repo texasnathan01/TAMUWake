@@ -13,7 +13,7 @@ class WakeboardSetsController < ApplicationController
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
-    @joinable = !SetRider.rider_exists(current_admin.id, params[:id])
+    @joinable = !SetRider.rider_exists?(current_admin.id, params[:id])
     @riders = SetRider.where("wakeboard_set_id = ?", params[:id]).joins(:user).select(:firstname, :lastname, :as_dib)
   end
 
@@ -38,12 +38,6 @@ class WakeboardSetsController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @wakeboard_set.errors, status: :unprocessable_entity }
       end
-	 
-	  setID = params[:id]
-	  @set = WakeboardSet.find(setID)
-	  user = params[:user_id]
-	  rider = Rider.find_by(:user_id => user)
-	  setdriver = SetDriver.new(date_registered: DateTime.current, rider_id: rider.id, wakeboard_set_id: setID)
     end
   end
 
@@ -76,10 +70,11 @@ class WakeboardSetsController < ApplicationController
   # on the sets page
   def join
     @wakeboard_set = WakeboardSet.find(params[:id])
+    as_dib = ActiveModel::Type::Boolean.new.cast(params[:as_dib])
     user = current_admin.id
 
     respond_to do |format|
-      if !@wakeboard_set.join(user, params[:as_dib])
+      if !@wakeboard_set.join(user, as_dib)
         format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Unable to join set" }
         format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
       else

@@ -27,7 +27,7 @@ class WakeboardSet < ApplicationRecord
   # join the set. A rider can join if there are
   # open spots (max 4 dibs, 3 chibs) and the rider
   # joins an open set (i.e. the set is not in the past)
-  def rider_can_join(user_id, as_dib)
+  def rider_can_join?(user_id, as_dib)
     if !user_id || user_id < 1 || as_dib == nil
       return false
     end
@@ -37,7 +37,7 @@ class WakeboardSet < ApplicationRecord
       return false
     end
 
-    if SetRider.rider_exists(user_id, self.id)
+    if SetRider.rider_exists?(user_id, self.id)
       return false
     end
 
@@ -59,7 +59,7 @@ class WakeboardSet < ApplicationRecord
   # Called in controller
   # retuns true if successful
   def join(user_id, as_dib)
-    if !rider_can_join(user_id, as_dib) || (!user_id || as_dib == nil)
+    if !rider_can_join?(user_id, as_dib) || (!user_id || as_dib == nil)
       return false
     end
 
