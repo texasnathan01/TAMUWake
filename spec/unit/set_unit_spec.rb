@@ -1,14 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe WakeboardSet, type: :model do
-    let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-
     subject do
         described_class.new(
             rider_limit: 7,
             current_rider_count: 0,
             scheduled_date: (DateTime.current).tomorrow,
-            user_id: user.id
+            user_id: 3
         )
     end
 
