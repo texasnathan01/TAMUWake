@@ -1,5 +1,5 @@
 Admin.create!([
-    {email: "tamuwakeuser@gmail.com", full_name: "Admin User", uid: 123, avatar_url: "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg", is_approved: true, role_id: 1}
+    {email: "tamuwakeuser@gmail.com", full_name: "Admin User", uid: 123, avatar_url: "https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg", is_approved: true}
 ])
 
 User.create!([
