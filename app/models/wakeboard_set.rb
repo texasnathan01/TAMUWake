@@ -96,13 +96,14 @@ class WakeboardSet < ApplicationRecord
       return false
     end
 
+    if rider.as_dib
+      self.dib_count -= 1
+    else
+      self.chib_count -= 1
+    end
+
     self.transaction do
       rider.destroy!
-      if rider.as_dib
-        self.dib_count -= 1
-      else
-        self.chib_count -= 1
-      end
       self.save!
     end
 

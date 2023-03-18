@@ -90,7 +90,7 @@ class WakeboardSetsController < ApplicationController
   def leave
     @set = WakeboardSet.find(params[:id])
 
-    user = current_admin.id
+    user = current_user.id
 
     respond_to do |format|
       if !@set.leave(user)
