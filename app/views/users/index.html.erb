@@ -16,18 +16,20 @@
   
   <p class="bannerBox"></p>
 
+<%= link_to 'Approve New Users', users_to_approve_path %>
+
 <h1>Users</h1>
 
-<div id="users">
+<div id="admins">
   <% @users.each do |user| %>
     <%= render user %>
     <p>
-      <%= link_to "Show this user", user %> |<%= link_to 'Edit', edit_user_path(user) %>|<%= button_to 'Destroy', user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
+      <%= link_to 'Edit', edit_admin_path(user) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New user", new_user_path %>
+
 <br>
 
 

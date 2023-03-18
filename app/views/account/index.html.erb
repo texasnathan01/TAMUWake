@@ -2,7 +2,7 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
-<%= link_to "Sign Out", destroy_admin_session_path %>
+
 <ul>
 
   <a href="#"><banner>TAMU WAKE</banner></a>
@@ -13,7 +13,8 @@
   <a href="#"><p class="navbar navbarLeftEnd"><%= link_to "Rides", wakeboard_sets_path %></p></a>
   
   <p class="bannerBox"></p>
-
+  <img src=<%=@user.avatar_url %> alt="Image not found" height="250" width="250">
   <%= render @user %>
+  <%= link_to "Sign Out", destroy_admin_session_path %>
   
 </ul>

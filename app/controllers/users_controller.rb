@@ -1,13 +1,13 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy]
 
   # GET /users or /users.json
   def index
     # need to check the role of the user
-    @user = User.find_by(:email => current_admin.email)
+    @user = current_admin
     # added case for test TODO: need to remove
-    if @user.role_id == 1 || @user.role_id >=0
-      @users = User.all
+    if @user.role_id == 1 || @user.role_id >= -1 
+      @users = Admin.all
     else
       # redirect to account if they do not have permission
       respond_to do |format|
@@ -20,41 +20,13 @@ class UsersController < ApplicationController
   def show
   end
 
+  def approval
+    @users = Admin.where('role_id < 0')
+  end
+
   # GET /users/new
   def new
     @user = User.new
-  end
-
-  # GET /users/1/edit
-  def edit
-  end
-
-  # POST /users or /users.json
-  def create
-    @user = User.new(user_params)
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to user_url(@user), notice: "User was successfully created." }
-        format.json { render :show, status: :created, location: @user }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /users/1 or /users/1.json
-  def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /users/1 or /users/1.json
@@ -70,16 +42,12 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = Admin.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:email, :firstname, :lastname, :password,:role_id ,:is_approved)
-    end
-
     def delete
-      @users = User.find(params[:id])
+      @users = Admin.find(params[:id])
     end
 
 end

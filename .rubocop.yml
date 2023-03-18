@@ -133,7 +133,7 @@ Layout/SpaceInLambdaLiteral:
     EnforcedStyle: require_space
 
 Layout/LineLength:
-    Max: 100
+    Max: 150
     Exclude:
         - "**/spec/**/*"
 
@@ -413,7 +413,7 @@ Style/KeywordParametersOrder:
     Enabled: true
 
 Style/MethodCallWithArgsParentheses:
-    Enabled: true
+    Enabled: false
 
 Style/MissingElse:
     Enabled: false
