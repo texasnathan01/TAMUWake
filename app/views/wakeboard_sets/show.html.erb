@@ -20,7 +20,7 @@
 
 <%= render @wakeboard_set %>
 
-<% if SetRider.rider_exists?(current_admin.id, @wakeboard_set.id) %>
+<% if SetRider.rider_exists?(current_user.id, @wakeboard_set.id) %>
   <div>
     <%= button_to "Leave Set", leave_wakeboard_set_path %>
   </div>
