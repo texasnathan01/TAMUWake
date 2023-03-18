@@ -78,7 +78,7 @@ class WakeboardSet < ApplicationRecord
 
     self.transaction do
       self.save!
-      rider.save
+      rider.save!
     end
 
     return true
@@ -97,7 +97,7 @@ class WakeboardSet < ApplicationRecord
     end
 
     self.transaction do
-      rider.destroy
+      rider.destroy!
       if rider.as_dib
         self.dib_count -= 1
       else

@@ -94,7 +94,7 @@ class WakeboardSetsController < ApplicationController
 
     respond_to do |format|
       if !@set.leave(user)
-        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Unable to leave set" }
+        format.html { redirect_to wakeboard_set_url(@set), notice: "Unable to leave set" }
         format.json { render json:{ message: "Unable to leave set" }, status: :expectation_failed }
       else
         format.html { redirect_to wakeboard_set_url(@set), notice: "Successfully left set" }
