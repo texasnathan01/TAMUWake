@@ -13,7 +13,7 @@ class WakeboardSetsController < ApplicationController
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
-    @joinable = !SetRider.rider_exists?(current_admin.id, params[:id])
+    @joinable = !SetRider.rider_exists?(current_user.id, params[:id])
     @riders = SetRider.where("wakeboard_set_id = ?", params[:id]).joins(:user).select(:firstname, :lastname, :as_dib)
   end
 
@@ -71,7 +71,7 @@ class WakeboardSetsController < ApplicationController
   def join
     @wakeboard_set = WakeboardSet.find(params[:id])
     as_dib = ActiveModel::Type::Boolean.new.cast(params[:as_dib])
-    user = current_admin.id
+    user = current_user.id
 
     respond_to do |format|
       if !@wakeboard_set.join(user, as_dib)
@@ -90,11 +90,11 @@ class WakeboardSetsController < ApplicationController
   def leave
     @set = WakeboardSet.find(params[:id])
 
-    user = current_admin.id
+    user = current_user.id
 
     respond_to do |format|
       if !@set.leave(user)
-        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Unable to leave set" }
+        format.html { redirect_to wakeboard_set_url(@set), notice: "Unable to leave set" }
         format.json { render json:{ message: "Unable to leave set" }, status: :expectation_failed }
       else
         format.html { redirect_to wakeboard_set_url(@set), notice: "Successfully left set" }
