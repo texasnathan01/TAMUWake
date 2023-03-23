@@ -1,0 +1,2 @@
+class SetDriver < ApplicationRecord
+end

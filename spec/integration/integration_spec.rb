@@ -36,7 +36,6 @@ RSpec.describe 'Member Pages Without Access', type: :feature do
   end
 end
 
-
 RSpec.describe 'Member Pages With Access', type: :feature do
 
   let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
@@ -50,7 +49,6 @@ RSpec.describe 'Member Pages With Access', type: :feature do
 
   scenario 'visiting member page with sufficient permissions' do
     visit users_path
-    expect(page).to have_content('Users')
+    expect(page).to have_content('team')
   end
-
 end

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :wakeboard_sets, :path => "/sets" do
     member do
       post 'join'
+      post 'leave'
     end
   end
   resources :receipts
@@ -19,7 +20,6 @@ Rails.application.routes.draw do
     get 'admins/sign_out', to: 'admins/sessions#destroy', as: :destroy_admin_session
     resources :admins
   end
-
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
