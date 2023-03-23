@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_06_020939) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_23_012022) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,7 +22,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_020939) do
     t.boolean "is_approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "role_id", default: 0
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
@@ -39,19 +38,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_020939) do
     t.string "image_link"
   end
 
-  create_table "riders", force: :cascade do |t|
-    t.boolean "documents_signed"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_riders_on_user_id"
-  end
-
   create_table "set_drivers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "rider_id", null: false
-    t.bigint "wakeboard_set_id"
+    t.bigint "wakeboard_set_id", null: false
   end
 
   create_table "set_riders", force: :cascade do |t|
@@ -74,6 +65,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_06_020939) do
     t.datetime "updated_at", null: false
     t.boolean "documents_signed", default: false
     t.integer "role_id", default: 0
+    t.integer "uin"
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

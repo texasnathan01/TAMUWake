@@ -42,6 +42,16 @@
   </div>
 
   <div>
+    <%= form.label :uin, style: "display: block" %>
+    <%= form.number_field :uin %>
+  </div>
+
+  <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
     <%= form.submit %>
   </div>
 <% end %>
