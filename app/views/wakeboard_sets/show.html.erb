@@ -20,7 +20,7 @@
 
 <%= render @wakeboard_set %>
 
-<% if SetRider.rider_exists?(current_user.id, @wakeboard_set.id) %>
+<% if SetRider.rider_exists?(current_admin.id, @wakeboard_set.id) %>
   <div>
     <%= button_to "Leave Set", leave_wakeboard_set_path %>
   </div>
@@ -43,7 +43,7 @@
         <% (@riders.select {|r| r.as_dib}).each do |rider| %>
           <% i = 1%>
           <tr>
-            <td><%=rider.firstname + " " + rider.lastname %></td>
+            <td><%=rider.first_name + " " + rider.last_name %></td>
           </tr>
           <% i += 1%>
         <% end %>
@@ -55,7 +55,7 @@
       <table id="chib-table">
         <% (@riders.select {|r| !r.as_dib}).each do |rider| %>
           <tr>
-            <td><%=  rider.firstname + " " + rider.lastname %></td>
+            <td><%=  rider.first_name + " " + rider.last_name %></td>
           </tr>
         <% end %>
       </table>

@@ -1,5 +1,5 @@
 class SetRider < ApplicationRecord
-  belongs_to :user
+  belongs_to :admin
   belongs_to :wakeboard_set
 
   # rider_exists(user, set) method
@@ -14,7 +14,7 @@ class SetRider < ApplicationRecord
       return false
     end
 
-    set = where(wakeboard_set_id: set, user_id: user)
+    set = where(wakeboard_set_id: set, admin_id: user)
     return set.length != 0
   end
 end

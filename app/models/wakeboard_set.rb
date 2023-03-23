@@ -66,7 +66,7 @@ class WakeboardSet < ApplicationRecord
     rider = SetRider.new(
       date_registered: DateTime.current,
       wakeboard_set_id: self.id,
-      user_id: user_id,
+      admin_id: user_id,
       as_dib: as_dib
     )
 
@@ -89,7 +89,7 @@ class WakeboardSet < ApplicationRecord
   # leave method which attempts to remove the record
   # of the rider being on the set
   def leave(user_id)
-    rider = SetRider.find_by(user_id: user_id, wakeboard_set_id: self.id)
+    rider = SetRider.find_by(admin_id: user_id, wakeboard_set_id: self.id)
     
     # rider isn't on set or set has been completed
     if !rider || DateTime.current > self.scheduled_date

@@ -16,7 +16,7 @@
   <div id="<%= dom_id receipt %>">
 
   <div hidden>
-    <%= @receipt_user = User.find_by(:id => receipt.user_id) %>
+    <%= @receipt_user = Admin.find_by(:id => receipt.user_id) %>
   </div>
 
   <p>
@@ -31,7 +31,7 @@
 
   <p>
     <strong>Receipt's Uploader's Name:</strong>
-    <%= @receipt_user.firstname %> <%= @receipt_user.lastname %>
+    <%= @receipt_user.first_name %> <%= @receipt_user.last_name %>
   </p>
 
   <p>
