@@ -36,6 +36,11 @@
     <%= form.check_box :documents_signed %>
   </div>
 
+    <div>
+    <%= form.label :is_approved, style: "display: block"%>
+    <%= form.check_box :is_approved %>
+  </div>
+
   <div>
     <%= form.submit "Update Member" %>
   </div>

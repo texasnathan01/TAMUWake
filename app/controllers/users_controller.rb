@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def approval
-    @users = Admin.where('role_id < 0')
+    @users = Admin.where(is_approved: false)
   end
 
   # GET /users/new
