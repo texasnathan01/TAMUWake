@@ -1,9 +1,6 @@
-<p style="color: green"><%= notice %></p>
-
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
-
 
 <ul>
 
@@ -15,28 +12,16 @@
   <a href="#"><p class="navbar navbarLeftEnd"><%= link_to "Rides", wakeboard_sets_path %></p></a>
   
   <p class="bannerBox"></p>
+  
+  <h1>Editing user</h1>
 
-<%= link_to 'Approve New Users', users_to_approve_path %>
+  <%= render "form", admin: @user %>
+  <br>
 
-<h1>Users</h1>
-
-<div id="admins">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to 'Edit', edit_admin_path(user) %>
-    </p>
-  <% end %>
+<div>
+  <%= link_to "Show this user", @user %> |
+  <%= link_to "Back to users", users_path %> |
+  <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
 </div>
-
-
-<br>
-
-
   
 </ul>
-
-
-
-
-

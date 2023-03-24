@@ -20,6 +20,7 @@
     <%= form.label :firstname, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
+
   <div>
     <%= form.label :lastname, style: "display: block" %>
     <%= form.text_field :last_name %>
@@ -35,14 +36,9 @@
     <%= form.check_box :documents_signed %>
   </div>
 
-  <div>
-    <%= form.label :uin, style: "display: block" %>
-    <%= form.number_field :uin %>
-  </div>
-
-  <div>
-    <%= form.label :address, style: "display: block" %>
-    <%= form.text_field :address %>
+    <div>
+    <%= form.label :is_approved, style: "display: block"%>
+    <%= form.check_box :is_approved %>
   </div>
 
   <div>

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'Creating a set', type: :feature do
   let(:admin) { Admin.find_or_create_by(email: "aramone@tamu.edu") }
-  let(:user) { User.find_or_create_by(email: "aramone@tamu.edu", firstname: "Axel", lastname: "Ramone", role_id: 1) }
+  # let(:user) { User.find_or_create_by(email: "aramone@tamu.edu", firstname: "Axel", lastname: "Ramone", role_id: 1) }
 
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)

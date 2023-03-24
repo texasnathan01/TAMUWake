@@ -16,9 +16,9 @@
   
   <p class="bannerBox"></p>
 
-<%= link_to 'Approve New Users', users_to_approve_path %>
+<%= link_to 'Current Users', users_path %>
 
-<h1>Users</h1>
+<h1>Users to Approve</h1>
 
 <div id="admins">
   <% @users.each do |user| %>
@@ -28,7 +28,6 @@
     </p>
   <% end %>
 </div>
-
 
 <br>
 
