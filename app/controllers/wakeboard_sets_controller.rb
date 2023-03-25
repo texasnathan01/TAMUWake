@@ -3,12 +3,15 @@ class WakeboardSetsController < ApplicationController
 
   # GET /wakeboard_sets or /wakeboard_sets.json
   def index
-    @wakeboard_sets = WakeboardSet.limit(10)
-    
-    # .where("scheduled_date >= ? AND scheduled_date <= ?",
-    #  DateTime.current.beginning_of_week(start_date = :sunday).advance(hours: 8), 
-    #  DateTime.current.end_of_week(start_date = :sunday).advance(hours: -4)
-    # )
+    @today = DateTime.current
+
+    # on sunday show sets for next week + ongoing sets today
+    @weekStart, @weekEnd = helpers.available_set_range(@today)
+
+    @wakeboard_sets = WakeboardSet.limit(10).order(:scheduled_date).where("scheduled_date >= ? AND scheduled_date <= ?",
+      @weekStart,
+      @weekEnd
+    )
   end
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
