@@ -86,8 +86,11 @@ group :test do
   gem "capybara", ">= 3.26"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem 'database_cleaner-active_record'
 
 end
 
 # Add gem to manage db
 gem "yaml_db"
+
+gem "tailwindcss-rails", "~> 2.0"
