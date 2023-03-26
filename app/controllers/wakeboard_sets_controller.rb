@@ -30,20 +30,8 @@ class WakeboardSetsController < ApplicationController
   def create
     @wakeboard_set = WakeboardSet.new(wakeboard_set_params.merge(driver_count: 1))
 
-	logger.info "secondary_driver: #{params[:user_id]}" 
-
-    user = User.find_by(:email => current_admin.email)
-
     respond_to do |format|
       if @wakeboard_set.save
-	  
-		
-		driver1 = SetDriver.new(rider_id: user.id, wakeboard_set_id: @wakeboard_set.id)
-		driver2 = SetDriver.new(rider_id: params[:wakeboard_set][:user_id], wakeboard_set_id: @wakeboard_set.id)
-	
-		if driver1.save & driver2.save
-		end
-	
         format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully created." }
         format.json { render :show, status: :created, location: @wakeboard_set }
       else
