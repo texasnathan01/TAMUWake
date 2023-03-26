@@ -17,9 +17,7 @@
 </ul>
 
 <%= link_to "Back to set list", wakeboard_sets_path %>
-
 <%= render @wakeboard_set %>
-
 <% if SetRider.rider_exists?(current_admin.id, @wakeboard_set.id) %>
   <div>
     <%= button_to "Leave Set", leave_wakeboard_set_path %>

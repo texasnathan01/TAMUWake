@@ -15,8 +15,16 @@
     <%= form.label :scheduled_date, style: "display: block" %>
     <%= form.datetime_field :scheduled_date %>
   </div>
-
-
+  
+  <br>
+  
+  <div>
+    <%= form.label :secondary_driver, style: "display: block" %>
+    <%= form.collection_select(:user_id, User.all, :id, :firstname) %>
+  </div>
+  
+  <br>
+  
   <div>
     <%= form.submit "Create Set" %>
   </div>
