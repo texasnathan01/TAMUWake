@@ -1,6 +1,18 @@
 class AdminsController < ApplicationController
-  before_action :set_admin, only: %i[ show edit update destroy]
+  before_action :set_admin, only: %i[ show edit update destroy update_approval]
   
+  def update_approval
+    respond_to do |format| 
+      if @user.update(is_approved: true)
+        format.html { redirect_to users_path, notice: "User was successfully approved." }
+        format.json { render :show, status: :ok, location: @user }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def edit
   end
 
@@ -38,7 +50,7 @@ class AdminsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def admin_params
-    params.require(:admin).permit(:email, :first_name, :last_name,:role_id,:documents_signed)
+    params.require(:admin).permit(:email, :first_name, :last_name, :role_id,:address,:uin,:documents_signed, :is_approved)
   end
 
   def delete

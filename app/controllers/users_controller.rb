@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @user = current_admin
     # added case for test TODO: need to remove
     if @user.role_id == 1 || @user.role_id >= -1 
-      @users = Admin.all
+      @users = Admin.where(is_approved: true)
     else
       # redirect to account if they do not have permission
       respond_to do |format|
