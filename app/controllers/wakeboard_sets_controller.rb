@@ -6,7 +6,7 @@ class WakeboardSetsController < ApplicationController
     @today = DateTime.current
 
     # on sunday show sets for next week + ongoing sets today
-    @weekStart, @weekEnd = helpers.available_set_range(@today)
+    @weekStart, @weekEnd = WakeboardSet.available_set_range(@today)
 
     @wakeboard_sets = WakeboardSet.limit(10).order(:scheduled_date).where("scheduled_date >= ? AND scheduled_date <= ?",
       @weekStart,
@@ -16,7 +16,7 @@ class WakeboardSetsController < ApplicationController
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
-    @joinable = !SetRider.rider_exists?(current_admin.id, params[:id])
+    @joinable = helpers.set_available?(current_admin.id, @wakeboard_set)
     @riders = SetRider.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :as_dib)
 	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name)
   end

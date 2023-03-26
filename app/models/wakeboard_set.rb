@@ -18,6 +18,29 @@ class WakeboardSet < ApplicationRecord
     errors.add(:driver_count, "exceeds the driver limit") if driver_count > driver_limit
   end
 
+  # returns the dates that bound the sets
+  # a user is able to join based on the
+  # current date. Sundays allow you to join
+  # a week in advance but otherwise a user is only
+  # able to join sets for the current week
+  def self.available_set_range(current_date)
+    if current_date.sunday.today?
+      return current_date, current_date.next_week.end_of_week
+    else
+      return current_date, current_date.end_of_week
+    end
+  end
+
+  # returns true if the set is available for registration
+  # on sunday after 8pm
+  def self.sunday_registration_open?(scheduled_date, current_date = DateTime.current)
+    limit = DateTime.new(current_date.year, current_date.month, current_date.day, 20, 0, 0, current_date.zone)
+    if current_date.before?(limit) and (scheduled_date.after?(limit) or scheduled_date.to_i == limit.to_i)
+      return false
+    end
+    return true
+  end
+
   # determines if a rider with user_id can
   # join the set. A rider can join if there are
   # open spots (max 4 dibs, 3 chibs) and the rider
@@ -26,7 +49,15 @@ class WakeboardSet < ApplicationRecord
     return false if !user_id || user_id < 1 || as_dib.nil?
 
     now = DateTime.current
-    return false if scheduled_date < now
+    lower, upper = WakeboardSet.available_set_range(now)
+    if self.scheduled_date.before?(lower) || self.scheduled_date.after?(upper)
+      return false
+    end
+
+    # after 8pm riders can sign up on sundays
+    if now.sunday.today? && !WakeboardSet.sunday_registration_open?(self.scheduled_date, now)
+      return false
+    end
 
     return false if SetRider.rider_exists?(user_id, id)
 
