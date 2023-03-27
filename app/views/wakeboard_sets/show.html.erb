@@ -37,6 +37,19 @@
   <h2>Current Riders</h2>
 
   <div style="display: flex; flex-direction: row; justify-content: center;">
+	<div style="margin: 0 1.5rem;">
+      <h3 style="text-align: center">Drivers</h3>
+      <table id="driver-table">
+        <% @drivers.each do |driver| %>
+          <% i = 1%>
+          <tr>
+            <td><%=driver.first_name + " " + driver.last_name %></td>
+          </tr>
+          <% i += 1%>
+        <% end %>
+      </table>
+    </div>
+	
     <div style="margin: 0 1.5rem;">
       <h3 style="text-align: center">Dibs</h3>
       <table id="dib-table">

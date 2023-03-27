@@ -44,10 +44,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
   end
 
   create_table "set_drivers", force: :cascade do |t|
+    t.bigint "admin_id", null: false
+    t.bigint "wakeboard_set_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "rider_id", null: false
-    t.bigint "wakeboard_set_id", null: false
+    t.index ["admin_id"], name: "index_set_drivers_on_admin_id"
+    t.index ["wakeboard_set_id"], name: "index_set_drivers_on_wakeboard_set_id"
   end
 
   create_table "set_riders", force: :cascade do |t|
@@ -73,6 +75,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
     t.integer "driver_limit", default: 2
   end
 
+  add_foreign_key "set_drivers", "admins"
+  add_foreign_key "set_drivers", "wakeboard_sets"
   add_foreign_key "set_riders", "admins"
   add_foreign_key "set_riders", "wakeboard_sets"
 end
