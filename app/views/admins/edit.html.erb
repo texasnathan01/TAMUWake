@@ -13,12 +13,15 @@
   
   <p class="bannerBox"></p>
   
-  <h1>Editing User:  </h1>
+  <h1>Editing user</h1>
+
   <%= render "form", admin: @user %>
   <br>
 
 <div>
+  <%= link_to "Show this user", @user %> |
   <%= link_to "Back to users", users_path %>
+  <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
 </div>
   
 </ul>

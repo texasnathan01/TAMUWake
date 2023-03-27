@@ -4,7 +4,7 @@ class AdminsController < ApplicationController
   def update_approval
     respond_to do |format| 
       if @user.update(is_approved: true)
-        format.html { redirect_to users_path, notice: "User was successfully approved." }
+        format.html { redirect_to users_to_approve_path, notice: "User #{@user.first_name} #{@user.last_name} was successfully approved." }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit, status: :unprocessable_entity }

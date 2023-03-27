@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :receipts
   resources :users
   get 'approval', to: 'users#approval', as: 'users_to_approve'
+  get 'help', to: 'help#index'
   # resources :admins
   
 

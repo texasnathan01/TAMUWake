@@ -22,12 +22,11 @@ end
 RSpec.describe 'Member Pages Without Access', type: :feature do
 
   let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: -1)}
+  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: -2)}
   
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
     allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
   end
 
   scenario 'visiting member page without sufficient permissions' do
@@ -44,7 +43,6 @@ RSpec.describe 'Member Pages With Access', type: :feature do
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
     allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
   end
 
   scenario 'visiting member page with sufficient permissions' do
