@@ -32,6 +32,16 @@
   </div>
 
   <div>
+    <%= form.label :address, style: "display: block" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :uin, style: "display: block" %>
+    <%= form.number_field :uin %>
+  </div>
+
+  <div>
     <%= form.label :documents_signed, style: "display: block" %>
     <%= form.check_box :documents_signed %>
   </div>

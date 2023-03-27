@@ -1,5 +1,3 @@
-<p style="color: green"><%= notice %></p>
-
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
@@ -12,7 +10,8 @@
   <a href="#"><p class="navbar navbarRightEnd"><%= link_to "Reciepts", receipts_path %></p></a>
   <a href="#"><p class="navbar currentPage"><%= link_to "Members", users_path %></p></a>
   <a href="#"><p class="navbar"> <%= link_to "Account", accounts_path %></p></a>
-  <a href="#"><p class="navbar navbarLeftEnd"><%= link_to "Rides", wakeboard_sets_path %></p></a>
+  <a href="#"><p class="navbar"><%= link_to "Rides", wakeboard_sets_path %></p></a>
+  <a href="#"><p class="navbar navbarLeftEnd"> <%= link_to "Help", help_path %></p></a>
   
   <p class="bannerBox"></p>
 
@@ -24,7 +23,7 @@
   <% @users.each do |user| %>
     <%= render user %>
     <p>
-      <%= link_to 'Edit', edit_admin_path(user) %>
+      <%= link_to 'Edit', edit_admin_path(user) %> | <%= link_to "Show this user", user %>
     </p>
   <% end %>
 </div>

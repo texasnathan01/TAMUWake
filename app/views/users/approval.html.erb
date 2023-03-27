@@ -24,7 +24,7 @@
   <% @users.each do |user| %>
     <%= render user %>
     <p>
-      <%= link_to 'Edit', edit_admin_path(user) %>
+      <%= button_to "Approve User", update_approval_admin_path(user), method: :patch %>
     </p>
   <% end %>
 </div>
