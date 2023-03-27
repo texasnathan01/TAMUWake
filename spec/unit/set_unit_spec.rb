@@ -91,4 +91,120 @@ RSpec.describe WakeboardSet, type: :model do
     expect(subject.scheduled_date.prev_day?).to be true
     expect(subject).not_to be_valid
   end
+
+  describe 'join helper methods - rider_can_join' do
+    before :each do
+      @user = Admin.find_or_create_by(email: "aramone@tamu.edu")
+      @set = WakeboardSet.create(
+        dib_count: 0,
+        chib_count: 0,
+        driver_count: 1,
+        scheduled_date: (DateTime.current).tomorrow
+      )
+    end
+
+    it 'is true when a rider is not on the set, as a dib' do
+      as_dib = true
+      result = @set.rider_can_join(@user.id, as_dib)
+      expect(result).to be true
+    end
+
+    it 'is true when a rider is not on the set, as a chib' do
+      as_dib = false
+      result = @set.rider_can_join(@user.id, as_dib)
+      expect(result).to be true
+    end
+
+    it 'is false when a rider is on the set as dib, joins as dib' do
+      as_dib = true
+      joined = @set.join(@user.id, as_dib)
+      expect(joined).to be true
+      result = @set.rider_can_join(@user.id, as_dib)
+      expect(result).to be false
+    end
+
+    it 'is false when a rider is on the set as dib, joins as chib' do
+      as_dib = true
+      joined = @set.join(@user.id, as_dib)
+      expect(joined).to be true
+      result = @set.rider_can_join(@user.id, !as_dib)
+      expect(result).to be false
+    end
+
+    it 'is false when a rider is on the set as chib, joins as chib' do
+      as_dib = false
+      joined = @set.join(@user.id, as_dib)
+      expect(joined).to be true
+      result = @set.rider_can_join(@user.id, as_dib)
+      expect(result).to be false
+    end
+
+    it 'is false when a rider is on the set as chib and joins as dib' do
+      as_dib = false
+      joined = @set.join(@user.id, as_dib)
+      expect(joined).to be true
+      result = @set.rider_can_join(@user.id, !as_dib)
+      expect(result).to be false
+    end
+
+    it 'is false when a userid is nil' do
+      as_dib = true
+      result = @set.rider_can_join(nil, as_dib)
+      expect(result).to be false
+    end
+
+    it 'is false when a userid is negative' do
+      as_dib = true
+      result = @set.rider_can_join(-1, as_dib)
+      expect(result).to be false
+    end
+
+    it 'is false when a userid is negative and as_dib is nil' do
+      result = @set.rider_can_join(-1, nil)
+      expect(result).to be false
+    end
+
+    it 'is false when a userid is valid and as_dib is nil' do
+      result = @set.rider_can_join(1, nil)
+      expect(result).to be false
+    end
+
+    it 'is false when schedule date and as_dib is nil' do
+      @set.scheduled_date = DateTime.current.prev_day()
+      result = @set.rider_can_join(1, true)
+      expect(result).to be false
+    end
+
+    it 'is false when dib_count is = dib_limit' do
+      @set.dib_count = 4
+      expect(@set.dib_count).to eq(@set.dib_limit)
+      as_dib = true
+      result = @set.rider_can_join(1, as_dib)
+      expect(result).to be false
+    end
+
+    it 'is false when chib_count is = chib_limit' do
+      @set.chib_count = 3
+      expect(@set.chib_count).to eq(@set.chib_limit)
+      as_dib = false
+      result = @set.rider_can_join(1, as_dib)
+      expect(result).to be false
+    end
+
+    it 'is true when chib_count is = chib_limit - 1' do
+      @set.chib_count = 2
+      expect(@set.chib_count).to eq(@set.chib_limit - 1)
+      as_dib = false
+      result = @set.rider_can_join(1, as_dib)
+      expect(result).to be true
+    end
+
+    it 'is true when dib_count is = dib_limit - 1' do
+      @set.dib_count = 3
+      expect(@set.dib_count).to eq(@set.dib_limit - 1)
+      as_dib = true
+      result = @set.rider_can_join(1, as_dib)
+      expect(result).to be true
+    end
+  end
 end

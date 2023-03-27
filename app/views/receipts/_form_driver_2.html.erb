@@ -12,7 +12,7 @@
   <% end %>
 
   <div hidden>
-    <%= @user = User.find_by(:email => current_admin.email) %>
+    <%= @user = Admin.find_by(:email => current_admin.email) %>
     <p> <%= @user.id %> </p>
   </div>
 

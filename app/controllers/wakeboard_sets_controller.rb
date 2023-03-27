@@ -13,8 +13,8 @@ class WakeboardSetsController < ApplicationController
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
-    @joinable = !SetRider.rider_exists(current_admin.id, params[:id])
-    @riders = SetRider.where("wakeboard_set_id = ?", params[:id]).joins(:user).select(:firstname, :lastname, :as_dib)
+    @joinable = !SetRider.rider_exists?(current_admin.id, params[:id])
+    @riders = SetRider.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :as_dib)
   end
 
   # GET /wakeboard_sets/new
@@ -30,20 +30,8 @@ class WakeboardSetsController < ApplicationController
   def create
     @wakeboard_set = WakeboardSet.new(wakeboard_set_params.merge(driver_count: 1))
 
-	logger.info "secondary_driver: #{params[:user_id]}" 
-
-    user = User.find_by(:email => current_admin.email)
-
     respond_to do |format|
       if @wakeboard_set.save
-	  
-		
-		driver1 = SetDriver.new(rider_id: user.id, wakeboard_set_id: @wakeboard_set.id)
-		driver2 = SetDriver.new(rider_id: params[:wakeboard_set][:user_id], wakeboard_set_id: @wakeboard_set.id)
-	
-		if driver1.save & driver2.save
-		end
-	
         format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully created." }
         format.json { render :show, status: :created, location: @wakeboard_set }
       else
@@ -81,19 +69,38 @@ class WakeboardSetsController < ApplicationController
   # a set either from the set itself or from the sets table
   # on the sets page
   def join
-    @set = WakeboardSet.find(params[:id])
+    @wakeboard_set = WakeboardSet.find(params[:id])
+    as_dib = ActiveModel::Type::Boolean.new.cast(params[:as_dib])
     user = current_admin.id
 
     respond_to do |format|
-      if !@set.join(user, params[:as_dib])
-        format.html { render :show, status: :expectation_failed }
+      if !@wakeboard_set.join(user, as_dib)
+        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Unable to join set" }
         format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
       else
-        format.html { redirect_to wakeboard_set_url(@set), notice: "Successfully joined set" }
-        format.json { render :show, status: :ok, location: @set }
+        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Successfully joined set" }
+        format.json { render :show, status: :ok, location: @wakeboard_set }
       end
     end
 
+  end
+
+  # This action is called when a rider attempts to
+  # leave a set
+  def leave
+    @set = WakeboardSet.find(params[:id])
+
+    user = current_admin.id
+
+    respond_to do |format|
+      if !@set.leave(user)
+        format.html { redirect_to wakeboard_set_url(@set), notice: "Unable to leave set" }
+        format.json { render json:{ message: "Unable to leave set" }, status: :expectation_failed }
+      else
+        format.html { redirect_to wakeboard_set_url(@set), notice: "Successfully left set" }
+        format.json { render :show, status: :ok, location: @set }
+      end
+    end
   end
 
   private
