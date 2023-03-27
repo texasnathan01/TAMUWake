@@ -20,13 +20,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "role_id", default: 0
     t.boolean "documents_signed", default: false
     t.string "first_name"
     t.string "last_name"
     t.boolean "is_approved", default: false
     t.integer "uin"
     t.string "address"
+    t.integer "role_id", default: 0
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
@@ -43,19 +43,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
     t.string "image_link"
   end
 
-  create_table "riders", force: :cascade do |t|
-    t.boolean "documents_signed"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_riders_on_user_id"
-  end
-
   create_table "set_drivers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "rider_id", null: false
-    t.bigint "wakeboard_set_id"
+    t.bigint "wakeboard_set_id", null: false
   end
 
   create_table "set_riders", force: :cascade do |t|
