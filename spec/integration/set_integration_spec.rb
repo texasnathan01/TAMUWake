@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 require 'rails_helper'
 
 RSpec.describe 'Creating a set', type: :feature do
@@ -148,10 +147,4 @@ RSpec.describe 'Leaving a set', type: :feature do
     expect(page).not_to have_content(@admin.full_name)
     expect(page).not_to have_content('Leave Set')
   end
-=======
-require 'rails_helper'
-
-RSpec.describe 'Creating a valid set', type: :feature do
-    
->>>>>>> main
 end

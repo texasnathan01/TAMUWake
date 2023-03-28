@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <p style="color: green"><%= notice %></p>
 
 <div hidden>
@@ -28,34 +27,4 @@
     <h1> You are unauthorized to see this page </h1>
     <%= link_to "Back to receipts", receipts_path %>
   <% end %>
-=======
-<p style="color: green"><%= notice %></p>
-
-<div hidden>
-  <%= @user = User.find_by(:email => current_admin.email) %>
-  <p> <%= @user.id %> </p>
-</div>
-
-<div>
-  <!-- This section will only be shown if the user is a treasurer (code 3) -->
-  <% if @user.role_id == 3 %>
-    <%= render @receipt %>
-    <%= link_to "Edit this receipt", edit_receipt_path(@receipt) %> |
-    <%= link_to "Back to receipts", receipts_path %>
-    <%= button_to "Destroy this receipt", @receipt, method: :delete %>
-
-  <!-- This section will only be shown if the user is the driver who uploaded the receipt (code 2) -->
-  <% elsif (@user.role_id == 1) and (@receipt.user_id == @user.id) %>
-    <%= render @receipt %>
-    <% if @receipt.stage == 2 %>
-      <%= link_to "I got my refund", edit_receipt_path(@receipt) %> |
-    <% end %>
-    <%= link_to "Back to receipts", receipts_path %>
-
-  <!-- This section will be shown to all other users-->
-  <% else %>
-    <h1> You are unauthorized to see this page </h1>
-    <%= link_to "Back to receipts", receipts_path %>
-  <% end %>
->>>>>>> main
 </div>

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div id="<%= dom_id wakeboard_set %>">
   <h2>
     Set On
@@ -14,17 +13,4 @@
     <%= wakeboard_set.chib_limit - wakeboard_set.chib_count %>
   </p>
 
-=======
-<div id="<%= dom_id wakeboard_set %>">
-  <h2>
-    <%= wakeboard_set.user.firstname.capitalize %>'s Set On
-    <%= wakeboard_set.scheduled_date.strftime("%A, %B %e at %l:%M %P") %>
-  </h2>
-
-  <p>
-    <strong>Spots Available:</strong>
-    <%= wakeboard_set.rider_limit - wakeboard_set.current_rider_count %>
-  </p>
-
->>>>>>> main
 </div>
