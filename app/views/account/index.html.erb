@@ -2,7 +2,11 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
+<<<<<<< HEAD
 
+=======
+<%= link_to "Sign Out", destroy_admin_session_path %>
+>>>>>>> main
 <ul>
 
   <a href="#"><banner>TAMU WAKE</banner></a>
@@ -10,6 +14,7 @@
   <a href="#"><p class="navbar navbarRightEnd"><%= link_to "Reciepts", receipts_path %></p></a>
   <a href="#"><p class="navbar"><%= link_to "Members", users_path %></p></a>
   <a href="#"><p class="navbar currentPage"><%= link_to "Account", accounts_path %></p></a>
+<<<<<<< HEAD
   <a href="#"><p class="navbar"><%= link_to "Rides", wakeboard_sets_path %></p></a>
   <a href="#"><p class="navbar navbarLeftEnd"> <%= link_to "Help", help_path %></p></a>
   
@@ -19,5 +24,12 @@
   <img src=<%=@user.avatar_url %> alt="Image not found" height="250" width="250">
   <%= render @user %>
   <%= link_to "Sign Out", destroy_admin_session_path %>
+=======
+  <a href="#"><p class="navbar navbarLeftEnd"><%= link_to "Rides", wakeboard_sets_path %></p></a>
+  
+  <p class="bannerBox"></p>
+
+  <%= render @user %>
+>>>>>>> main
   
 </ul>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%= form_with(model: wakeboard_set) do |form| %>
   <% if wakeboard_set.errors.any? %>
     <div style="color: red">
@@ -21,3 +22,37 @@
     <%= form.submit "Create Set" %>
   </div>
 <% end %>
+=======
+<%= form_with(model: wakeboard_set) do |form| %>
+  <% if wakeboard_set.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(wakeboard_set.errors.count, "error") %> prohibited this wakeboard_set from being saved:</h2>
+
+      <ul>
+        <% wakeboard_set.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :rider_limit, style: "display: block" %>
+    <%= form.number_field :rider_limit %>
+  </div>
+
+  <div>
+    <%= form.label :scheduled_date, style: "display: block" %>
+    <%= form.datetime_field :scheduled_date %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.select :user_id, User.where(:isDriver => true).order(:firstname).map { |user| [user.firstname, user.id] } %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+>>>>>>> main

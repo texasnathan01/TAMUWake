@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%= form_with(model: receipt) do |form| %>
   <% if receipt.errors.any? %>
     <div style="color: red">
@@ -34,3 +35,41 @@
     <%= form.submit %>
   </div>
 <% end %>
+=======
+<%= form_with(model: receipt) do |form| %>
+  <% if receipt.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(receipt.errors.count, "error") %> prohibited this receipt from being saved:</h2>
+
+      <ul>
+        <% receipt.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div hidden>
+    <%= @user = User.find_by(:email => current_admin.email) %>
+    <p> <%= @user.id %> </p>
+  </div>
+
+  <div>
+    <%= form.hidden_field :user_id, value: @user.id %>
+    <!-- <p> Driver ID: <%= @user.id %> </p> -->
+  </div>
+
+  <div>
+    <%= form.label :date_refunded, style: "display: block" %>
+    <%= form.date_field :date_refunded %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :stage, value: 3 %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+>>>>>>> main
