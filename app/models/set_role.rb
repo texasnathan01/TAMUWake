@@ -1,4 +1,5 @@
 class SetRole < ApplicationRecord
-  belongs_to :role_id
-  belongs_to :user_id
+  belongs_to :role
+  belongs_to :user
+  validates :user_id, presence: true
 end

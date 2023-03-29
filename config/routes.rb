@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
-  resources :set_roles
-  resources :roles
+  
   resources :wakeboard_sets, :path => "/sets" do
     member do
       post 'join'
     end
   end
   resources :receipts
-  resources :users
+  # path to add and delete a role using user
+  resources :users do
+    member do
+      post 'addrole'
+      post 'deleterole'
+    end 
+  end
 
   root 'receipts#index'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
