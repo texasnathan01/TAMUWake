@@ -17,17 +17,6 @@
 
   <%= render @user %>
 
-<<<<<<< HEAD
-  <div>
-    <%= form_tag('/add')
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.select :user_id, User.where(:isDriver => true).order(:firstname).map { |user| [user.firstname, user.id] } %>
-  </div>
-  
-
-
-=======
->>>>>>> origin/test
 <div>
   <%= link_to "Edit this user", edit_user_path(@user) %> |
   <%= link_to "Back to users", users_path %>

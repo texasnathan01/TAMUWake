@@ -9,4 +9,23 @@ class Admin < ApplicationRecord
   end
 
   has_many :wakeboard_set
+  has_many :set_roles
+  has_many :roles, :through => :set_roles
+
+  def add_role(role_id)
+    user_role = SetRole.new(
+      admin_id: self.id,
+      role_id: role_id
+    )
+    if (self.roles.map { |role| role.id }).include?(role_id)
+      return false
+    end
+    user_role.save!
+    # role successfully added to user
+    return true
+
+  rescue ActiveRecord::RecordNotSaved
+    # db issue - role not added to user
+    return false
+  end
 end

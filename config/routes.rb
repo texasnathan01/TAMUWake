@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       post 'addrole'
-      post 'deleterole'
+      post 'removerole'
     end 
   end
   get 'approval', to: 'users#approval', as: 'users_to_approve'
@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     resources :admins do 
       member do 
         patch :update_approval 
+        post 'add_role'
+        post 'remove_role'
       end
     end
   end
