@@ -10,18 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema[7.0].define(version: 2023_03_03_202147) do
+=======
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
+>>>>>>> origin/test
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "admins", force: :cascade do |t|
     t.string "email", null: false
-    t.string "full_name"
     t.string "uid"
     t.string "avatar_url"
-    t.boolean "is_approved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role_id", default: 0
+    t.boolean "documents_signed", default: false
+    t.string "first_name"
+    t.string "last_name"
+    t.boolean "is_approved", default: false
+    t.integer "uin"
+    t.string "address"
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
@@ -51,14 +60,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_202147) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+  
+  create_table "set_drivers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "rider_id", null: false
+    t.bigint "wakeboard_set_id"
+  end
 
   create_table "set_riders", force: :cascade do |t|
     t.datetime "date_registered", precision: nil
-    t.bigint "rider_id", null: false
     t.bigint "wakeboard_set_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["rider_id"], name: "index_set_riders_on_rider_id"
+    t.boolean "as_dib"
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_set_riders_on_admin_id"
     t.index ["wakeboard_set_id"], name: "index_set_riders_on_wakeboard_set_id"
   end
 
@@ -71,30 +88,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_202147) do
     t.index ["user_id"], name: "index_set_roles_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "firstname"
-    t.string "lastname"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "documents_signed", default: false
-    t.integer "role_id", default: 0
-    t.index ["email"], name: "index_users_on_email", unique: true
-  end
-
   create_table "wakeboard_sets", force: :cascade do |t|
-    t.integer "rider_limit"
-    t.integer "current_rider_count", default: 0
     t.datetime "scheduled_date", precision: nil
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_wakeboard_sets_on_user_id"
+    t.integer "dib_count", default: 0
+    t.integer "dib_limit", default: 4
+    t.integer "chib_count", default: 0
+    t.integer "chib_limit", default: 3
+    t.integer "driver_count", default: 0
+    t.integer "driver_limit", default: 2
   end
 
-  add_foreign_key "riders", "users"
-  add_foreign_key "set_riders", "riders"
+  add_foreign_key "set_riders", "admins"
   add_foreign_key "set_riders", "wakeboard_sets"
   add_foreign_key "set_roles", "roles"
   add_foreign_key "set_roles", "users"

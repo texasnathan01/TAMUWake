@@ -1,0 +1,46 @@
+<%= form_with(model: receipt) do |form| %>
+  <% if receipt.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(receipt.errors.count, "error") %> prohibited this receipt from being saved:</h2>
+
+      <ul>
+        <% receipt.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div hidden>
+    <%= @user = Admin.find_by(:email => current_admin.email) %>
+    <p> <%= @user.id %> </p>
+  </div>
+
+  <div>
+    <%= form.hidden_field :user_id, value: @user.id %>
+    <!-- <p> Driver ID: <%= @user.id %> </p> -->
+  </div>
+
+  <div>
+    <%= form.label :value, "Receipt Value ($)", style: "display: block" %>
+    <%= form.text_field :value %>
+  </div>
+
+  <div>
+    <%= form.label :date_made, style: "display: block" %>
+    <%= form.date_field :date_made %>
+  </div>
+
+  <div>
+    <%= form.hidden_field :stage, value: 1 %>
+  </div>
+
+  <div>
+    <%= form.label :image_link, 'Image Link', style: "display: block"%>
+    <%= form.text_field :image_link %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

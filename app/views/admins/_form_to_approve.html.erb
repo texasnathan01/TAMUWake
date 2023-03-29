@@ -1,0 +1,22 @@
+<%= form_with(model: admin) do |form| %>
+  <% if admin.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(admin.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% admin.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div>
+    <%= form.label :Check_The_Box_To_Approve, style: "display: block"%>
+    <%= form.check_box :is_approved %>
+  </div>
+
+  <div>
+    <%= form.submit "Submit Approval" %>
+  </div>
+<% end %>
