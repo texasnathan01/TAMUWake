@@ -19,7 +19,7 @@
   <br>
   <div>
     <%= form.label :secondary_driver, style: "display: block" %>
-    <%= form.collection_select(:user_id, Admin.all.where.not("uid = ?", params[:id]), :id, :first_name) %>
+    <%= form.collection_select(:user_id, Admin.where.not("id = ?", current_admin.id), :id, :first_name) %>
   </div>
   <br>
 
