@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,13 +20,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role_id", default: 0
     t.boolean "documents_signed", default: false
     t.string "first_name"
     t.string "last_name"
     t.boolean "is_approved", default: false
     t.integer "uin"
     t.string "address"
-    t.integer "role_id", default: 0
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
@@ -44,12 +44,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
   end
 
   create_table "set_drivers", force: :cascade do |t|
-    t.bigint "admin_id", null: false
-    t.bigint "wakeboard_set_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "wakeboard_set_id"
+    t.bigint "admin_id"
     t.index ["admin_id"], name: "index_set_drivers_on_admin_id"
-    t.index ["wakeboard_set_id"], name: "index_set_drivers_on_wakeboard_set_id"
   end
 
   create_table "set_riders", force: :cascade do |t|
@@ -76,7 +75,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
   end
 
   add_foreign_key "set_drivers", "admins"
-  add_foreign_key "set_drivers", "wakeboard_sets"
   add_foreign_key "set_riders", "admins"
   add_foreign_key "set_riders", "wakeboard_sets"
 end
