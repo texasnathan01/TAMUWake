@@ -15,7 +15,17 @@
   
   <h1>Editing user</h1>
 
-  <%= render "form", admin: @user %>
+  <!-- This section is shown if whoever is editing is an admin-->
+  <% if (current_admin.role_id == 1) or (current_admin.role_id >= -1) %>
+    <h1>Editing Member</h1>
+      <%= render "form", admin: @user %>
+
+  <!-- This section is shown to anyone else-->
+  <% else %>
+    <h1> Editing Account Info </h1>
+    <%= render "form_for_nonadmin", admin: @user %>
+  <% end %>
+
   <br>
 
 <div>

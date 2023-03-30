@@ -10,8 +10,8 @@ class UsersController < ApplicationController
   def index
     # need to check the role of the user
     @user = current_admin
-    # added case for test TODO: need to remove
     if @user.role_id == 1 || @user.role_id >= -1 
+      # check if user passed filter arguments when looking at user
       @users = if params[:first_name].present? || params[:last_name].present?
         Admin.where('is_approved = true AND first_name LIKE ? AND last_name LIKE ?', "%#{params[:first_name]}%", "%#{params[:last_name]}%")
       else
@@ -30,9 +30,10 @@ class UsersController < ApplicationController
   end
 
   def approval
+    # need to check the role of the user
     @user = current_admin
-    # added case for test TODO: need to remove
     if @user.role_id == 1 || @user.role_id >= -1 
+      # check if user passed filter arguments when looking at user
       @users = if params[:first_name].present? || params[:last_name].present?
         Admin.where('is_approved = false AND first_name LIKE ? AND last_name LIKE ?', "%#{params[:first_name]}%", "%#{params[:last_name]}%")
       else
@@ -53,10 +54,18 @@ class UsersController < ApplicationController
 
   # DELETE /users/1 or /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-      format.json { head :no_content }
+    # need to check the role of the user to allow for deletion
+    if @user.role_id == 1 || @user.role_id >= 0
+      @user.destroy
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+        format.json { head :no_content }
+      end
+    else
+      # redirect to account if they do not have permission
+      respond_to do |format|
+        format.html { redirect_to accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
+      end
     end
   end
 

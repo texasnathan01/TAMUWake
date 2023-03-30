@@ -2,13 +2,21 @@ class AdminsController < ApplicationController
   before_action :set_admin, only: %i[ show edit update destroy update_approval]
   
   def update_approval
-    respond_to do |format| 
-      if @user.update(is_approved: true)
-        format.html { redirect_to users_to_approve_path, notice: "User #{@user.first_name} #{@user.last_name} was successfully approved." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    # validate that the user is editing info is admin
+    if current_admin.role_id == 1 || current_admin.role_id >= 0
+      respond_to do |format| 
+        if @user.update(is_approved: true)
+          format.html { redirect_to users_to_approve_path, notice: "User #{@user.first_name} #{@user.last_name} was successfully approved." }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      # redirect to account if they do not have permission
+      respond_to do |format|
+        format.html { redirect_to accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
       end
     end
   end
@@ -29,14 +37,23 @@ class AdminsController < ApplicationController
   
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    
-    respond_to do |format|
-      if @user.update(admin_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+    # validate that the user is editing info is either admin or same user
+    logger.info "params id: #{current_admin.email} and current_admin id #{@user.email}"
+    logger.info "#{current_admin.email == @user.email}"
+    if (current_admin.role_id == 1 || current_admin.role_id >= 0 || current_admin.email == @user.email)
+      respond_to do |format|
+        if @user.update(admin_params)
+          format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
+          format.json { render :show, status: :ok, location: @user }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @user.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      # redirect to account if they do not have permission
+      respond_to do |format|
+        format.html { redirect_to accounts_url, notice: "You do not have access to that update action. Contact your adminstrator for help."}
       end
     end
   end
