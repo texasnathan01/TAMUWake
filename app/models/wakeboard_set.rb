@@ -1,6 +1,6 @@
 class WakeboardSet < ApplicationRecord
-  has_many :set_rider, dependent: :destroy
-  has_many :set_driver, dependent: :destroy
+  has_many :set_riders, dependent: :destroy
+  has_many :set_drivers, dependent: :destroy
 
   validates :dib_count, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :chib_count, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }

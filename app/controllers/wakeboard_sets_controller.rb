@@ -17,7 +17,6 @@ class WakeboardSetsController < ApplicationController
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
     @joinable = helpers.set_available?(current_admin.id, @wakeboard_set)
-    @riders = SetRider.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :as_dib)
 	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name)
   end
 

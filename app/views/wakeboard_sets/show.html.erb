@@ -47,10 +47,10 @@
     <div style="margin: 0 1.5rem;">
       <h3 style="text-align: center">Dibs</h3>
       <table id="dib-table">
-        <% (@riders.select {|r| r.as_dib}).each do |rider| %>
+        <% (@wakeboard_set.set_riders.select {|r| r.as_dib}).each do |rider| %>
           <% i = 1%>
           <tr>
-            <td><%=rider.first_name + " " + rider.last_name %></td>
+            <td><%=rider.admin.first_name + " " + rider.admin.last_name %></td>
           </tr>
           <% i += 1%>
         <% end %>
@@ -60,9 +60,9 @@
     <div style="margin: 0 1.5rem;">
       <h3 style="text-align: center">Chibs</h3>
       <table id="chib-table">
-        <% (@riders.select {|r| !r.as_dib}).each do |rider| %>
+        <% (@wakeboard_set.set_riders.select {|r| !r.as_dib}).each do |rider| %>
           <tr>
-            <td><%=  rider.first_name + " " + rider.last_name %></td>
+            <td><%=  rider.admin.first_name + " " + rider.admin.last_name %></td>
           </tr>
         <% end %>
       </table>
