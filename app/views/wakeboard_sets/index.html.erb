@@ -18,6 +18,10 @@
   
   <h1>Sets this Week</h1>
 
+  <% if flash[:error]%>
+    <div class = "alert alert-danger"> <%= flash[:error] %></div>
+  <% end %>
+  
   <table id="wakeboard_sets">
     <thead>
       <tr>

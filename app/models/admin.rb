@@ -8,5 +8,5 @@ class Admin < ApplicationRecord
     create_with(uid: uid,first_name: full_name.split[0],last_name: full_name.split[1], avatar_url: avatar_url).find_or_create_by!(email: email)
   end
 
-  has_many :wakeboard_set
+  has_many :wakeboard_set, dependent: :destroy
 end

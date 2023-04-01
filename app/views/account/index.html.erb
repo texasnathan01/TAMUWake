@@ -17,7 +17,7 @@
   <h2 class="text-3xl font-bold">  Welcome to the TAMUWake Website <%=@user.first_name%>!</h2>
   <img src=<%=@user.avatar_url %> alt="Image not found" height="250" width="250">
   <%= render @user %>
-  <%= link_to 'Edit', edit_admin_path(@user) %> 
+  <%= link_to 'Edit Account Info', edit_admin_path(@user) %> 
   <%= link_to "Sign Out", destroy_admin_session_path %>
   
 </ul>

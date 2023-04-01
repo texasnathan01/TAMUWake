@@ -1,4 +1,5 @@
 class ReceiptsController < ApplicationController
+include ApplicationHelper
   before_action :set_receipt, only: %i[ show edit update destroy ]
 
   # GET /receipts or /receipts.json
@@ -25,11 +26,18 @@ class ReceiptsController < ApplicationController
 
   # POST /receipts or /receipts.json
   def create
+    @user = current_admin
     @receipt = Receipt.new(receipt_params)
+    logger.info("In create the id: #{params[:receipt][:user_id]}")
     respond_to do |format|
-      if @receipt.save
-        format.html { redirect_to receipt_url(@receipt), notice: "Receipt was successfully created." }
-        format.json { render :show, status: :created, location: @receipt }
+      if has_info_filled_out(params[:receipt][:user_id])
+        if @receipt.save
+          format.html { redirect_to receipt_url(@receipt), notice: "Receipt was successfully created." }
+          format.json { render :show, status: :created, location: @receipt }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @receipt.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @receipt.errors, status: :unprocessable_entity }

@@ -1,4 +1,5 @@
 class WakeboardSetsController < ApplicationController
+include ApplicationHelper
   before_action :set_wakeboard_set, only: %i[ show edit update destroy ]
 
   # GET /wakeboard_sets or /wakeboard_sets.json
@@ -82,12 +83,17 @@ class WakeboardSetsController < ApplicationController
     user = current_admin.id
 
     respond_to do |format|
-      if !@wakeboard_set.join(user, as_dib)
+      if has_documents_signed
+        if  !@wakeboard_set.join(user, as_dib)
+          format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Unable to join set" }
+          format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
+        else
+          format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Successfully joined set" }
+          format.json { render :show, status: :ok, location: @wakeboard_set }
+        end
+      else
         format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Unable to join set" }
         format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
-      else
-        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Successfully joined set" }
-        format.json { render :show, status: :ok, location: @wakeboard_set }
       end
     end
 

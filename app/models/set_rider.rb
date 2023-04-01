@@ -1,5 +1,5 @@
 class SetRider < ApplicationRecord
-  belongs_to :admin
+  belongs_to :admin, dependent: :destroy
   belongs_to :wakeboard_set
 
   # rider_exists(user, set) method
