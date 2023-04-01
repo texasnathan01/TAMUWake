@@ -1,8 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <div hidden>
-  <%= @user = User.find_by(:email => current_admin.email) %>
   <p> <%= @user.id %> </p>
+  <p> <%= @user.role_id %> </p>
+  <p> <%= @receipt.user_id %> </p>
 </div>
 
 <div>

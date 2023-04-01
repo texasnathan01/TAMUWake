@@ -3,26 +3,29 @@ class ReceiptsController < ApplicationController
 
   # GET /receipts or /receipts.json
   def index
+    @user = current_admin
     @receipts = Receipt.all
   end
 
   # GET /receipts/1 or /receipts/1.json
   def show
+    @user = current_admin
   end
 
   # GET /receipts/new
   def new
+    @user = current_admin
     @receipt = Receipt.new
   end
 
   # GET /receipts/1/edit
   def edit
+    @user = current_admin
   end
 
   # POST /receipts or /receipts.json
   def create
     @receipt = Receipt.new(receipt_params)
-
     respond_to do |format|
       if @receipt.save
         format.html { redirect_to receipt_url(@receipt), notice: "Receipt was successfully created." }

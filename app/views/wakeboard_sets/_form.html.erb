@@ -12,21 +12,18 @@
   <% end %>
 
   <div>
-    <%= form.label :rider_limit, style: "display: block" %>
-    <%= form.number_field :rider_limit %>
-  </div>
-
-  <div>
     <%= form.label :scheduled_date, style: "display: block" %>
     <%= form.datetime_field :scheduled_date %>
   </div>
 
+  <br>
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.select :user_id, User.where(:isDriver => true).order(:firstname).map { |user| [user.firstname, user.id] } %>
+    <%= form.label :secondary_driver, style: "display: block" %>
+    <%= form.collection_select(:user_id, Admin.where.not("id = ?", current_admin.id), :id, :first_name) %>
   </div>
+  <br>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "Create Set" %>
   </div>
 <% end %>

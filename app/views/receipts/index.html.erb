@@ -11,18 +11,17 @@
   <a href="#"><p class="navbar currentPage navbarRightEnd"><%= link_to "Reciepts", receipts_path %></p></a>
   <a href="#"><p class="navbar"><%= link_to "Members", users_path %></p></a>
   <a href="#"><p class="navbar"> <%= link_to "Account", accounts_path %></p></a>
-  <a href="#"><p class="navbar navbarLeftEnd"><%= link_to "Rides", wakeboard_sets_path %></p></a>
-  
+  <a href="#"><p class="navbar"><%= link_to "Rides", wakeboard_sets_path %></p></a>
+  <a href="#"><p class="navbar navbarLeftEnd"> <%= link_to "Help", help_path %></p></a>
   <p class="bannerBox"></p>
   
   <div hidden>
-    <%= @user = User.find_by(:email => current_admin.email) %>
     <p> <%= @user.id %> </p>
   </div>
 
   <!-- This section will only be shown if the user is a driver (code 1) -->
   <% if @user.role_id == 1 %>
-    <h2> Receipts for <%= @user.firstname%> <%= @user.lastname%> </h2>
+    <h2> Receipts for <%= @user.first_name%> <%= @user.last_name%> </h2>
     <h3> User ID: <%= @user.id%></h3>
 
     <%= link_to "New receipt", new_receipt_path %>

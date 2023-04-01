@@ -9,12 +9,12 @@
   <a href="#"><p class="navbar currentPage navbarRightEnd"><%= link_to "Reciepts", receipts_path %></p></a>
   <a href="#"><p class="navbar"><%= link_to "Members", users_path %></p></a>
   <a href="#"><p class="navbar"> <%= link_to "Account", accounts_path %></p></a>
-  <a href="#"><p class="navbar navbarLeftEnd"><%= link_to "Rides", wakeboard_sets_path %></p></a>
+  <a href="#"><p class="navbar"><%= link_to "Rides", wakeboard_sets_path %></p></a>
+  <a href="#"><p class="navbar navbarLeftEnd"> <%= link_to "Help", help_path %></p></a>
   
   <p class="bannerBox"></p>
 
   <div hidden>
-    <%= @user = User.find_by(:email => current_admin.email) %>
     <p> <%= @user.id %> </p>
   </div>
   
