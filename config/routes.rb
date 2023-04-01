@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   get 'home', to: 'home#index'
 
   get 'account', to: 'account#index', as: :accounts
+  get 'account/history', to: 'account#history', as: :set_history
+  post 'account/history', to: 'account#history'
+
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
   
   devise_scope :admin do

@@ -1,0 +1,13 @@
+<tr>
+    <td class="p-4 border-b border-slate-100"><%= set.scheduled_date.strftime("%a %-d/%-m/%Y") %></td>
+    <td class="p-4 border-b border-slate-100"><%= set.scheduled_date.strftime("%l:%M %P") %></td>
+    <td class="p-4 border-b border-r border-slate-100">
+    <% if set.set_drivers.length > 0 %>
+        <%= set.set_drivers[0].admin.first_name %>
+        <% if set.set_drivers.length > 1 %>
+        <%= "and " + set.set_drivers[1].admin.first_name %>
+        <% end %>
+    <% end %>
+    </td>
+    <td class="p-4 border-b border-slate-100"><%= link_to "View", wakeboard_set_path(set.id) %></td>
+</tr>

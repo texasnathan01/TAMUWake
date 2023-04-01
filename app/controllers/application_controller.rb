@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
     before_action :check_user_approval
 
     include ApplicationHelper
+    include Pagy::Backend
 
   private
 
