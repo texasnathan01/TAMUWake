@@ -60,5 +60,13 @@ RSpec.describe 'Driver creating a new receipt', type: :feature do
     visit receipts_path
     expect(page).to have_content('Receipt ID')
   end
+
+  scenario 'missing inputs' do
+    visit new_receipt_path
+    click_on 'Create Receipt'
+    expect(page).to have_content('prohibited this receipt')
+  end
 end
+
+
 
