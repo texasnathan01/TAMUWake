@@ -4,7 +4,7 @@ class ReceiptsController < ApplicationController
   # GET /receipts or /receipts.json
   def index
     @user = current_admin
-    @receipts = Receipt.all
+    @receipts = Receipt.search(params[:search])
   end
 
   # GET /receipts/1 or /receipts/1.json
@@ -68,6 +68,6 @@ class ReceiptsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def receipt_params
-      params.require(:receipt).permit(:user_id, :value, :date_made, :date_approved, :date_refunded, :stage, :image_link)
+      params.require(:receipt).permit(:user_id, :value, :date_made, :date_approved, :date_refunded, :stage, :image_link, :search)
     end
 end
