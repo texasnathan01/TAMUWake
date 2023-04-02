@@ -31,16 +31,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_24_000740) do
   end
 
   create_table "receipts", force: :cascade do |t|
-    t.integer "receipt_id"
-    t.integer "user_id"
-    t.float "value"
-    t.date "date_made"
+    t.integer "receipt_id", null: false
+    t.integer "user_id", null: false
+    t.float "value", null: false
+    t.date "date_made", null: false
     t.date "date_approved"
     t.date "date_refunded"
-    t.integer "stage"
+    t.integer "stage", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image_link"
+    t.string "image_link", null: false
   end
 
   create_table "set_drivers", force: :cascade do |t|

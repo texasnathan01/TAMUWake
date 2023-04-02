@@ -15,9 +15,10 @@
   <p class="bannerBox"></p>
 
   <div hidden>
-    <p> <%= @user.id %> </p>
+    <%= @user = Admin.find_by(:email => current_admin.email) %>
+    <%= @user.id %>
   </div>
-  
+
   <h1>New receipt</h1>
 
   <!-- This section will only be shown if the user is a driver (code 1) -->
