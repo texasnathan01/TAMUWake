@@ -1,5 +1,5 @@
 class ReceiptsController < ApplicationController
-include ApplicationHelper
+
   before_action :set_receipt, only: %i[ show edit update destroy ]
 
   # GET /receipts or /receipts.json

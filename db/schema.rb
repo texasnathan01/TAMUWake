@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_02_220214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,8 +23,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
     t.string "first_name"
     t.string "last_name"
     t.boolean "is_approved", default: false
-    t.integer "uin"
-    t.string "address"
+    t.string "uin", default: ""
+    t.string "address", default: ""
     t.integer "role_id", default: 0
     t.boolean "aor_completed", default: false
     t.boolean "boat_waiver_completed", default: false

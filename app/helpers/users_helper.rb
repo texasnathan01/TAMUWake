@@ -12,11 +12,13 @@ module UsersHelper
         logger.info("user_id: #{user_id}")
         @user_to_check = Admin.find_by(id: user_id)
         if !@user_to_check.address.present? || !@user_to_check.uin.present?
-            flash[:error] = "Info Not Yet Filled Out on Account: " + (@user_to_check.uin.present? ? "" : "UIN ") + (@user_to_check.address.present? ? "" : "Address ")+".Please fill this out on the Account Page."
+            flash[:error] = "Info Not Yet Filled Out on Account: " + (@user_to_check.uin.present? ? "" : "UIN ") + (@user_to_check.address.present? ? "" : "Address ")+". Please fill this info out on the Account Page."
             flash.discard(:error)
             return false
         else
             return true
         end
     end
+
+
 end

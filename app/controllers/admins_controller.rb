@@ -1,4 +1,5 @@
 class AdminsController < ApplicationController
+  before_action :check_user_approval
   before_action :set_admin, only: %i[ show edit update destroy update_approval]
   
   def update_approval
