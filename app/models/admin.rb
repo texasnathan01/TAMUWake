@@ -13,7 +13,7 @@ class Admin < ApplicationRecord
   # allows us to establish a connection between roles and set_roles
   has_many :roles, :through => :set_roles
 
-# this function is used to add a role using the admin to the set role table
+  # this function is used to add a role using the admin to the set role table
   def add_role(role_id)
     user_role = SetRole.new(
       admin_id: self.id,

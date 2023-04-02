@@ -16,6 +16,12 @@
     <%= form.datetime_field :scheduled_date %>
   </div>
 
+  <br>
+  <div>
+    <%= form.label :secondary_driver, style: "display: block" %>
+    <%= form.collection_select(:user_id, Admin.where.not("id = ?", current_admin.id), :id, :first_name) %>
+  </div>
+  <br>
 
   <div>
     <%= form.submit "Create Set" %>
