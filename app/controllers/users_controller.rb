@@ -80,5 +80,4 @@ class UsersController < ApplicationController
     def delete
       @users = Admin.find(params[:id])
     end
-
 end

@@ -21,14 +21,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role_id", default: 0
+    t.boolean "documents_signed", default: false
     t.string "first_name"
     t.string "last_name"
     t.boolean "is_approved", default: false
     t.integer "uin"
     t.string "address"
-    t.boolean "aor_completed", default: false
-    t.boolean "boat_waiver_completed", default: false
-    t.boolean "dues_completed", default: false
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
@@ -53,6 +51,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
     t.index ["user_id"], name: "index_riders_on_user_id"
   end
 
+  create_table "roles", force: :cascade do |t|
+    t.string "role_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "set_drivers", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -72,16 +76,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
     t.index ["wakeboard_set_id"], name: "index_set_riders_on_wakeboard_set_id"
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "firstname"
-    t.string "lastname"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "documents_signed", default: false
-    t.integer "role_id", default: 0
-    t.index ["email"], name: "index_users_on_email", unique: true
+  create_table "set_roles", force: :cascade do |t|
+    t.bigint "role_id", null: false
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_set_roles_on_admin_id"
+    t.index ["role_id"], name: "index_set_roles_on_role_id"
   end
 
   create_table "wakeboard_sets", force: :cascade do |t|
@@ -99,4 +98,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
   add_foreign_key "set_drivers", "admins"
   add_foreign_key "set_riders", "admins"
   add_foreign_key "set_riders", "wakeboard_sets"
+  add_foreign_key "set_roles", "admins"
+  add_foreign_key "set_roles", "roles"
 end

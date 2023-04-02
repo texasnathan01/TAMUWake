@@ -20,12 +20,15 @@
 
 <h1>Users</h1>
 
+<<<<<<< HEAD
 <%= form_with url: users_path, method: 'get', id: 'search-form' do |f| %>
   <%= f.text_field :first_name, placeholder: 'Search by first name....', class: 'form-control' %>
   <%= f.text_field :last_name, placeholder: 'Search by last name....', class: 'form-control' %>
   <%= f.submit "Find Member", class: "btn" %>
 <% end %>
 
+=======
+>>>>>>> origin/test-s3
 <div id="admins">
   <% @users.each do |user| %>
     <%= render user %>

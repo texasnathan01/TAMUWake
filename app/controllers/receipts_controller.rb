@@ -28,7 +28,10 @@ include ApplicationHelper
   def create
     @user = current_admin
     @receipt = Receipt.new(receipt_params)
+<<<<<<< HEAD
     logger.info("In create the id: #{params[:receipt][:user_id]}")
+=======
+>>>>>>> origin/test-s3
     respond_to do |format|
       if has_info_filled_out(params[:receipt][:user_id])
         if @receipt.save

@@ -1,5 +1,5 @@
 class SetDriver < ApplicationRecord
-  belongs_to :admin, dependent: :destroy
+  belongs_to :admin
   belongs_to :wakeboard_set
 
   # driver_exists(user, set) method

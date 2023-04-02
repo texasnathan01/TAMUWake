@@ -1,5 +1,8 @@
 class WakeboardSetsController < ApplicationController
+<<<<<<< HEAD
 include ApplicationHelper
+=======
+>>>>>>> origin/test-s3
   before_action :set_wakeboard_set, only: %i[ show edit update destroy ]
 
   # GET /wakeboard_sets or /wakeboard_sets.json

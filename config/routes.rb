@@ -6,9 +6,16 @@ Rails.application.routes.draw do
     end
   end
   resources :receipts
-  resources :users
+  resources :users do
+    member do
+      post 'addrole'
+      post 'removerole'
+    end 
+  end
   get 'approval', to: 'users#approval', as: 'users_to_approve'
   get 'help', to: 'help#index'
+  
+  
   # resources :admins
   
 
@@ -22,6 +29,8 @@ Rails.application.routes.draw do
     resources :admins do 
       member do 
         patch :update_approval 
+        post 'add_role'
+        post 'remove_role'
       end
     end
   end
