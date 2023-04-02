@@ -18,7 +18,3 @@ class SetRider < ApplicationRecord
     return set.length != 0
   end
 end
-class SetRider < ApplicationRecord
-  belongs_to :rider
-  belongs_to :wakeboard_set
-end
