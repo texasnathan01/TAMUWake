@@ -41,16 +41,17 @@ class AdminsController < ApplicationController
     end
   end
 
+  # this function allows the admin to assign a role to a user
   def add_role
     user = Admin.find(params[:id])
     role = Role.find(params[:role_id])
 
     respond_to do |format|
       if !user.add_role(role.id)
-        format.html { redirect_to user_url(user), notice: "Unable to join set" }
-        format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
+        format.html { redirect_to user_url(user), notice: "Role has been successfully assigned to the user." }
+        format.json { render json:{ message: "Role has already been assigned to the user. Could not assign it again" }, status: :expectation_failed }
       else
-        format.html { redirect_to user_url(user), notice: "Successfully joined set" }
+        format.html { redirect_to user_url(user), notice: "Role has been successfully assigned to the user." }
         format.json { render :show, status: :ok, location: user }
       end
     end
