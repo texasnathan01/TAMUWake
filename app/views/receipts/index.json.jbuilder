@@ -1,1 +1,1 @@
-json.array! @receipts, partial: "receipts/receipt", as: :receipt
+json.array!(@receipts, partial: 'receipts/receipt', as: :receipt)

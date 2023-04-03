@@ -10,6 +10,6 @@ require 'rails_helper'
 #     end
 #   end
 # end
-RSpec.describe RolesHelper, type: :helper do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe(RolesHelper) do
+     pending "add some examples to (or delete) #{__FILE__}"
 end
