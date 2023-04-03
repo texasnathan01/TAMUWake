@@ -443,6 +443,9 @@ Style/StringConcatenation:
 Style/SwapValues: # (new in 1.1)
     Enabled: true
 
+Style/Tab:
+    Enabled: false
+
 ###########################################################
 ######################## RSpec ############################
 ###########################################################
@@ -458,22 +461,6 @@ RSpec/ExampleLength:
 
 RSpec/IdenticalEqualityAssertion: # (new in 2.4)
     Enabled: true
-
-    # .rubocop.yml
-
-    # The behavior of RuboCop can be controlled via the .rubocop.yml
-    # configuration file. It makes it possible to enable/disable
-    # certain cops (checks) and to alter their behavior if they accept
-    # any parameters. The file can be placed either in your home
-    # directory or in some project directory.
-    #
-    # RuboCop will start looking for the configuration file in the directory
-    # where the inspected file is and continue its way up to the root directory.
-    #
-
-    - ".rubocop-performance.yml"
-    - ".rubocop-rails.yml"
-
 
 ###########################################################
 ######################## Naming ###########################
