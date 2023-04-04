@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe 'Member Pages Without Access', type: :feature do
 
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last", is_approved: true,role_id: -2)}
+  let(:admin) {Admin.create!(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last", is_approved: true,role_id: -2)}
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
     allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
@@ -16,9 +16,7 @@ RSpec.describe 'Member Pages Without Access', type: :feature do
 end
 
 RSpec.describe 'Member Pages With Access', type: :feature do
-
-let(:chris) {Admin.create!(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last",role_id: 3, is_approved: true)}
-
+  let(:chris) {Admin.create!(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last",role_id: 3, is_approved: true)}
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
     allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(chris)
@@ -26,7 +24,7 @@ let(:chris) {Admin.create!(email: "chrispasala@tamu.edu", first_name: "first", l
 
   it 'visiting member page with sufficient permissions' do
       visit users_path
-      expect(page).to have_content('chris')
+      expect(page).to have_content('chrispasala')
   end
 
   it 'visiting member approval page with sufficient permissions' do
@@ -45,12 +43,13 @@ let(:chris) {Admin.create!(email: "chrispasala@tamu.edu", first_name: "first", l
   end
 
   it 'denying member page with sufficient permissions' do
+
     Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test",role_id: 0, is_approved: false)
     visit users_to_approve_path
     click_on("Deny User")
     visit users_to_approve_path
-    expect(page).to not_have_content("realemailreal@tamu.edu")
-end
+    expect(page).not_to have_content("realemailreal@tamu.edu")
+  end
   
     
 
