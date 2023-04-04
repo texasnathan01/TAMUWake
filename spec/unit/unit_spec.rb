@@ -1,8 +1,8 @@
-# location: spec/unit/unit_spec.rb
+# # location: spec/unit/unit_spec.rb
 # require 'rails_helper'
 
 # RSpec.describe User, type: :model do
-
+  
 #   subject do
 #     described_class.new(firstname: "team",lastname: 'team',email:'team@gmail.com')
 #   end
