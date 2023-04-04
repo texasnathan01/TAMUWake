@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-    # include ApplicationHelper
+    # these actions will check if user is logged in and approved
     before_action :authenticate_admin!
     before_action :check_user_approval
     
