@@ -1,5 +1,5 @@
-# location: spec/feature/receipt_integration_spec.rb
-require 'rails_helper'
+# # location: spec/feature/receipt_integration_spec.rb
+# require 'rails_helper'
 
 RSpec.describe 'Go to receipts page as treasurer', type: :feature do
   let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last", role_id: 3, is_approved: true, uin: 123, address: "123 place")}

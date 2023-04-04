@@ -12,7 +12,6 @@ class Admin < ApplicationRecord
     end
   end
 
-  has_many :wakeboard_set, dependent: :destroy
   has_many :set_roles, dependent: :destroy
   # allows us to establish a connection between roles and set_roles
   has_many :roles, :through => :set_roles

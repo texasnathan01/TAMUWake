@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
         if current_admin && !current_admin.is_approved?
             # they will be able to access the account page and sign out path if the account is not approved
             if !(params[:controller] == "account" && params[:action] == "index") && !(params[:controller] == "admins/sessions" && params[:action] == "destroy")
-                flash[:alert] = "Your account is not yet approved yet. Please wait for approval or contact your Administrators."
+                flash[:alert] = "Your account is not approved yet. Please wait for approval or contact your Administrators."
                 redirect_to accounts_path
             end
         end 
