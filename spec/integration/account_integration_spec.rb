@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.describe 'Using Account Page and Tools', type: :feature do
 
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last",role_id: -2)}
+  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last",is_approved: true, role_id: -2)}
 
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
@@ -20,6 +20,12 @@ RSpec.describe 'Using Account Page and Tools', type: :feature do
     fill_in "admin[first_name]", with: "new_name"
     click_on 'Update Account Info'
     expect(page).to have_content('new_name')
+  end
+
+  scenario 'visiting account page and editing user info without being approved' do
+    admin.is_approved = false
+    visit edit_admin_path(admin.id)
+    expect(page).to have_content('not approved yet')
   end
 
 end
