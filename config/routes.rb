@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'account#index'
+
   resources :wakeboard_sets, :path => "/sets" do
     member do
       post 'join'
@@ -6,22 +8,18 @@ Rails.application.routes.draw do
     end
   end
   resources :receipts
+
   resources :users do
     member do
       post 'addrole'
       post 'removerole'
     end 
   end
+
   get 'approval', to: 'users#approval', as: 'users_to_approve'
   get 'help', to: 'help#index'
   
-  
-  # resources :admins
-  
-
   get 'account', to: 'account#index', as: :accounts
-
-  root 'receipts#index'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
   devise_scope :admin do
     get 'admins/sign_in', to: 'admins/sessions#new', as: :new_admin_session

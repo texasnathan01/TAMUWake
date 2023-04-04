@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema[7.0].define(version: 2023_03_29_195331) do
-=======
-ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
->>>>>>> test-s3
+ActiveRecord::Schema[7.0].define(version: 2023_04_02_220214) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -24,20 +20,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-<<<<<<< HEAD
-=======
-    t.integer "role_id", default: 0
->>>>>>> test-s3
-    t.boolean "documents_signed", default: false
     t.string "first_name"
     t.string "last_name"
     t.boolean "is_approved", default: false
-    t.integer "uin"
-    t.string "address"
-<<<<<<< HEAD
+    t.string "uin", default: ""
+    t.string "address", default: ""
     t.integer "role_id", default: 0
-=======
->>>>>>> test-s3
+    t.boolean "aor_completed", default: false
+    t.boolean "boat_waiver_completed", default: false
+    t.boolean "dues_completed", default: false
     t.index ["email"], name: "index_admins_on_email", unique: true
   end
 
@@ -61,11 +52,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
   end
 
   create_table "set_drivers", force: :cascade do |t|
+    t.bigint "admin_id", null: false
+    t.bigint "wakeboard_set_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "wakeboard_set_id"
-    t.bigint "admin_id"
     t.index ["admin_id"], name: "index_set_drivers_on_admin_id"
+    t.index ["wakeboard_set_id"], name: "index_set_drivers_on_wakeboard_set_id"
   end
 
   create_table "set_riders", force: :cascade do |t|
@@ -81,8 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
 
   create_table "set_roles", force: :cascade do |t|
     t.bigint "role_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.bigint "admin_id"
     t.index ["admin_id"], name: "index_set_roles_on_admin_id"
     t.index ["role_id"], name: "index_set_roles_on_role_id"
@@ -100,9 +90,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_30_023412) do
     t.integer "driver_limit", default: 2
   end
 
+  add_foreign_key "set_drivers", "admins"
+  add_foreign_key "set_drivers", "wakeboard_sets"
   add_foreign_key "set_riders", "admins"
   add_foreign_key "set_riders", "wakeboard_sets"
   add_foreign_key "set_roles", "admins"
   add_foreign_key "set_roles", "roles"
-  add_foreign_key "set_drivers", "admins"
 end
