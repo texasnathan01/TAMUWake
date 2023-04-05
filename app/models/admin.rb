@@ -12,9 +12,11 @@ class Admin < ApplicationRecord
     end
   end
 
+  has_many :set_drivers, dependent: :destroy
   has_many :set_roles, dependent: :destroy
   # allows us to establish a connection between roles and set_roles
   has_many :roles, :through => :set_roles
+  has_many :receipt, dependent: :destroy
 
   # this function is used to add a role using the admin to the set role table
   def add_role(role_id)
