@@ -35,7 +35,7 @@ class WakeboardSetsController < ApplicationController
       if @wakeboard_set.save
 	    user = current_admin
 	    driver1 = SetDriver.new(admin_id: user.id, wakeboard_set_id: @wakeboard_set.id)
-        driver2 = SetDriver.new(admin_id: params[:wakeboard_set][:user_id], wakeboard_set_id: @wakeboard_set.id)
+        driver2 = SetDriver.new(admin_id: params[:wakeboard_set][:admin_id], wakeboard_set_id: @wakeboard_set.id)
 
         if driver1.save & driver2.save
         end
