@@ -2,7 +2,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Go to receipts page as treasurer', type: :feature do
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last",role_id: 3)}
+  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last", role_id: 3, is_approved: true, uin: 123, address: "123 place")}
 
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
@@ -16,7 +16,7 @@ RSpec.describe 'Go to receipts page as treasurer', type: :feature do
 end
   
 RSpec.describe 'Go to receipts page as driver', type: :feature do
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "Nathan", last_name: "Wilke",role_id: 1)}
+  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "Nathan", last_name: "Wilke", role_id: 1, is_approved: true, uin: 123, address: "123 place")}
 
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
@@ -30,7 +30,7 @@ RSpec.describe 'Go to receipts page as driver', type: :feature do
 end
   
 RSpec.describe 'Go to receipts page as non driver and non treasurer', type: :feature do
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "Nathan", last_name: "Wilke",role_id: -1)}
+  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "Nathan", last_name: "Wilke", role_id: -1, is_approved: true, uin: 123, address: "123 place")}
 
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
@@ -44,7 +44,7 @@ RSpec.describe 'Go to receipts page as non driver and non treasurer', type: :fea
 end
 
 RSpec.describe 'Driver creating a new receipt', type: :feature do
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "Nathan", last_name: "Wilke",role_id: 1)}
+  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "Nathan", last_name: "Wilke", role_id: 1, is_approved: true, uin: 123, address: "123 place")}
 
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
@@ -69,8 +69,8 @@ RSpec.describe 'Driver creating a new receipt', type: :feature do
 end
 
 RSpec.describe 'Treasurer creating a new receipt', type: :feature do
-  let(:admin) {Admin.create(email: "texasnathan@tamu.edu", first_name: "Nathan", last_name: "Wilke",role_id: 3)}
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "chris", last_name: "pasala",role_id: 3, id:2)}
+  let(:admin) {Admin.create(email: "texasnathan@tamu.edu", first_name: "Nathan", last_name: "Wilke", role_id: 3, is_approved: true, uin: 123, address: "123 place")}
+  let(:admin) {Admin.create(email: "chrispasala@tamu.edu", first_name: "chris", last_name: "pasala", role_id: 3, id:2, is_approved: true, uin: 123, address: "123 place")}
 
   before :each do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
@@ -91,6 +91,7 @@ RSpec.describe 'Treasurer creating a new receipt', type: :feature do
 
   scenario 'missing inputs' do
     visit new_receipt_path
+    fill_in "receipt[user_id]", with:2
     click_on 'Create Receipt'
     expect(page).to have_content('prohibited this receipt')
   end
