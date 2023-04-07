@@ -7,24 +7,25 @@
 
 <ul>
 
-  <a href="#"><banner>TAMU WAKE</banner></a>
-  
-  <a href="#"><p class="navbar navbarRightEnd"><%= link_to "Reciepts", receipts_path %></p></a>
-  <a href="#"><p class="navbar currentPage"><%= link_to "Members", users_path %></p></a>
-  <a href="#"><p class="navbar"> <%= link_to "Account", accounts_path %></p></a>
-  <a href="#"><p class="navbar navbarLeftEnd"><%= link_to "Rides", wakeboard_sets_path %></p></a>
-  
+  <%= render "/navbar"%>
   <p class="bannerBox"></p>
 
 <%= link_to 'Current Users', users_path %>
 
 <h1>Users to Approve</h1>
 
+<%= form_with url: users_to_approve_path, method: 'get', id: 'search-form' do |f| %>
+  <%= f.text_field :first_name, placeholder: 'Search by first name....', class: 'form-control' %>
+  <%= f.text_field :last_name, placeholder: 'Search by last name....', class: 'form-control' %>
+  <%= f.submit "Find Member", class: "btn" %>
+<% end %>
+
 <div id="admins">
   <% @users.each do |user| %>
     <%= render user %>
     <p>
       <%= button_to "Approve User", update_approval_admin_path(user), method: :patch %>
+      <%= button_to 'Deny User', user, method: :delete, :onclick => "return confirm('Are you sure you want to deny this user?')" %>
     </p>
   <% end %>
 </div>

@@ -82,12 +82,17 @@ class WakeboardSetsController < ApplicationController
     user = current_admin.id
 
     respond_to do |format|
-      if !@wakeboard_set.join(user, as_dib)
-        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Unable to join set" }
-        format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
+      if has_documents_signed
+        if  !@wakeboard_set.join(user, as_dib)
+          format.html { redirect_to wakeboard_set_url(@wakeboard_set)}
+          format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
+        else
+          format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Successfully joined set" }
+          format.json { render :show, status: :ok, location: @wakeboard_set }
+        end
       else
-        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Successfully joined set" }
-        format.json { render :show, status: :ok, location: @wakeboard_set }
+        format.html { redirect_to wakeboard_set_url(@wakeboard_set)}
+        format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
       end
     end
 
