@@ -11,17 +11,11 @@ class WakeboardSet < ApplicationRecord
   # checks to ensure all count attributes are under
   # their respective limits
   def counts_under_limit
-    if dib_count > dib_limit
-      errors.add(:dib_count, "exceeds the dib limit")
-    end
+    errors.add(:dib_count, "exceeds the dib limit") if dib_count > dib_limit
 
-    if chib_count > chib_limit
-      errors.add(:chib_count, "exceeds the chib limit")
-    end
+    errors.add(:chib_count, "exceeds the chib limit") if chib_count > chib_limit
 
-    if driver_count > driver_limit
-      errors.add(:driver_count, "exceeds the driver limit")
-    end
+    errors.add(:driver_count, "exceeds the driver limit") if driver_count > driver_limit
   end
 
   # determines if a rider with user_id can
@@ -29,30 +23,20 @@ class WakeboardSet < ApplicationRecord
   # open spots (max 4 dibs, 3 chibs) and the rider
   # joins an open set (i.e. the set is not in the past)
   def rider_can_join?(user_id, as_dib)
-    if !user_id || user_id < 1 || as_dib == nil
-      return false
-    end
+    return false if !user_id || user_id < 1 || as_dib.nil?
 
     now = DateTime.current
-    if (self.scheduled_date < now)
-      return false
-    end
+    return false if scheduled_date < now
 
-    if SetRider.rider_exists?(user_id, self.id)
-      return false
-    end
+    return false if SetRider.rider_exists?(user_id, id)
 
     if as_dib
-      if self.dib_count >= self.dib_limit
-        return false
-      end
-    else
-      if self.chib_count >= self.chib_limit
-        return false
-      end
+      return false if dib_count >= dib_limit
+    elsif chib_count >= chib_limit
+      return false
     end
 
-    return true
+    true
   end
 
   # join method which adds an entry in the
@@ -60,13 +44,11 @@ class WakeboardSet < ApplicationRecord
   # Called in controller
   # retuns true if successful
   def join(user_id, as_dib)
-    if !rider_can_join?(user_id, as_dib) || (!user_id || as_dib == nil)
-      return false
-    end
+    return false if !rider_can_join?(user_id, as_dib) || (!user_id || as_dib.nil?)
 
     rider = SetRider.new(
       date_registered: DateTime.current,
-      wakeboard_set_id: self.id,
+      wakeboard_set_id: id,
       admin_id: user_id,
       as_dib: as_dib
     )
@@ -77,25 +59,23 @@ class WakeboardSet < ApplicationRecord
       self.chib_count += 1
     end
 
-    self.transaction do
-      self.save!
+    transaction do
+      save!
       rider.save!
     end
 
-    return true
+    true
   rescue ActiveRecord::Rollback
-    return false
+    false
   end
 
   # leave method which attempts to remove the record
   # of the rider being on the set
   def leave(user_id)
-    rider = SetRider.find_by(admin_id: user_id, wakeboard_set_id: self.id)
-    
+    rider = SetRider.find_by(admin_id: user_id, wakeboard_set_id: id)
+
     # rider isn't on set or set has been completed
-    if !rider || DateTime.current > self.scheduled_date
-      return false
-    end
+    return false if !rider || DateTime.current > scheduled_date
 
     if rider.as_dib
       self.dib_count -= 1
@@ -103,15 +83,14 @@ class WakeboardSet < ApplicationRecord
       self.chib_count -= 1
     end
 
-    self.transaction do
+    transaction do
       rider.destroy!
-      self.save!
+      save!
     end
 
     # successfully removed rider
-    return true
-    
+    true
   rescue ActiveRecord::Rollback
-    return false
+    false
   end
 end
