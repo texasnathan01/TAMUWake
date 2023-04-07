@@ -29,7 +29,7 @@ class ReceiptsController < ApplicationController
     @receipt = Receipt.new(receipt_params)
     logger.info("In create the id: #{params[:receipt][:admin_id]}")
     respond_to do |format|
-      if has_info_filled_out(params[:receipt][:admin_id])
+      if has_info_filled_out?(params[:receipt][:admin_id])
         if @receipt.save
           format.html { redirect_to(receipt_url(@receipt), notice: "Receipt was successfully created.") }
           format.json { render(:show, status: :created, location: @receipt) }
