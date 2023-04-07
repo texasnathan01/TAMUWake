@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def search
     @products = Admin.where('is_approved = true AND first_name LIKE ? AND last_name LIKE ?', "%#{params[:first_name]}%", "%#{params[:last_name]}%")
-    render json: @products
+    render(json: @products)
   end
 
   # GET /users or /users.json
@@ -14,13 +14,13 @@ class UsersController < ApplicationController
       # check if user passed filter arguments when looking at user
       @users = if params[:first_name].present? || params[:last_name].present?
         Admin.where('is_approved = true AND first_name LIKE ? AND last_name LIKE ?', "%#{params[:first_name]}%", "%#{params[:last_name]}%")
-      else
+               else
         Admin.where(is_approved: true) 
-      end
+               end
     else
       # redirect to account if they do not have permission
       respond_to do |format|
-        format.html { redirect_to accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
+        format.html { redirect_to(accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help.") }
       end
     end
   end
@@ -36,13 +36,13 @@ class UsersController < ApplicationController
       # check if user passed filter arguments when looking at user
       @users = if params[:first_name].present? || params[:last_name].present?
         Admin.where('is_approved = false AND first_name LIKE ? AND last_name LIKE ?', "%#{params[:first_name]}%", "%#{params[:last_name]}%")
-      else
+               else
         Admin.where(is_approved: false) 
-      end
+               end
     else
       # redirect to account if they do not have permission
       respond_to do |format|
-        format.html { redirect_to accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
+        format.html { redirect_to(accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help.") }
       end
     end
   end
@@ -58,13 +58,13 @@ class UsersController < ApplicationController
     if @user.role_id == 1 || @user.role_id >= 0
       @user.destroy
       respond_to do |format|
-        format.html { redirect_to users_url, notice: "User was successfully destroyed." }
-        format.json { head :no_content }
+        format.html { redirect_to(users_url, notice: "User was successfully destroyed.") }
+        format.json { head(:no_content) }
       end
     else
       # redirect to account if they do not have permission
       respond_to do |format|
-        format.html { redirect_to accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
+        format.html { redirect_to(accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help.") }
       end
     end
   end

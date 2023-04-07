@@ -1,1 +1,1 @@
-json.partial! "receipts/receipt", receipt: @receipt
+json.partial!("receipts/receipt", receipt: @receipt)

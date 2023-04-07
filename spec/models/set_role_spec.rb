@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe SetRole, type: :model do
+RSpec.describe(SetRole) do
   pending "add some examples to (or delete) #{__FILE__}"
 end
