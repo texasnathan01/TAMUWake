@@ -48,10 +48,16 @@ class AdminsController < ApplicationController
   end
 
   def destroy
+    logger.info(params)
     @user.destroy!
     respond_to do |format|
-      format.html { redirect_to(users_path, notice: "User was successfully destroyed.") }
-      format.json { head(:no_content) }
+      if (params[:action] == "approval")
+        format.html { redirect_to(users_to_approve_path, notice: "Account was successfully denied.") }
+        format.json { head(:no_content) }
+      else
+        format.html { redirect_to(users_path, notice: "User was successfully destroyed.") }
+        format.json { head(:no_content) }
+      end
     end
   end
 
