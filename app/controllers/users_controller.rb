@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy]
+  before_action :set_user, only: %i[ show destroy]
 
   def search
     @products = Admin.where('is_approved = true AND first_name LIKE ? AND last_name LIKE ?', "%#{params[:first_name]}%", "%#{params[:last_name]}%")
