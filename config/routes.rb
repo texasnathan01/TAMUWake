@@ -23,14 +23,16 @@ Rails.application.routes.draw do
 
   root 'receipts#index'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
+  
   devise_scope :admin do
     get 'admins/sign_in', to: 'admins/sessions#new', as: :new_admin_session
     get 'admins/sign_out', to: 'admins/sessions#destroy', as: :destroy_admin_session
     resources :admins do 
       member do 
         patch :update_approval 
-        post 'add_role'
-        post 'remove_role'
+        post 'add_role' # route to add a role using join table
+        post 'remove_role' # route to remove a role using join table
+        post 'show_role' # route to display all the roles assigned to a user on the admins page
       end
     end
   end

@@ -57,6 +57,37 @@ class AdminsController < ApplicationController
     end
   end
   
+  # this function allows the admin to delete a role from a user
+  def remove_role
+    user = Admin.find(params[:id])
+    role = Role.find(params[:role_id])
+    
+    # rendering the view to display the status message
+    respond_to do |format|
+      if !user.remove_role(role.id)
+        format.html { redirect_to user_url(user), notice: "Role has been removed successfully." }
+        format.json { render json:{ message: "Role does not exist for the user. Could not remove it." }, status: :expectation_failed}
+      else
+        format.html { redirect_to user_url(user), notice: "Role has been removed successfully." }
+        format.json { render :show, status: :ok, location: user}
+      end
+    end
+  end
+
+  # this function allows the admin to view all the roles assigned to a user
+  def show_role
+    user = Admin.find(params[:id])
+    # retrieving the roles associated to the user
+    @roles = user.set_roles 
+
+    # rendering the view to display the roles
+    respond_to do |format|
+      # views > admin > show.html.erb
+      format.html 
+      format.json {render json: @roles}
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_admin

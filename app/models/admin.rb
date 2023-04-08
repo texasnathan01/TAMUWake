@@ -26,7 +26,25 @@ class Admin < ApplicationRecord
     user_role.save!
     # role successfully added to user
     return true
-
+  
+  rescue ActiveRecord::RecordNotSaved
+    # db issue - role not added to user
+    return false
+  end
+  
+  # this function is used to remove a role using the admin from the set role table
+  def remove_role(role_id)
+    user_role = SetRole.find_by(admin_id: self.id, role_id: role_id)
+    # checks if the role already exists for the user
+    # if it exists, it deletes it
+    if user_role
+      user_role.destroy
+      return true
+    # if it doesn't exist, it returns false
+    else
+      return false
+    end
+  
   rescue ActiveRecord::RecordNotSaved
     # db issue - role not added to user
     return false
