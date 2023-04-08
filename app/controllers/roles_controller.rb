@@ -1,5 +1,9 @@
 class RolesController < ApplicationController
+<<<<<<< HEAD
   before_action :set_role, only: %i[ show edit update destroy ]
+=======
+  before_action :set_role, only: %i[show edit update destroy]
+>>>>>>> origin/JIRA-59-Google-OAuth-Integration-and-User-Settup
 
   # GET /roles or /roles.json
   def index
@@ -7,8 +11,12 @@ class RolesController < ApplicationController
   end
 
   # GET /roles/1 or /roles/1.json
+<<<<<<< HEAD
   def show
   end
+=======
+  def show; end
+>>>>>>> origin/JIRA-59-Google-OAuth-Integration-and-User-Settup
 
   # GET /roles/new
   def new
@@ -16,8 +24,12 @@ class RolesController < ApplicationController
   end
 
   # GET /roles/1/edit
+<<<<<<< HEAD
   def edit
   end
+=======
+  def edit; end
+>>>>>>> origin/JIRA-59-Google-OAuth-Integration-and-User-Settup
 
   # POST /roles or /roles.json
   def create

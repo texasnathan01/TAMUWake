@@ -5,17 +5,17 @@ class WakeboardSetsController < ApplicationController
   def index
     @wakeboard_sets = WakeboardSet.limit(10)
     
-    #.where("scheduled_date >= ? AND scheduled_date <= ?",
+    # .where("scheduled_date >= ? AND scheduled_date <= ?",
     #  DateTime.current.beginning_of_week(start_date = :sunday).advance(hours: 8), 
     #  DateTime.current.end_of_week(start_date = :sunday).advance(hours: -4)
-    #)
+    # )
   end
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
     @joinable = !SetRider.rider_exists?(current_admin.id, params[:id])
     @riders = SetRider.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :as_dib)
-	@drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name)
+	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name)
   end
 
   # GET /wakeboard_sets/new
@@ -33,18 +33,16 @@ class WakeboardSetsController < ApplicationController
 
     respond_to do |format|
       if @wakeboard_set.save
-	    user = current_admin
-	    driver1 = SetDriver.new(admin_id: user.id, wakeboard_set_id: @wakeboard_set.id)
-        driver2 = SetDriver.new(admin_id: params[:wakeboard_set][:user_id], wakeboard_set_id: @wakeboard_set.id)
+        user = current_admin
+        driver1 = SetDriver.new(admin_id: user.id, wakeboard_set_id: @wakeboard_set.id)
+        driver2 = SetDriver.new(admin_id: params[:wakeboard_set][:admin_id], wakeboard_set_id: @wakeboard_set.id)
 
-        if driver1.save & driver2.save
-        end
-		
-        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully created." }
-        format.json { render :show, status: :created, location: @wakeboard_set }
+            
+        format.html { redirect_to(wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully created.") }
+        format.json { render(:show, status: :created, location: @wakeboard_set) }
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @wakeboard_set.errors, status: :unprocessable_entity }
+        format.html { render(:new, status: :unprocessable_entity) }
+        format.json { render(json: @wakeboard_set.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -53,11 +51,11 @@ class WakeboardSetsController < ApplicationController
   def update
     respond_to do |format|
       if @wakeboard_set.update(wakeboard_set_params)
-        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully updated." }
-        format.json { render :show, status: :ok, location: @wakeboard_set }
+        format.html { redirect_to(wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully updated.") }
+        format.json { render(:show, status: :ok, location: @wakeboard_set) }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @wakeboard_set.errors, status: :unprocessable_entity }
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @wakeboard_set.errors, status: :unprocessable_entity) }
       end
     end
   end
@@ -67,8 +65,8 @@ class WakeboardSetsController < ApplicationController
     @wakeboard_set.destroy
 
     respond_to do |format|
-      format.html { redirect_to wakeboard_sets_url, notice: "Wakeboard set was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to(wakeboard_sets_url, notice: "Wakeboard set was successfully destroyed.") }
+      format.json { head(:no_content) }
     end
   end
 
@@ -82,12 +80,17 @@ class WakeboardSetsController < ApplicationController
     user = current_admin.id
 
     respond_to do |format|
-      if !@wakeboard_set.join(user, as_dib)
-        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Unable to join set" }
-        format.json { render json:{ message: "Unable to join set" }, status: :expectation_failed }
+      if has_documents_signed?
+        if @wakeboard_set.join(user, as_dib)
+          format.html { redirect_to(wakeboard_set_url(@wakeboard_set), notice: "Successfully joined set") }
+          format.json { render(:show, status: :ok, location: @wakeboard_set) }
+        else
+          format.html { redirect_to(wakeboard_set_url(@wakeboard_set)) }
+          format.json { render(json: { message: "Unable to join set" }, status: :expectation_failed) }
+        end
       else
-        format.html { redirect_to wakeboard_set_url(@wakeboard_set), notice: "Successfully joined set" }
-        format.json { render :show, status: :ok, location: @wakeboard_set }
+        format.html { redirect_to(wakeboard_set_url(@wakeboard_set)) }
+        format.json { render(json: { message: "Unable to join set" }, status: :expectation_failed) }
       end
     end
 
@@ -101,12 +104,12 @@ class WakeboardSetsController < ApplicationController
     user = current_admin.id
 
     respond_to do |format|
-      if !@set.leave(user)
-        format.html { redirect_to wakeboard_set_url(@set), notice: "Unable to leave set" }
-        format.json { render json:{ message: "Unable to leave set" }, status: :expectation_failed }
+      if @set.leave(user)
+        format.html { redirect_to(wakeboard_set_url(@set), notice: "Successfully left set") }
+        format.json { render(:show, status: :ok, location: @set) }
       else
-        format.html { redirect_to wakeboard_set_url(@set), notice: "Successfully left set" }
-        format.json { render :show, status: :ok, location: @set }
+        format.html { redirect_to(wakeboard_set_url(@set), notice: "Unable to leave set") }
+        format.json { render(json: { message: "Unable to leave set" }, status: :expectation_failed) }
       end
     end
   end
@@ -126,7 +129,7 @@ class WakeboardSetsController < ApplicationController
         :chib_limit,
         :driver_count,
         :driver_limit,
-        :scheduled_date, 
+        :scheduled_date 
       )
     end
 end

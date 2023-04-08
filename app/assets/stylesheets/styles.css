@@ -3,12 +3,22 @@ body {
 	background-size: cover;
 }
 
+@font-face {
+   font-family: 'Americancaptain';
+   src: url('AMERICANCAPTAIN.otf');
+}
+
+@font-face {
+   font-family: 'Indoscreen';
+   src: url('INDOSCREEN.ttf');
+}
+
 a:link {
-	color: black;
+	color: white;
 }
 
 a:visited { 
-	color: black;
+	color: #AFAFAF;
 }
 
 .navbar {
@@ -16,14 +26,32 @@ a:visited {
   padding-right: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #3696d1;
+  background-color: #500000;
   display: inline;
   text-align: center;
-  color: black;
+  color: white;
   font-size: 25px;
-  float: right;
+  float: left;
   border-right-style: solid;
   border-color: black;
+  font-family: Indoscreen;
+}
+
+.title {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 2px;
+  padding-bottom: 1px;
+  background-color: #500000;
+  display: inline;
+  text-align: center;
+  color: white;
+  float: left;
+  border-right-style: solid;
+  border-color: black;
+  font-family: 'Americancaptain', sans-serif;
+  font-size: 55px;
+  line-height: 55px;
 }
 
 .navbar:hover {
@@ -54,7 +82,7 @@ banner {
   padding-top: 30px;
   padding-bottom: 30px;
   float: left;
-  background-color: #3696d1;
+  background-color: #500000;
   font-size: 80px;
 }
 
@@ -103,3 +131,4 @@ headerBox {
   background-color: #3696d1;
   font-size: 50px;
 }
+

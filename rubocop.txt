@@ -1,288 +1,109 @@
-Inspecting 54 files
-....CCCW.C.......C.....CC..........WC.C.CC..CCC.......
+Inspecting 84 files
+......CC....C......C......C....................C.CC.................................
 
 Offenses:
 
-app/controllers/admins/omniauth_callbacks_controller.rb:2:7: C: Naming/MethodName: Use camelCase for method names.
-  def google_oauth2
-      ^^^^^^^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:4:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
-app/controllers/admins/omniauth_callbacks_controller.rb:5:25: C: [Correctable] Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
-    user = User.find_by(:email => admin.email)
-                        ^^^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:7:5: C: [Correctable] Style/NegatedIf: Favor unless over if for negative conditions.
-    if !user ...
-    ^^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:8:58: C: [Correctable] Layout/SpaceAfterComma: Space missing after comma.
-      user = User.new(firstname: admin.full_name.split[0],lastname: admin.full_name.split[1],email: admin.email)
-                                                         ^
-app/controllers/admins/omniauth_callbacks_controller.rb:8:93: C: [Correctable] Layout/SpaceAfterComma: Space missing after comma.
-      user = User.new(firstname: admin.full_name.split[0],lastname: admin.full_name.split[1],email: admin.email)
-                                                                                            ^
-app/controllers/admins/omniauth_callbacks_controller.rb:9:7: C: [Correctable] Style/NegatedIf: Favor unless over if for negative conditions.
-      if !user.save ...
-      ^^^^^^^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:26:3: C: [Correctable] Layout/AccessModifierIndentation: Indent access modifiers like protected.
-  protected
-  ^^^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:28:7: C: Naming/MethodName: Use camelCase for method names.
-  def after_omniauth_failure_path_for(_scope)
-      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:32:7: C: Naming/MethodName: Use camelCase for method names.
-  def after_sign_in_path_for(resource_or_scope)
-      ^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:36:3: C: [Correctable] Layout/AccessModifierIndentation: Indent access modifiers like private.
-  private
-  ^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:38:7: C: Naming/MethodName: Use camelCase for method names.
-  def from_google_params
-      ^^^^^^^^^^^^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:40:7: C: [Correctable] Layout/FirstHashElementIndentation: Use 5 spaces for indentation in a hash, relative to the start of the line where the left curly brace is.
-      uid: auth.uid,
-      ^^^^^^^^^^^^^
-app/controllers/admins/omniauth_callbacks_controller.rb:50:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
-end
-   
-app/controllers/admins/sessions_controller.rb:2:7: C: Naming/MethodName: Use camelCase for method names.
-  def after_sign_out_path_for(_resource_or_scope)
-      ^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/admins/sessions_controller.rb:6:7: C: Naming/MethodName: Use camelCase for method names.
-  def after_sign_in_path_for(resource_or_scope)
-      ^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/admins/sessions_controller.rb:9:4: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
-end
-   
-app/controllers/application_controller.rb:5:5: C: [Correctable] Layout/AccessModifierIndentation: Indent access modifiers like private.
-    private
-    ^^^^^^^
-app/controllers/application_controller.rb:7:9: C: Naming/MethodName: Use camelCase for method names.
-    def current_user
-        ^^^^^^^^^^^^
-app/controllers/application_controller.rb:8:48: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
-        # grabbing current userwho is logged in  
-                                               ^^
-app/controllers/application_controller.rb:9:22: C: [Correctable] Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
-        User.find_by(:email => current_admin.email)
-                     ^^^^^^^^^
-app/controllers/application_controller.rb:10:8: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
-    end   
-       ^^^
-app/controllers/dashboards_controller.rb:2:5: C: [Correctable] Style/EmptyMethod: Put empty method definitions on a single line.
-    def show ...
-    ^^^^^^^^
-app/controllers/dashboards_controller.rb:4:3: W: [Correctable] Layout/EndAlignment: end at 4, 2 is not aligned with class at 1, 0.
-  end
-  ^^^
-app/controllers/dashboards_controller.rb:4:6: C: [Correctable] Layout/TrailingEmptyLines: Final newline missing.
-  end
-     
-app/controllers/users_controller.rb:7:26: C: [Correctable] Style/HashSyntax: Use the new Ruby 1.9 hash syntax.
-    @user = User.find_by(:email => current_admin.email)
-                         ^^^^^^^^^
-app/controllers/users_controller.rb:9:44: C: [Correctable] Layout/SpaceAroundOperators: Surrounding space missing for operator >=.
-    if @user.role_id == 1 || @user.role_id >=0
-                                           ^^
-app/controllers/users_controller.rb:14:131: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-        format.html { redirect_to accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help."}
-                                                                                                                                  ^
-app/controllers/users_controller.rb:78:76: C: [Correctable] Layout/SpaceAfterComma: Space missing after comma.
-      params.require(:user).permit(:email, :firstname, :lastname, :password,:role_id ,:is_approved)
-                                                                           ^
-app/controllers/users_controller.rb:78:85: C: [Correctable] Layout/SpaceBeforeComma: Space found before comma.
-      params.require(:user).permit(:email, :firstname, :lastname, :password,:role_id ,:is_approved)
-                                                                                    ^
-app/controllers/users_controller.rb:78:86: C: [Correctable] Layout/SpaceAfterComma: Space missing after comma.
-      params.require(:user).permit(:email, :firstname, :lastname, :password,:role_id ,:is_approved)
-                                                                                     ^
-app/models/admin.rb:4:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
-app/models/admin.rb:6:12: C: Naming/MethodName: Use camelCase for method names.
-  def self.from_google(email:, full_name:, uid:, avatar_url:)
-           ^^^^^^^^^^^
-app/models/admin.rb:7:5: C: [Correctable] Layout/EmptyLineAfterGuardClause: Add empty line after guard clause.
-    return nil unless email =~ /@tamu.edu\z/ || email == 'tamuwakeuser@gmail.com'
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/models/wakeboard_set.rb:11:9: C: [Correctable] Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
-        if current_rider_count > rider_limit
-        ^^
-app/validators/not_in_past_validator.rb:3:9: C: [Correctable] Style/IfUnlessModifier: Favor modifier if usage when having a single-line body. Another good alternative is the usage of control flow &&/||.
-        if value.present? && value < DateTime.current
-        ^^
-db/seeds.rb:1:1: W: Lint/EmptyFile: Empty file detected.
-spec/integration/integration_spec.rb:7:16: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside {.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-               ^
-spec/integration/integration_spec.rb:7:22: C: [Correctable] Rails/SaveBang: Use create! instead of create if the return value is not checked.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-                     ^^^^^^
-spec/integration/integration_spec.rb:7:59: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-                                                          ^
-spec/integration/integration_spec.rb:8:15: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside {.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-              ^
-spec/integration/integration_spec.rb:8:20: C: [Correctable] Rails/SaveBang: Use create! instead of create if the return value is not checked.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                   ^^^^^^
-spec/integration/integration_spec.rb:8:94: C: [Correctable] Layout/SpaceAfterComma: Space missing after comma.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                                                                                             ^
-spec/integration/integration_spec.rb:8:106: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                                                                                                         ^
-spec/integration/integration_spec.rb:10:3: C: [Correctable] RSpec/HookArgument: Omit the default :each argument for RSpec hooks.
-  before :each do
-  ^^^^^^^^^^^^
-spec/integration/integration_spec.rb:11:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:12:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:13:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:26:16: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside {.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-               ^
-spec/integration/integration_spec.rb:26:22: C: [Correctable] Rails/SaveBang: Use create! instead of create if the return value is not checked.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-                     ^^^^^^
-spec/integration/integration_spec.rb:26:59: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-                                                          ^
-spec/integration/integration_spec.rb:27:15: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside {.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 1)}
-              ^
-spec/integration/integration_spec.rb:27:20: C: [Correctable] Rails/SaveBang: Use create! instead of create if the return value is not checked.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 1)}
-                   ^^^^^^
-spec/integration/integration_spec.rb:27:94: C: [Correctable] Layout/SpaceAfterComma: Space missing after comma.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 1)}
-                                                                                             ^
-spec/integration/integration_spec.rb:27:106: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 1)}
-                                                                                                         ^
-spec/integration/integration_spec.rb:29:3: C: [Correctable] RSpec/HookArgument: Omit the default :each argument for RSpec hooks.
-  before :each do
-  ^^^^^^^^^^^^
-spec/integration/integration_spec.rb:30:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:31:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:32:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:35:13: C: [Correctable] RSpec/ExcessiveDocstringSpacing: Excessive whitespace.
-  scenario 'visiting account page ' do
-            ^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:42:1: C: [Correctable] Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.
-spec/integration/integration_spec.rb:43:16: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside {.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-               ^
-spec/integration/integration_spec.rb:43:22: C: [Correctable] Rails/SaveBang: Use create! instead of create if the return value is not checked.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-                     ^^^^^^
-spec/integration/integration_spec.rb:43:59: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-                                                          ^
-spec/integration/integration_spec.rb:44:15: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside {.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: -1)}
-              ^
-spec/integration/integration_spec.rb:44:20: C: [Correctable] Rails/SaveBang: Use create! instead of create if the return value is not checked.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: -1)}
-                   ^^^^^^
-spec/integration/integration_spec.rb:44:94: C: [Correctable] Layout/SpaceAfterComma: Space missing after comma.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: -1)}
-                                                                                             ^
-spec/integration/integration_spec.rb:44:107: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: -1)}
-                                                                                                          ^
-spec/integration/integration_spec.rb:45:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
-spec/integration/integration_spec.rb:46:3: C: [Correctable] RSpec/HookArgument: Omit the default :each argument for RSpec hooks.
-  before :each do
-  ^^^^^^^^^^^^
-spec/integration/integration_spec.rb:47:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:48:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:49:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:60:1: C: [Correctable] Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body beginning.
-spec/integration/integration_spec.rb:61:16: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside {.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-               ^
-spec/integration/integration_spec.rb:61:22: C: [Correctable] Rails/SaveBang: Use create! instead of create if the return value is not checked.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-                     ^^^^^^
-spec/integration/integration_spec.rb:61:59: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-  let(:admin) {Admin.create(email: "chrispasala@tamu.edu")}
-                                                          ^
-spec/integration/integration_spec.rb:62:15: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside {.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-              ^
-spec/integration/integration_spec.rb:62:20: C: [Correctable] Rails/SaveBang: Use create! instead of create if the return value is not checked.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                   ^^^^^^
-spec/integration/integration_spec.rb:62:94: C: [Correctable] Layout/SpaceAfterComma: Space missing after comma.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                                                                                             ^
-spec/integration/integration_spec.rb:62:106: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-  let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                                                                                                         ^
-spec/integration/integration_spec.rb:64:3: C: [Correctable] RSpec/HookArgument: Omit the default :each argument for RSpec hooks.
-  before :each do
-  ^^^^^^^^^^^^
-spec/integration/integration_spec.rb:65:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:66:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:67:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/integration_spec.rb:74:1: C: [Correctable] Layout/EmptyLinesAroundBlockBody: Extra empty line detected at block body end.
-spec/models/admin_spec.rb:3:23: C: [Correctable] RSpec/Rails/InferredSpecType: Remove redundant spec type.
-RSpec.describe Admin, type: :model do
-                      ^^^^^^^^^^^^
-spec/unit/set_unit_spec.rb:4:17: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside {.
-    let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                ^
-spec/unit/set_unit_spec.rb:4:22: C: [Correctable] Rails/SaveBang: Use create! instead of create if the return value is not checked.
-    let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                     ^^^^^^
-spec/unit/set_unit_spec.rb:4:96: C: [Correctable] Layout/SpaceAfterComma: Space missing after comma.
-    let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                                                                                               ^
-spec/unit/set_unit_spec.rb:4:108: C: [Correctable] Layout/SpaceInsideBlockBraces: Space missing inside }.
-    let(:user) {User.create(email: "chrispasala@tamu.edu", firstname: "first", lastname: "last",role_id: 3)}
-                                                                                                           ^
-spec/unit/set_unit_spec.rb:6:5: C: [Correctable] RSpec/LeadingSubject: Declare subject above any other let declarations.
-    subject do ...
-    ^^^^^^^^^^
-spec/unit/unit_spec.rb:5:1: C: [Correctable] Layout/TrailingWhitespace: Trailing whitespace detected.
-test/controllers/receipts_controller_test.rb:20:151: C: [Correctable] Layout/LineLength: Line is too long. [263/150]
-      post receipts_url, params: { receipt: { date_approved: @receipt.date_approved, date_made: @receipt.date_made, date_refunded: @receipt.date_refunded, receipt_id: @receipt.receipt_id, stage: @receipt.stage, user_id: @receipt.user_id, value: @receipt.value } }
-                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-test/controllers/receipts_controller_test.rb:37:151: C: [Correctable] Layout/LineLength: Line is too long. [271/150]
-    patch receipt_url(@receipt), params: { receipt: { date_approved: @receipt.date_approved, date_made: @receipt.date_made, date_refunded: @receipt.date_refunded, receipt_id: @receipt.receipt_id, stage: @receipt.stage, user_id: @receipt.user_id, value: @receipt.value } }
+app/controllers/admins_controller.rb:19:57: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
+        format.html { redirect_to(accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help.") }
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/admins_controller.rb:35:62: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
+          format.html { redirect_to(user_url(@user), notice: "User was successfully updated.") }
+                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/admins_controller.rb:45:57: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
+        format.html { redirect_to(accounts_url, notice: "You do not have access to that update action. Contact your adminstrator for help.") }
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/admins_controller.rb:53:53: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
+      format.html { redirect_to(users_path, notice: "User was successfully destroyed.") }
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/admins_controller.rb:64:57: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
+      format.html { redirect_to(user_url(user), notice: "Role has been successfully assigned to the user.") }
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/application_controller.rb:14:151: C: Layout/LineLength: Line is too long. [271/150]
+        if current_admin && !current_admin.is_approved? && (!(params[:controller] == "account" && params[:action] == "index") && !(params[:controller] == "admins/sessions" && params[:action] == "destroy") && !(params[:controller] == "home" && params[:action] == "index"))
                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-test/controllers/users_controller_test.rb:20:151: C: [Correctable] Layout/LineLength: Line is too long. [248/150]
-      post users_url, params: { user: { email: @user.email, firstname: @user.firstname, isAdmin: @user.isAdmin, isDriver: @user.isDriver, isRider: @user.isRider, isTreasurer: @user.isTreasurer, lastname: @user.lastname, password: @user.password } }
-                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-test/controllers/users_controller_test.rb:37:151: C: [Correctable] Layout/LineLength: Line is too long. [253/150]
-    patch user_url(@user), params: { user: { email: @user.email, firstname: @user.firstname, isAdmin: @user.isAdmin, isDriver: @user.isDriver, isRider: @user.isRider, isTreasurer: @user.isTreasurer, lastname: @user.lastname, password: @user.password } }
-                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-test/controllers/wakeboard_sets_controller_test.rb:20:151: C: [Correctable] Layout/LineLength: Line is too long. [205/150]
-      post wakeboard_sets_url, params: { wakeboard_set: { current_rider_count: @wakeboard_set.current_rider_count, rider_limit: @wakeboard_set.rider_limit, scheduled_date: @wakeboard_set.scheduled_date } }
-                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-test/controllers/wakeboard_sets_controller_test.rb:37:151: C: [Correctable] Layout/LineLength: Line is too long. [219/150]
-    patch wakeboard_set_url(@wakeboard_set), params: { wakeboard_set: { current_rider_count: @wakeboard_set.current_rider_count, rider_limit: @wakeboard_set.rider_limit, scheduled_date: @wakeboard_set.scheduled_date } }
-                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/application_controller.rb:15:41: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
+                        flash[:alert] = "Your account is not approved yet. Please wait for approval or contact your Administrators."
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/roles_controller.rb:26:60: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
+        format.html { redirect_to(role_url(@role), notice: "Role was successfully created.") }
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/roles_controller.rb:39:60: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
+        format.html { redirect_to(role_url(@role), notice: "Role was successfully updated.") }
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/controllers/roles_controller.rb:53:52: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
+      format.html { redirect_to(roles_url, notice: "Role was successfully destroyed.") }
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/users_helper.rb:2:9: C: Naming/PredicateName: Rename has_documents_signed? to documents_signed?.
+    def has_documents_signed?
+        ^^^^^^^^^^^^^^^^^^^^^
+app/helpers/users_helper.rb:5:151: C: Layout/LineLength: Line is too long. [195/150]
+              "Documents Not Yet Completed: #{current_admin.dues_completed ? '' : 'Dues '}#{current_admin.aor_completed ? '' : 'AOR '}#{current_admin.boat_waiver_completed ? '' : 'Boat Waiver '}"
+                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/helpers/users_helper.rb:12:9: C: Naming/PredicateName: Rename has_info_filled_out? to info_filled_out?.
+    def has_info_filled_out?(user_id)
+        ^^^^^^^^^^^^^^^^^^^^
+app/helpers/users_helper.rb:17:151: C: Layout/LineLength: Line is too long. [194/150]
+              "Info Not Yet Filled Out on Account: #{user_to_check.uin.present? ? '' : 'UIN '}#{user_to_check.address.present? ? '' : 'Address '}. Please fill this info out on the Account Page."
+                                                                                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/role.rb:2:5: C: Rails/HasManyOrHasOneDependent: Specify a :dependent option.
+    has_many :set_role
+    ^^^^^^^^
+spec/integration/account_integration_spec.rb:8:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/account_integration_spec.rb:9:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/members_integration_spec.rb:4:1: C: RSpec/MultipleDescribes: Do not use multiple top-level example groups - try to nest them.
+RSpec.describe('Member Pages Without Access', type: :feature) do
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/members_integration_spec.rb:8:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/members_integration_spec.rb:9:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/members_integration_spec.rb:22:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/members_integration_spec.rb:23:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(chris))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:4:1: C: RSpec/MultipleDescribes: Do not use multiple top-level example groups - try to nest them.
+RSpec.describe('Go to receipts page as treasurer', type: :feature) do
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:8:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:9:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:22:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:23:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:36:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:37:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:50:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:51:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:73:3: C: RSpec/OverwritingSetup: admin is already defined.
+  let(:admin) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "chris", last_name: "pasala", role_id: 3, id: 2, is_approved: true, uin: 123, address: "123 place") }
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:76:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:77:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-54 files inspected, 99 offenses detected, 78 offenses autocorrectable
+84 files inspected, 34 offenses detected

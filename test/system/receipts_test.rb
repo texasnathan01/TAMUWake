@@ -19,7 +19,7 @@ class ReceiptsTest < ApplicationSystemTestCase
     fill_in "Date refunded", with: @receipt.date_refunded
     fill_in "Receipt", with: @receipt.receipt_id
     fill_in "Stage", with: @receipt.stage
-    fill_in "User", with: @receipt.user_id
+    fill_in "User", with: @receipt.admin_id
     fill_in "Value", with: @receipt.value
     click_on "Create Receipt"
 
@@ -36,7 +36,7 @@ class ReceiptsTest < ApplicationSystemTestCase
     fill_in "Date refunded", with: @receipt.date_refunded
     fill_in "Receipt", with: @receipt.receipt_id
     fill_in "Stage", with: @receipt.stage
-    fill_in "User", with: @receipt.user_id
+    fill_in "User", with: @receipt.admin_id
     fill_in "Value", with: @receipt.value
     click_on "Update Receipt"
 

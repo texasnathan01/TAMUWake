@@ -12,11 +12,6 @@
   <% end %>
 
   <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
     <%= form.label :firstname, style: "display: block" %>
     <%= form.text_field :first_name %>
   </div>
@@ -42,9 +37,20 @@
   </div>
 
   <div>
-    <%= form.label :documents_signed, style: "display: block" %>
-    <%= form.check_box :documents_signed %>
+    <%= form.label :aor_completed, style: "display: block" %>
+    <%= form.check_box :aor_completed %>
   </div>
+
+  <div>
+    <%= form.label :boat_waiver_completed, style: "display: block" %>
+    <%= form.check_box :boat_waiver_completed %>
+  </div>
+
+<div>
+    <%= form.label :dues_completed, style: "display: block" %>
+    <%= form.check_box :dues_completed %>
+  </div>
+
 
     <div>
     <%= form.label :is_approved, style: "display: block"%>
@@ -52,6 +58,6 @@
   </div>
 
   <div>
-    <%= form.submit "Update Member" %>
+    <%= form.submit "Update Account Info" %>
   </div>
 <% end %>

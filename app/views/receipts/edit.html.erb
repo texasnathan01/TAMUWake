@@ -4,13 +4,7 @@
 
 <ul>
 
-  <a href="#"><banner>TAMU WAKE</banner></a>
-  
-  <a href="#"><p class="navbar currentPage navbarRightEnd"><%= link_to "Reciepts", receipts_path %></p></a>
-  <a href="#"><p class="navbar"><%= link_to "Members", users_path %></p></a>
-  <a href="#"><p class="navbar"> <%= link_to "Account", accounts_path %></p></a>s
-  <a href="#"><p class="navbar"><%= link_to "Rides", wakeboard_sets_path %></p></a>
-  <a href="#"><p class="navbar navbarLeftEnd"> <%= link_to "Help", help_path %></p></a>
+  <%= render "/navbar"%>
   <p class="bannerBox"></p>
 
   <div hidden>
@@ -25,7 +19,7 @@
     <%= render "form", receipt: @receipt %>
 
   <!-- This section will only be shown if the user is the driver who uploaded the receipt -->
-  <% elsif (@user.role_id == 1) and (@receipt.user_id == @user.id) and (@receipt.stage == 2) %>
+  <% elsif (@user.role_id == 1) and (@receipt.admin_id == @user.id) and (@receipt.stage == 2) %>
     <h1>I got my refund</h1>
     <%= render "form_driver_2", receipt: @receipt %>
 

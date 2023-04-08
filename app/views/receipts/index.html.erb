@@ -6,13 +6,8 @@
 
 <ul>
 
-  <a href="#"><banner>TAMU WAKE</banner></a>
+  <%= render "/navbar"%>
   
-  <a href="#"><p class="navbar currentPage navbarRightEnd"><%= link_to "Reciepts", receipts_path %></p></a>
-  <a href="#"><p class="navbar"><%= link_to "Members", users_path %></p></a>
-  <a href="#"><p class="navbar"> <%= link_to "Account", accounts_path %></p></a>
-  <a href="#"><p class="navbar"><%= link_to "Rides", wakeboard_sets_path %></p></a>
-  <a href="#"><p class="navbar navbarLeftEnd"> <%= link_to "Help", help_path %></p></a>
   <p class="bannerBox"></p>
   
   <div hidden>
@@ -28,7 +23,7 @@
  
     <div id="stage_1">
     <h2> Pending Treasurer Approval (Stage 1)</h2>
-    <% @receipts.where(stage: 1, user_id: @user.id).each do |receipt| %>
+    <% @receipts.where(stage: 1, admin_id: @user.id).each do |receipt| %>
       <p>
         <strong>Receipt ID:</strong>
         <%= receipt.id %>
@@ -40,7 +35,7 @@
     
     <div id="stage_2">
       <h2> Approved By Treasurer, Awaiting Refund (Stage 2)</h2>
-      <% @receipts.where(stage: 2, user_id: @user.id).each do |receipt| %>
+      <% @receipts.where(stage: 2, admin_id: @user.id).each do |receipt| %>
         <p>
           <strong>Receipt ID:</strong>
           <%= receipt.id %>
@@ -52,7 +47,7 @@
 
     <div id="stage_3">
       <h2> Refund Received (Stage 3)</h2>
-      <% @receipts.where(stage: 3, user_id: @user.id).each do |receipt| %>
+      <% @receipts.where(stage: 3, admin_id: @user.id).each do |receipt| %>
         <p>
           <strong>Receipt ID:</strong>
           <%= receipt.id %>

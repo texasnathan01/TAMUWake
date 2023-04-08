@@ -17,7 +17,14 @@ class WakeboardSetsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create wakeboard_set" do
     assert_difference("WakeboardSet.count") do
-      post wakeboard_sets_url, params: { wakeboard_set: { current_rider_count: @wakeboard_set.current_rider_count, rider_limit: @wakeboard_set.rider_limit, scheduled_date: @wakeboard_set.scheduled_date } }
+      post wakeboard_sets_url,
+           params: {
+             wakeboard_set: {
+               current_rider_count: @wakeboard_set.current_rider_count,
+               rider_limit: @wakeboard_set.rider_limit,
+               scheduled_date: @wakeboard_set.scheduled_date
+             }
+           }
     end
 
     assert_redirected_to wakeboard_set_url(WakeboardSet.last)
@@ -34,7 +41,14 @@ class WakeboardSetsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update wakeboard_set" do
-    patch wakeboard_set_url(@wakeboard_set), params: { wakeboard_set: { current_rider_count: @wakeboard_set.current_rider_count, rider_limit: @wakeboard_set.rider_limit, scheduled_date: @wakeboard_set.scheduled_date } }
+    patch wakeboard_set_url(@wakeboard_set),
+          params: {
+            wakeboard_set: {
+              current_rider_count: @wakeboard_set.current_rider_count,
+              rider_limit: @wakeboard_set.rider_limit,
+              scheduled_date: @wakeboard_set.scheduled_date
+            }
+          }
     assert_redirected_to wakeboard_set_url(@wakeboard_set)
   end
 

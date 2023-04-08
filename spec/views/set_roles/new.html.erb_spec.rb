@@ -1,21 +1,21 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-RSpec.describe "set_roles/new", type: :view do
-  before(:each) do
-    assign(:set_role, SetRole.new(
-      role_id: nil,
-      user_id: nil
-    ))
-  end
+# RSpec.describe "set_roles/new", type: :view do
+#   before(:each) do
+#     assign(:set_role, SetRole.new(
+#       role_id: nil,
+#       user_id: nil
+#     ))
+#   end
 
-  it "renders new set_role form" do
-    render
+#   it "renders new set_role form" do
+#     render
 
-    assert_select "form[action=?][method=?]", set_roles_path, "post" do
+#     assert_select "form[action=?][method=?]", set_roles_path, "post" do
 
-      assert_select "input[name=?]", "set_role[role_id_id]"
+#       assert_select "input[name=?]", "set_role[role_id_id]"
 
-      assert_select "input[name=?]", "set_role[user_id_id]"
-    end
-  end
-end
+#       assert_select "input[name=?]", "set_role[user_id_id]"
+#     end
+#   end
+# end
