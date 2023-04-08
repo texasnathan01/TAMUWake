@@ -8,10 +8,10 @@ class WakeboardSetsController < ApplicationController
     # on sunday show sets for next week + ongoing sets today
     @weekStart, @weekEnd = WakeboardSet.available_set_range(@today)
 
-    @wakeboard_sets = WakeboardSet.limit(10).order(:scheduled_date).where("scheduled_date >= ? AND scheduled_date <= ?",
-      @weekStart,
-      @weekEnd
-    )
+    @pagy, @wakeboard_sets = pagy(WakeboardSet
+      .order(:scheduled_date)
+      .where("scheduled_date >= ? AND scheduled_date <= ?", @weekStart, @weekEnd), 
+      items: 2)
   end
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
