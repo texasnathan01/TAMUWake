@@ -1,0 +1,52 @@
+
+<tr>
+  <td>
+    <%= user_to_display.email %>
+  </td>
+
+  <td>
+    <%= user_to_display.first_name %>
+  </td>
+
+  <td>
+    <%= user_to_display.last_name %>
+  </td>
+
+  <td>
+    <%= user_to_display.role_id %>
+  </td>
+
+  <td>
+    <%= user_to_display.address %>
+  </td>
+
+  <td>
+    <%= user_to_display.uin %>
+  </td>
+
+  <td>
+    <%= user_to_display.aor_completed ? "yes" : "no" %>
+
+  </td>
+
+  <td>
+    <%= user_to_display.boat_waiver_completed ? "yes" : "no"%>
+  </td>
+
+  <td>
+    <%= user_to_display.dues_completed ? "yes" : "no" %>
+  </td>
+
+ <td>
+    <%= user_to_display.is_approved ? "yes" : "no"  %>
+  </td>
+
+  <td>
+    <%= user_to_display.created_at%>
+  </td>
+  <td>
+   <%= link_to "Edit this user", edit_admin_path(user_to_display) %>
+  </td>
+ 
+  
+</tr>
