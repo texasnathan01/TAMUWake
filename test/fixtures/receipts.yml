@@ -2,7 +2,7 @@
 
 one:
   receipt_id: 1
-  user_id: 1
+  admin_id: 1
   value: 1.5
   date_made: 2023-02-11
   date_approved: 2023-02-11
@@ -11,7 +11,7 @@ one:
 
 two:
   receipt_id: 1
-  user_id: 1
+  admin_id: 1
   value: 1.5
   date_made: 2023-02-11
   date_approved: 2023-02-11

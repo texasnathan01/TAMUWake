@@ -3,7 +3,7 @@
 <div hidden>
   <p> <%= @user.id %> </p>
   <p> <%= @user.role_id %> </p>
-  <p> <%= @receipt.user_id %> </p>
+  <p> <%= @receipt.admin_id %> </p>
 </div>
 
 <div>
@@ -15,7 +15,7 @@
     <%= button_to "Destroy this receipt", @receipt, method: :delete %>
 
   <!-- This section will only be shown if the user is the driver who uploaded the receipt (code 2) -->
-  <% elsif (@user.role_id == 1) and (@receipt.user_id == @user.id) %>
+  <% elsif (@user.role_id == 1) and (@receipt.admin_id == @user.id) %>
     <%= render @receipt %>
     <% if @receipt.stage == 2 %>
       <%= link_to "I got my refund", edit_receipt_path(@receipt) %> |
