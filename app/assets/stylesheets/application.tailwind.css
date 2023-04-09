@@ -41,5 +41,5 @@ template inspired from: https://github.com/ddnexus/pagy/blob/master/docs/extras/
 }
 
 .page.active {
-  @apply z-10 border-indigo-500 bg-indigo-50 text-indigo-600 relative inline-flex items-center border text-xs font-medium focus:z-20 ml-1 rounded-full cursor-pointer w-8 h-8 justify-center;
+  @apply z-10 border-sky-500 bg-sky-50 text-sky-600 relative inline-flex items-center border text-xs font-medium focus:z-20 ml-1 rounded-full cursor-pointer w-8 h-8 justify-center;
 }

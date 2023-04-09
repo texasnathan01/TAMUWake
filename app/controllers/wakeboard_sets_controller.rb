@@ -15,7 +15,7 @@ class WakeboardSetsController < ApplicationController
     @pagy, @wakeboard_sets = pagy(WakeboardSet
       .order(:scheduled_date)
       .where("scheduled_date >= ? AND scheduled_date <= ?", @weekStart, @weekEnd), 
-      items: 2)
+      items: 10)
   end
 
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json

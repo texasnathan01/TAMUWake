@@ -4,7 +4,9 @@
       <p class="text-gray-500">Drivers</p>
     </div>
     
-    <div class="flex flex-row space-x-2">
+    <div class="flex flex-row flex-wrap first:m-0">
+      <% test_user = Admin.new(first_name: "Christopher", avatar_url: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg") %>
+      <%= render partial: "shared/profile_pill", locals: { user: test_user } %>
       <%= render partial: "shared/profile_pill", collection: drivers, as: :user %>
     </div>
     
@@ -50,7 +52,7 @@
   </div>
 
 
-  <div class="mt-2">
+  <div class="flex mt-2 justify-end">
     <% if SetRider.rider_exists?(current_admin.id, wakeboard_set.id) %>
       <div>
         <%= button_to "Leave Set", leave_wakeboard_set_path, class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 transition-all duration-250 text-neutral-100" %>
@@ -63,10 +65,10 @@
           </button>
         </div>
 
-        <div class="absolute left-0 z-10 mt-2 w-24 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all opacity-0 scale-95" id="dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+        <div class="absolute left-0 z-50 mt-2 w-24 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all opacity-0 scale-95" id="dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
           <div class="py-1" role="none">
-            <%= button_to "As Dib", join_wakeboard_set_path, params: { as_dib: true }, method: :post, disabled: !joinable, class: "text-gray-700 block px-4 py-2 text-sm" %>
-            <%= button_to "As Chib", join_wakeboard_set_path, params: { as_dib: false }, method: :post, disabled: !joinable, class: "text-gray-700 block px-4 py-2 text-sm" %>
+            <%= button_to "As Dib", join_wakeboard_set_path, params: { as_dib: true }, method: :post, disabled: !joinable, class: "text-gray-700 block px-4 py-2 text-sm relative z-50" %>
+            <%= button_to "As Chib", join_wakeboard_set_path, params: { as_dib: false }, method: :post, disabled: !joinable, class: "text-gray-700 block px-4 py-2 text-sm relative z-50" %>
             <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
           </div>
         </div>

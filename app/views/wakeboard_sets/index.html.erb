@@ -22,11 +22,11 @@
       <table class="border-collapse table-auto w-full" id="wakeboard_sets">
         <thead class="border-b border-slate-300">
           <tr>
-            <th class="text-start px-4 py-2">Set Date</th>
-            <th class="text-start px-4 py-2">Drivers</th>
-            <th class="text-start px-4 py-2">Dib Spots</th>
-            <th class="text-start px-4 py-2">Chib Spots</th>
-            <th class=""></th>
+            <th class="border-0 text-start px-4 py-2">Set Date</th>
+            <th class="border-0 text-start px-4 py-2">Drivers</th>
+            <th class="border-0 text-start px-4 py-2">Dib Spots</th>
+            <th class="border-0 text-start px-4 py-2">Chib Spots</th>
+            <th class="border-0"></th>
           </tr>
         </thead>
         <tbody class="" id="set-list">
@@ -40,8 +40,8 @@
     <div class="flex w-full justify-between items-center">
       <h1 class="text-2xl">Available Sets</h1>
 
-      <%= link_to new_wakeboard_set_path do %>
-        <i class="fa-solid fa-circle-plus"></i> Create Set
+      <%= link_to new_wakeboard_set_path, class: "text-sm p-3 bg-sky-800 hover:bg-sky-600 transition-all ease-in-out duration-250 rounded-md" do %>
+        <span class="text-gray-100"><i class="fa-solid fa-circle-plus"></i> Create Set</span>
       <% end %>
     </div>
 
@@ -50,11 +50,11 @@
       <table class="border-collapse table-auto w-full" id="wakeboard_sets">
         <thead class="border-b border-slate-300">
           <tr>
-            <th class="text-start px-4 py-2">Set Date</th>
-            <th class="text-start px-4 py-2">Drivers</th>
-            <th class="text-start px-4 py-2">Dib Spots</th>
-            <th class="text-start px-4 py-2">Chib Spots</th>
-            <th class=""></th>
+            <th class="border-0 text-start px-4 py-2">Set Date</th>
+            <th class="border-0 text-start px-4 py-2">Drivers</th>
+            <th class="border-0 text-start px-4 py-2">Dib Spots</th>
+            <th class="border-0 text-start px-4 py-2">Chib Spots</th>
+            <th class="border-0"></th>
           </tr>
         </thead>
         <tbody class="" id="set-list">
