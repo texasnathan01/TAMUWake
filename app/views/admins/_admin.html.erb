@@ -16,8 +16,14 @@
   </p>
 
   <p>
-    <strong>Role:</strong>
-    <%= admin.role_id %>
+  <strong> Roles: </strong>
+  <ul>
+  <% admin.set_roles.each do |role| %>
+    <li>
+    <%= role.role.role_name %>
+    </li>
+  <% end %>
+  </ul>
   </p>
 
   <p>
@@ -31,25 +37,25 @@
   </p>
 
   <p>
-    <strong>AOR Documents:</strong>
-    <%= admin.aor_completed %>
+    <strong>Are AOR Documents Completed:</strong>
+    <%= admin.aor_completed ? "yes" : "no" %>
 
   </p>
 
     <p>
-    <strong>Boat Waiver:</strong>
-    <%= admin.boat_waiver_completed %>
+    <strong>Are Boat Waiver Completed:</strong>
+    <%= admin.boat_waiver_completed ? "yes" : "no" %>
 
   </p>
 
     <p>
-    <strong>Dues:</strong>
-    <%= admin.dues_completed %>
+    <strong>Are Dues Completed:</strong>
+    <%= admin.dues_completed ? "yes" : "no" %>
 
   </p>
  <p>
-    <strong>Is Approved:</strong>
-    <%= admin.is_approved %>
+    <strong>Is Account Approved:</strong>
+    <%= admin.is_approved ? "yes" : "no" %>
   </p>
 
   <p>

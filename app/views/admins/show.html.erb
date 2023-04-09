@@ -12,6 +12,16 @@
 <mainContentHolder>
 
   <%= render @user %>
+  <table>
+    <thead> <th> Current Roles </th> </thead>
+    <% @roles.each do |role| %>
+      <tbody> 
+      <tr> 
+      <td> <%= role.role.role_name %> </td> 
+      </tr>
+      </tbody>
+    <% end %>
+  </table> 
 
 <div>
   <%= link_to "Edit this user", edit_admin_path(@user) %> |
@@ -20,6 +30,5 @@
 </div>
   
 </mainContentHolder>
-
 
 
