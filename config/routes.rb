@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
   end
   resources :receipts
+  
   resources :users do
     member do
       post 'addrole'
