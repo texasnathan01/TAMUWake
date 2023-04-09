@@ -11,6 +11,8 @@
 </h1>
 
 <mainContentHolder>
+
+  <%= link_to "My History", set_history_path %>
   
   <img src=<%=@user.avatar_url %> alt="Image not found" height="250" width="250">
   <%= render @user %>

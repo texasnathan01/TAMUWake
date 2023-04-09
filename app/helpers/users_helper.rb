@@ -1,6 +1,6 @@
 module UsersHelper
     def has_documents_signed?
-        if current_admin.aor_completed == false || current_admin.dues_completed == false || current_admin.boat_waiver_completed
+        if !current_admin.aor_completed || !current_admin.dues_completed || !current_admin.boat_waiver_completed
             flash[:error] =
               "Documents Not Yet Completed: #{current_admin.dues_completed ? '' : 'Dues '}#{current_admin.aor_completed ? '' : 'AOR '}#{current_admin.boat_waiver_completed ? '' : 'Boat Waiver '}"
             false

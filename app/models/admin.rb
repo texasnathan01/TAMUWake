@@ -17,6 +17,7 @@ class Admin < ApplicationRecord
 
   # allows us to establish a connection between different tables and thus destroy relates entries when a user is deleted
   has_many :set_riders, dependent: :destroy
+  has_many :wakeboard_sets, through: :set_riders
   has_many :set_drivers, dependent: :destroy
   has_many :set_roles, dependent: :destroy
   has_many :roles, through: :set_roles

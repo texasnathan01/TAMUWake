@@ -11,3 +11,35 @@
 }
 
 */
+
+/*
+template inspired from: https://github.com/ddnexus/pagy/blob/master/docs/extras/tailwind.md
+*/
+
+.pagy-nav.pagination {
+  @apply isolate inline-flex rounded-md;
+}
+
+.page.next a {
+  @apply relative inline-flex items-center justify-center rounded-full border border-gray-300 bg-white px-2 py-2 ml-3 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:z-20 w-10 h-10 transition-all duration-300;
+}
+
+.page.prev a {
+  @apply relative inline-flex items-center justify-center rounded-full border border-gray-300 bg-white px-2 py-2 mr-3 text-sm font-medium text-gray-900 hover:bg-gray-200 focus:z-20 w-10 h-10 transition-all duration-300;
+}
+
+.page.next.disabled {
+  @apply relative inline-flex items-center justify-center rounded-full border border-gray-300 bg-slate-100 px-2 py-2 ml-3 text-sm font-medium text-gray-900 focus:z-20 w-10 h-10 cursor-not-allowed;
+}
+
+.page.prev.disabled {
+  @apply relative inline-flex items-center justify-center rounded-full border border-gray-300 bg-slate-100 px-2 py-2 mr-3 text-sm font-medium text-gray-900 focus:z-20 w-10 h-10 cursor-not-allowed;
+}
+
+.page a, .page.gap {
+  @apply bg-white text-gray-500 hover:bg-gray-200 relative inline-flex items-center rounded-full text-xs font-medium focus:z-20 ml-1 cursor-pointer w-8 h-8 justify-center transition-all duration-300;
+}
+
+.page.active {
+  @apply z-10 border-indigo-500 bg-indigo-50 text-indigo-600 relative inline-flex items-center border text-xs font-medium focus:z-20 ml-1 rounded-full cursor-pointer w-8 h-8 justify-center;
+}

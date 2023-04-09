@@ -94,3 +94,9 @@ end
 gem "yaml_db"
 
 gem "tailwindcss-rails", "~> 2.0"
+
+# pagination
+gem "pagy", "~> 6.0"
+
+# icons
+gem "font-awesome-sass", "~> 6.4.0"

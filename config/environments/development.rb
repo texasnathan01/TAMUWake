@@ -70,4 +70,7 @@ Rails.application.configure do
 
   ENV['GOOGLE_OAUTH_CLIENT_ID'] = '936876149080-t7ksajr7ceuel8f3bb8atv0ri7ksii74.apps.googleusercontent.com'
   ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = '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'
+
+  # set time zone to Central by default
+  config.time_zone = "Central Time (US & Canada)"
 end

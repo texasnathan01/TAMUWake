@@ -2,49 +2,68 @@
 
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
+  <%- title "Join a Set | TAMU Wakeboarding" %>
 </head>
 
 <%= render "/navbar"%>
   
 <p class="bannerBox"></p>
 
-  
-<h1 class="text-5xl mb-5 text-center">
-  <pageTitleHolder>Sets this Week</pageTitleHolder>
-</h1>
 
-  <% if flash[:error]%>
-    <div class = "alert alert-danger"> <%= flash[:error] %></div>
-  <% end %>
-  
+<% if flash[:error]%>
+  <div class = "alert alert-danger"> <%= flash[:error] %></div>
+<% end %>
 
-<mainContentHolder>
-  
-  <table id="wakeboard_sets">
-    <thead>
-      <tr>
-        <th>Set Date</th>
-        <th>Drivers</th>
-        <th>Dib Spots Available</th>
-		<th>Chib Spots Available</th>
-        <th>Join Set</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @wakeboard_sets.each do |set| %>
-        <tr>
-          <td><%= set.scheduled_date.strftime("%A at %l:%M %P") %></td>
-          <td>Fix this with SetDriver table</td>
-		  <% #set.user.firstname.capitalize + " " + set.user.lastname.capitalize.chr + "." %>
-          <td><%= set.dib_limit - set.dib_count %></td>
-		  <td><%= set.chib_limit - set.chib_count %></td>
-          <td><%= link_to "Join", set %></td>
-        </tr>
+<div class="container mx-auto md:px-24 sm:px-4 divide-y-2 divide-dashed">
+  <div class="py-4">
+    <h1 class="text-2xl">Your Sets</h1>
+    
+    <div class="w-full flex flex-col justify-center rounded-lg border border-slate-300 my-3 bg-white shadow-md">
+      <table class="border-collapse table-auto w-full" id="wakeboard_sets">
+        <thead class="border-b border-slate-300">
+          <tr>
+            <th class="text-start px-4 py-2">Set Date</th>
+            <th class="text-start px-4 py-2">Drivers</th>
+            <th class="text-start px-4 py-2">Dib Spots</th>
+            <th class="text-start px-4 py-2">Chib Spots</th>
+            <th class=""></th>
+          </tr>
+        </thead>
+        <tbody class="" id="set-list">
+          <%= render partial: "set", collection: @user_sets %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="py-4">
+    <div class="flex w-full justify-between items-center">
+      <h1 class="text-2xl">Available Sets</h1>
+
+      <%= link_to new_wakeboard_set_path do %>
+        <i class="fa-solid fa-circle-plus"></i> Create Set
       <% end %>
-    </tbody>
-  </table>
-
-  <%= link_to "New wakeboard set", new_wakeboard_set_path %>
+    </div>
 
 
-</mainContentHolder>
+    <div class="w-full flex flex-col justify-center rounded-lg border border-slate-300 my-3 bg-white shadow-md">
+      <table class="border-collapse table-auto w-full" id="wakeboard_sets">
+        <thead class="border-b border-slate-300">
+          <tr>
+            <th class="text-start px-4 py-2">Set Date</th>
+            <th class="text-start px-4 py-2">Drivers</th>
+            <th class="text-start px-4 py-2">Dib Spots</th>
+            <th class="text-start px-4 py-2">Chib Spots</th>
+            <th class=""></th>
+          </tr>
+        </thead>
+        <tbody class="" id="set-list">
+          <%= render partial: "set", collection: @wakeboard_sets %>
+        </tbody>
+      </table>
+      <div class="w-full flex flex-row justify-center py-2">
+        <%== render partial: 'shared/pagy/nav', locals: { pagy: @pagy } %>
+      </div>
+    </div>
+  </div>
+</div>
