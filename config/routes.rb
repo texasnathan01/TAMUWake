@@ -8,6 +8,13 @@ Rails.application.routes.draw do
     end
   end
   resources :receipts
+  
+  resources :users do
+    member do
+      post 'addrole'
+      post 'removerole'
+    end 
+  end
 
   get 'approval', to: 'users#approval', as: 'users_to_approve'
   get 'help', to: 'help#index'
