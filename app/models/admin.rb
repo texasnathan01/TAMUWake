@@ -53,6 +53,9 @@ class Admin < ApplicationRecord
       return false
     end
   
+  # create 3 functions to determine whether account has a role or not
+    
+  
   rescue ActiveRecord::RecordNotSaved
     # db issue - role not added to user
     return false

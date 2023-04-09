@@ -13,7 +13,11 @@
   </td>
 
   <td>
-    <%= user_to_display.role_id %>
+    <% user_to_display.set_roles.each do |role| %>
+      <p>
+      <%= role.role.role_name %>
+      </p>
+    <% end %>
   </td>
 
   <td>

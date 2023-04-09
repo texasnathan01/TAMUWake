@@ -16,8 +16,14 @@
   </p>
 
   <p>
-    <strong>Role:</strong>
-    <%= admin.role_id %>
+  <strong> Roles: </strong>
+  <ul>
+  <% admin.set_roles.each do |role| %>
+    <li>
+    <%= role.role.role_name %>
+    </li>
+  <% end %>
+  </ul>
   </p>
 
   <p>

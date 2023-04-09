@@ -10,6 +10,16 @@
   <p class="bannerBox"></p>
 
   <%= render @user %>
+  <table>
+    <thead> <th> Current Roles </th> </thead>
+    <% @roles.each do |role| %>
+      <tbody> 
+      <tr> 
+      <td> <%= role.role.role_name %> </td> 
+      </tr>
+      </tbody>
+    <% end %>
+  </table> 
 
 <div>
   <%= link_to "Edit this user", edit_admin_path(@user) %> |
@@ -17,13 +27,6 @@
   <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
 </div>
   
-</ul>
-
-#-----------------
-<ul>
-  <% @roles.each do |role| %>
-    <li><%= role.name %></li>
-  <% end %>
 </ul>
 
 
