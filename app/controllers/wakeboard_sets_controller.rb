@@ -40,10 +40,9 @@ class WakeboardSetsController < ApplicationController
     respond_to do |format|
       if @wakeboard_set.save
         user = current_admin
-        driver1 = SetDriver.new(admin_id: user.id, wakeboard_set_id: @wakeboard_set.id)
-        driver2 = SetDriver.new(admin_id: params[:wakeboard_set][:admin_id], wakeboard_set_id: @wakeboard_set.id)
+        driver1 = SetDriver.create(admin_id: user.id, wakeboard_set_id: @wakeboard_set.id)
+        driver2 = SetDriver.create(admin_id: params[:wakeboard_set][:admin_id], wakeboard_set_id: @wakeboard_set.id)
 
-            
         format.html { redirect_to(wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully created.") }
         format.json { render(:show, status: :created, location: @wakeboard_set) }
       else
