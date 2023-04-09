@@ -15,7 +15,7 @@ class WakeboardSetsController < ApplicationController
   def show
     @joinable = !SetRider.rider_exists?(current_admin.id, params[:id])
     @riders = SetRider.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :as_dib)
-  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name)
+	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name)
   end
 
   # GET /wakeboard_sets/new
@@ -33,8 +33,8 @@ class WakeboardSetsController < ApplicationController
 
     respond_to do |format|
       if @wakeboard_set.save
-      user = current_admin
-      driver1 = SetDriver.new(admin_id: user.id, wakeboard_set_id: @wakeboard_set.id)
+        user = current_admin
+        driver1 = SetDriver.new(admin_id: user.id, wakeboard_set_id: @wakeboard_set.id)
         driver2 = SetDriver.new(admin_id: params[:wakeboard_set][:admin_id], wakeboard_set_id: @wakeboard_set.id)
 
             
