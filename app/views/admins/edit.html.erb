@@ -8,16 +8,25 @@
   
   <p class="bannerBox"></p>
   
-  <h1>Editing user</h1>
-
   <!-- This section is shown if whoever is editing is an admin-->
   <% if (current_admin.role_id == 1) or (current_admin.role_id >= -1) %>
     <h1>Editing Member</h1>
       <%= render "form", admin: @user %>
-      <%= form_with url: add_role_admin_path, method: :post do |form| %>
+        <%= form_with url: add_role_admin_path, method: :post do |form| %>
         <%= form.select :role_id, Role.all.map { |role| [role.role_name, role.id] } %>
         <%= form.submit "Add Role" %>
-      <% end %>
+        <% end %>
+        <table>
+          <thead> <th> Roles </th> </thead>
+          <% @roles.each do |role| %>
+            <tbody> 
+            <tr> 
+            <td> <%= role.role.role_name %> </td> 
+            <td> <%= button_to 'Delete Role', remove_role_admin_path(:id=> @user.id, :role_id=> role.role_id) , :method=>:post  %> </td>
+            </tr>
+            </tbody>
+          <% end %>
+        </table>     
 
   <!-- This section is shown to anyone else-->
   <% else %>
