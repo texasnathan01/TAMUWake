@@ -10,5 +10,10 @@
   </td>
   <td class="p-4 border-b border-slate-100"><%= set.dib_limit - set.dib_count %></td>
   <td class="p-4 border-b border-slate-100"><%= set.chib_limit - set.chib_count %></td>
-  <td class="p-4 border-b border-slate-100"><%= link_to "View", set, class: "rounded bg-slate-300 border border-slate-400 px-3 py-2 drop-shadow" %></td>
+  <td class="p-4 border-b border-slate-100">
+  <%# class: "rounded bg-slate-300 border border-slate-400 px-3 py-2 drop-shadow" %>
+    <%= link_to set, class: "" do %>
+      <span><i class="fa-solid fa-eye text-gray-600"></i> View</span>
+    <% end %>
+  </td>
 </tr>

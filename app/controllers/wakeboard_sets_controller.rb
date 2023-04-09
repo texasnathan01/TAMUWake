@@ -7,6 +7,10 @@ class WakeboardSetsController < ApplicationController
 
     # on sunday show sets for next week + ongoing sets today
     @weekStart, @weekEnd = WakeboardSet.available_set_range(@today)
+    @user_sets = current_admin.wakeboard_sets.order(:scheduled_date).where("scheduled_date >= ? AND scheduled_date <= ?",
+      @weekStart,
+      @weekEnd,
+    )
 
     @pagy, @wakeboard_sets = pagy(WakeboardSet
       .order(:scheduled_date)
@@ -17,7 +21,7 @@ class WakeboardSetsController < ApplicationController
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
     @joinable = helpers.set_available?(current_admin.id, @wakeboard_set)
-	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name)
+	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :avatar_url)
   end
 
   # GET /wakeboard_sets/new

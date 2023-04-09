@@ -1,6 +1,7 @@
 body {
 	background-size: cover;
 	background-color: #eaeaea;
+  overflow-x: hidden;
 }
 
 @font-face {
