@@ -5,8 +5,6 @@
     </div>
     
     <div class="flex flex-row flex-wrap first:m-0">
-      <% test_user = Admin.new(first_name: "Christopher", avatar_url: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?cs=srgb&dl=pexels-pixabay-220453.jpg&fm=jpg") %>
-      <%= render partial: "shared/profile_pill", locals: { user: test_user } %>
       <%= render partial: "shared/profile_pill", collection: drivers, as: :user %>
     </div>
     
@@ -60,7 +58,7 @@
     <% else %>
       <div class="relative inline-block text-left">
         <div>
-          <button type="button" class="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" id="dropdown-button" aria-expanded="true" aria-haspopup="true" onclick="renderDropdown()">
+          <button type="button" class="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:bg-gray-200 disabled:cursor-not-allowed" id="dropdown-button" aria-expanded="true" aria-haspopup="true" onclick="renderDropdown()" disabled=<%= !joinable %>>
             <i class="fa-solid fa-ship"></i> Join
           </button>
         </div>

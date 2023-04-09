@@ -81,38 +81,36 @@
       <div class="grid grid-cols-2 bg-white rounded-lg shadow p-3 justify-around">
         <div class="w-3/4 justify-self-center">
           <h3 class="text-center border-b mb-1">Dibs</h3>
-          <table id="dib-table">
-            <tr class="even:bg-white">
-              <td class="border-0 py-1">1. Axel Ramone</td>
-            </tr>
-            <tr class="even:bg-white">
-              <td class="border-0 py-1">1. Axel Ramone</td>
-            </tr>
-            <tr class="even:bg-white">
-              <td class="border-0 py-1">1. Axel Ramone</td>
-            </tr>
-
-            <% (@wakeboard_set.set_riders.select {|r| r.as_dib}).each do |rider| %>
-              <% i = 1%>
-              <tr>
-                <td class="border-0 py-1"><%= i.to_s + ". " +  rider.admin.first_name + " " + rider.admin.last_name %></td>
-              </tr>
-              <% i += 1%>
-            <% end %>
-          </table>
+          <% if (@wakeboard_set.set_riders.select {|r| r.as_dib}).length == 0 %>
+            <h6 class="text-sm text-gray-400 text-center my-10">No Dibs Yet</h6>
+          <% else %>
+            <table id="dib-table">
+              <% (@wakeboard_set.set_riders.select {|r| r.as_dib}).each do |rider| %>
+                <% i = 1%>
+                <tr class="even:bg-white">
+                  <td class="border-0 py-1"><%= i.to_s + ". " +  rider.admin.first_name + " " + rider.admin.last_name %></td>
+                </tr>
+                <% i += 1%>
+              <% end %>
+            </table>
+          <% end %>
         </div>
 
         <div class="w-3/4 justify-self-center">
           <h3 class="text-center border-b mb-1">Chibs</h3>
-          <table id="chib-table">
-            <% (@wakeboard_set.set_riders.select {|r| !r.as_dib}).each do |rider| %>
-              <% i = 1%>
-              <tr>
-                <td class="border-0 py-1"><%= i.to_s + ". " + rider.admin.first_name + " " + rider.admin.last_name %></td>
-              </tr>
-              <% i += 1%>
+            <% if (@wakeboard_set.set_riders.select {|r| !r.as_dib}).length == 0 %>
+              <h6 class="text-sm text-gray-400 text-center my-10">No Chibs Yet</h6>
+            <% else %>
+              <table id="chib-table">
+                <% (@wakeboard_set.set_riders.select {|r| !r.as_dib}).each do |rider| %>
+                  <% i = 1%>
+                  <tr>
+                    <td class="border-0 py-1"><%= i.to_s + ". " + rider.admin.first_name + " " + rider.admin.last_name %></td>
+                  </tr>
+                  <% i += 1%>
+                <% end %>
+              </table>
             <% end %>
-          </table>
         </div>
       </div>
     </div>
