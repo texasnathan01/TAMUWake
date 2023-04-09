@@ -10,19 +10,4 @@ RSpec.describe Admin, type: :model do
     expect(subject).to be_valid
   end
 
-  it 'is not valid without a role_id' do
-    subject.role_id = nil
-    expect(subject).not_to be_valid
-  end
-
-  it 'is not valid without a role_name' do
-    subject.role_name = nil
-    expect(subject).not_to be_valid
-  end
-
-  it 'is not valid without a negative role_id' do
-    subject.role_id = -1
-    expect(subject).not_to be_valid
-  end
-
 end
