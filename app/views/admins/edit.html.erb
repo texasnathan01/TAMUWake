@@ -2,12 +2,18 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
-<ul>
+
 
   <%= render "/navbar"%>
   
   <p class="bannerBox"></p>
   
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>Editing User</pageTitleHolder>
+</h1>
+
+<mainContentHolder>
+
   <!-- This section is shown if whoever is editing is an admin-->
   <% if (current_admin.role_id == 1) or (current_admin.role_id >= -1) %>
     <h1>Editing Member</h1>
@@ -42,4 +48,4 @@
   <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
 </div>
   
-</ul>
+</mainContentHolder>

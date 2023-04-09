@@ -2,15 +2,17 @@
 
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
-
 </head>
 
-<ul>
-  <%= render "/navbar"%>
+<%= render "/navbar"%>
 
-  <p class="bannerBox"></p>
+<p class="bannerBox"></p>
   
-  <h1 class="text-5xl mb-5 text-center">FAQs</h1>
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>FAQs</pageTitleHolder>
+</h1>
+
+<mainContentHolder>
 
   <%# Rider FAQs %>
   <h3 class="text-3xl mb-4">Joining Sets</h3>
@@ -32,4 +34,5 @@
  
   <p class="font-bold">How can I create a set?</p>
   <p class="mb-3">You can create a set by clicking the “Rides” button in the top right navigation bar. Once the page loads, click on the “create set” button. From there, you can enter the date of the set and add up to 1 additional driver.</p>
-</ul>
+
+</mainContentHolder>
