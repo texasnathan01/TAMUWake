@@ -4,10 +4,12 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
-<ul>
+
 
   <%= render "/navbar"%>
   <p class="bannerBox"></p>
+
+<mainContentHolder>
 
   <%= render @user %>
 
@@ -17,7 +19,7 @@
   <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
 </div>
   
-</ul>
+</mainContentHolder>
 
 
 

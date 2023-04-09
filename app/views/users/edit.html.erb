@@ -2,13 +2,15 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
-<ul>
+<%= render "/navbar"%>
+  
+<p class="bannerBox"></p>
+  
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>Editing User</pageTitleHolder>
+</h1>
 
-  <%= render "/navbar"%>
-  
-  <p class="bannerBox"></p>
-  
-  <h1>Editing user</h1>
+<mainContentHolder>
 
   <%= render "form", admin: @user %>
   <%= form_with url: add_role_admin_path, method: :post do |form| %>
@@ -17,10 +19,10 @@
   <% end %>
   <br>
 
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %> |
-  <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
-</div>
+  <div>
+	<%= link_to "Show this user", @user %> |
+	<%= link_to "Back to users", users_path %> |
+	<%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
+  </div>
   
-</ul>
+</mainContentHolder>

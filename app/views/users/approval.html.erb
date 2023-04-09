@@ -4,15 +4,17 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
+<%= render "/navbar"%>
 
-<ul>
+<p class="bannerBox"></p>
 
-  <%= render "/navbar"%>
-  <p class="bannerBox"></p>
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>Users to Approve</pageTitleHolder>
+</h1>
+
+<mainContentHolder>
 
 <%= link_to 'Current Users', users_path %>
-
-<h1>Users to Approve</h1>
 
 <%= form_with url: users_to_approve_path, method: 'get', id: 'search-form' do |f| %>
   <%= f.text_field :first_name, placeholder: 'Search by first name....', class: 'form-control' %>
@@ -30,11 +32,7 @@
   <% end %>
 </div>
 
-<br>
-
-
-  
-</ul>
+</mainContentHolder>
 
 
 

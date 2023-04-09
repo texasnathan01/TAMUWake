@@ -4,12 +4,11 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
-<ul>
-
-  <%= render "/navbar"%>
+<%= render "/navbar"%>
   
-  <p class="bannerBox"></p>
-</ul>
+<p class="bannerBox"></p>
+
+<mainContentHolder>
 
 <%= link_to "Back to set list", wakeboard_sets_path %>
 
@@ -83,3 +82,5 @@
     <%= button_to "Delete this set", @wakeboard_set, method: :delete %>
   </div>
 <% end %>
+
+</mainContentHolder>

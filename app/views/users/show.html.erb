@@ -4,20 +4,24 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
-<ul>
+<%= render "/navbar"%>
 
-  <%= render "/navbar"%>
-  <p class="bannerBox"></p>
+<p class="bannerBox"></p>
 
-  <%= render @user %>
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder></pageTitleHolder>
+</h1>
 
-<div>
-  <%= link_to "Edit this user", edit_admin_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
-  <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
-</div>
+<mainContentHolder>
+
+	<%= render @user %>
+	<div>
+	  <%= link_to "Edit this user", edit_admin_path(@user) %> |
+	  <%= link_to "Back to users", users_path %>
+	  <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
+	</div>
   
-</ul>
+</mainContentHolder>
 
 
 

@@ -4,25 +4,30 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
-<ul>
-
-  <%= render "/navbar"%>
+<%= render "/navbar"%>
   
-  <p class="bannerBox"></p>
+<p class="bannerBox"></p>
   
-  <div hidden>
-    <p> <%= @user.id %> </p>
-  </div>
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>Reciepts</pageTitleHolder>
+</h1>
+  
+<div hidden>
+  <p> <%= @user.id %> </p>
+</div>
+  
+<mainContentHolder>
 
   <!-- This section will only be shown if the user is a driver (code 1) -->
   <% if @user.role_id == 1 %>
-    <h2> Receipts for <%= @user.first_name%> <%= @user.last_name%> </h2>
-    <h3> User ID: <%= @user.id%></h3>
+    <h3 class="text-3xl mb-4"> Receipts for <%= @user.first_name%> <%= @user.last_name%> : </h3>
+	
+    <p class="font-bold"> User ID: <%= @user.id%></p>
 
-    <%= link_to "New receipt", new_receipt_path %>
+    <%= link_to "Create new receipt", new_receipt_path %>
  
     <div id="stage_1">
-    <h2> Pending Treasurer Approval (Stage 1)</h2>
+	  <p class="font-bold">Pending Treasurer Approval (Stage 1)</p>
     <% @receipts.where(stage: 1, admin_id: @user.id).each do |receipt| %>
       <p>
         <strong>Receipt ID:</strong>
@@ -34,7 +39,7 @@
     </div>
     
     <div id="stage_2">
-      <h2> Approved By Treasurer, Awaiting Refund (Stage 2)</h2>
+	  <p class="font-bold">Approved By Treasurer, Awaiting Refund (Stage 2)</p>
       <% @receipts.where(stage: 2, admin_id: @user.id).each do |receipt| %>
         <p>
           <strong>Receipt ID:</strong>
@@ -46,7 +51,7 @@
     </div>
 
     <div id="stage_3">
-      <h2> Refund Received (Stage 3)</h2>
+	  <p class="font-bold">Refund Received (Stage 3)</p>
       <% @receipts.where(stage: 3, admin_id: @user.id).each do |receipt| %>
         <p>
           <strong>Receipt ID:</strong>
@@ -59,12 +64,14 @@
   
   <!-- This section will only be shown if the user is a treasurer (code 3) -->
   <% elsif @user.role_id == 3 %>
-    <h2> Treasurer Page, Showing All Receipts </h2>
+  
+    <h3 class="text-3xl mb-4"> Treasurer Page, Showing All Receipts: </h3>
+    
 
     <%= link_to "New receipt", new_receipt_path %>
  
     <div id="stage_1">
-    <h2> Pending Treasurer Approval (Stage 1)</h2>
+    <p class="font-bold"> Pending Treasurer Approval (Stage 1)</p>
     <% @receipts.where(stage: 1).each do |receipt| %>
       <p>
         <strong>Receipt ID:</strong>
@@ -76,7 +83,7 @@
     </div>
     
     <div id="stage_2">
-      <h2> Approved By Treasurer, Awaiting Refund (Stage 2)</h2>
+      <p class="font-bold"> Approved By Treasurer, Awaiting Refund (Stage 2)</p>
       <% @receipts.where(stage: 2).each do |receipt| %>
         <p>
           <strong>Receipt ID:</strong>
@@ -88,7 +95,7 @@
     </div>
 
     <div id="stage_3">
-      <h2> Refund Received (Stage 3)</h2>
+      <p class="font-bold"> Refund Received (Stage 3)</p>
       <% @receipts.where(stage: 3).each do |receipt| %>
         <p>
           <strong>Receipt ID:</strong>
@@ -101,10 +108,8 @@
 
   <!-- This section will only be shown if the user isn't -->
   <% else %>
-    <h2> Welcome to the treasury! Only drivers or the treasurer can see this page. If you think you should be seeing this page but cannot, please contact your administrator </h2>
+    <p class="font-bold"> Welcome to the treasury! Only drivers or the treasurer can see this page. If you think you should be seeing this page but cannot, please contact your administrator </p>
 
   <% end %>
 
-
- 
-</ul>
+</mainContentHolder>

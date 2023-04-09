@@ -2,16 +2,15 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
-<ul>
-
-  <%= render "/navbar"%>
-  <p class="bannerBox"></p>
-
-  <div hidden>
-    <p> <%= @user.id %> </p>
-  </div>
- 
+<%= render "/navbar"%>
   
+<p class="bannerBox"></p>
+
+<div hidden>
+  <p> <%= @user.id %> </p>
+</div>
+ 
+<mainContentHolder>
 
   <!-- This section will only be shown if the user is a treasurer (code 3) -->
   <% if @user.role_id == 3 %>
@@ -35,7 +34,4 @@
     <%= link_to "Back to receipts", receipts_path %>
   </div>
  
-</ul>
-
-
-
+</mainContentHolder>
