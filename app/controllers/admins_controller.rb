@@ -77,7 +77,7 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if !user.add_role(role.id)
-        format.html { redirect_to edit_admin_path(user), notice: "Role has been successfully assigned to the user." }
+        format.html { redirect_to edit_admin_path(user), notice: "Role has been assigned to the user." }
         format.json { render json:{ message: "Role has already been assigned to the user. Could not assign it again" }, status: :expectation_failed }
       else
         format.html { redirect_to edit_admin_path(user), notice: "Unable to add Role to user." }
