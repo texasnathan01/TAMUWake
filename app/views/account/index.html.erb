@@ -2,16 +2,19 @@
 	<%= stylesheet_link_tag "styles.css" %>
 </head>
 
-<ul>
-
   <%= render "/navbar"%>
-  
 
   <p class="bannerBox"></p>
-  <h2 class="text-3xl font-bold">  Welcome to the TAMUWake Website <%=@user.first_name%>!</h2>
+  
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>  Welcome to the TAMUWake Website <%=@user.first_name%>!</pageTitleHolder>
+</h1>
+
+<mainContentHolder>
+  
   <img src=<%=@user.avatar_url %> alt="Image not found" height="250" width="250">
   <%= render @user %>
   <%= link_to 'Edit Account Info', edit_admin_path(@user) %> 
   <%= link_to "Sign Out", destroy_admin_session_path %>
   
-</ul>
+</mainContentHolder>

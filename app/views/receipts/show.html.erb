@@ -6,7 +6,8 @@
   <p> <%= @receipt.admin_id %> </p>
 </div>
 
-<div>
+<mainContentHolder>
+
   <!-- This section will only be shown if the user is a treasurer (code 3) -->
   <% if @user.role_id == 3 %>
     <%= render @receipt %>
@@ -27,4 +28,5 @@
     <h1> You are unauthorized to see this page </h1>
     <%= link_to "Back to receipts", receipts_path %>
   <% end %>
-</div>
+  
+</mainContentHolder>
