@@ -28,7 +28,7 @@
         <h1 class="text-2xl">Editing Member Roles</h1>
         <%= form_with url: add_role_admin_path, method: :post do |form| %>
         <%= form.select :role_id, Role.all.map { |role| [role.role_name, role.id] } %>
-        <%= form.submit "Add Role" %>
+        <%= form.submit "Add Role", class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100"%>
         <% end %>
         
         <table>
