@@ -7,46 +7,44 @@
   
 <p class="bannerBox"></p>
 
-<h1 class="text-5xl mb-5 text-center">
-  <pageTitleHolder>Users</pageTitleHolder>
-</h1>
 
-<mainContentHolder>
+<div class="container mx-auto">
 
-	<%= link_to 'Approve New Users', users_to_approve_path,  class: "border rounded-md px-3 py-1 bg-red-900 hover:bg-red-950 text-neutral-100" %>
-  <br>
-	<%= form_with url: users_path, method: 'get', id: 'search-form' do |f| %>
-	  <%= f.text_field :first_name, placeholder: 'Search by first name....', class: 'form-control' %>
-	  <%= f.text_field :last_name, placeholder: 'Search by last name....', class: 'form-control' %>
-	  <%= f.submit "Find Member (Case Sensitive)", class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
-	<% end %>
-  <div id="admins">
+  <h1 class="text-5xl mb-5 text-center">
+    <pageTitleHolder>Users</pageTitleHolder>
+  </h1>
 
-    <table class='user_table'>
-      <thead>
-        <tr>
-          <th>Email</th>
-          <th>FirstName</th>
-          <th>LastName</th>
-          <th>Roles</th>
-          <th>UIN</th>
-          <th>Address</th>
-          <th>Are Dues Paid</th>
-          <th>Are AOR Forms Completed</th>
-          <th>Are Boat Waivers Completed</th>
-          <th>Is Account Approved</th>
-          <th>Creation Date</th>
-        </tr>
-      </thead>
-      <% @users.each do |user_to_display| %>
-        <tbody>
-          <%= render partial: 'admin_table', locals: { user_to_display: user_to_display } %>
-        </tbody>
-      <% end %>
-    </table>
+  <div class="p-5 rounded-lg bg-stone-300 overflow-hidden">
+    <%= link_to 'Approve New Users', users_to_approve_path,  class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
+    <br>
+    <%= form_with url: users_path, method: 'get', id: 'search-form' do |f| %>
+      <%= f.text_field :first_name, placeholder: 'Search by first name....', class: 'form-control' %>
+      <%= f.text_field :last_name, placeholder: 'Search by last name....', class: 'form-control' %>
+      <%= f.submit "Find Member (Case Sensitive)", class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
+    <% end %>
+    <div id="admins" class = "mt-5 flex flex-col justify-center items-center">
+      <table class='user_table table-auto'>
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>First</th>
+            <th>Last</th>
+            <th class="hidden md:table-cell">Roles</th>
+            <th class="hidden md:table-cell">Dues Paid</th>
+            <th class="hidden md:table-cell">AOR Forms</th>
+            <th class="hidden md:table-cell">Boat Waiver</th>
+          </tr>
+        </thead>
+        <% @users.each do |user_to_display| %>
+          <tbody>
+            <%= render partial: 'admin_table', locals: { user_to_display: user_to_display } %>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
   </div>
 
-</mainContentHolder>
+</div>
 
 
 
