@@ -10,8 +10,7 @@ class Admin < ApplicationRecord
       ).find_or_create_by!(email: email)
     else
       return nil unless /@tamu.edu\z/.match?(email)
-
-      create_with(uid: uid, first_name: full_name.split[0], last_name: full_name.split[1], avatar_url: avatar_url).find_or_create_by!(email: email)
+        create_with(uid: uid, first_name: full_name.split[0], last_name: full_name.split[1], avatar_url: avatar_url).find_or_create_by!(email: email)
     end
   end
 

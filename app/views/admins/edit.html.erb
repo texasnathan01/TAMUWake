@@ -16,7 +16,7 @@
 <mainContentHolder>
 
   <!-- This section is shown if whoever is editing is an admin-->
-  <% if (current_admin.role_id == 1) or (current_admin.role_id >= -1) %>
+  <% if (current_admin.has_role("Admin"))>
     
     <h1 class="text-2xl flex justify-center">Editing Member Info</h1>
     <div class = "flex justify-center">

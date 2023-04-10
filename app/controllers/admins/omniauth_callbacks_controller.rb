@@ -1,6 +1,14 @@
 class Admins::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     admin = Admin.from_google(**from_google_params)
+    #needed for admin account NOTE: important that this account is protected via admins and not shared to those without permission
+    if admin.email == "tamuwakeuser@gmail.com"
+      #gives admin account all roles on login
+      Role.all.map.each do |role|
+        puts role.role_name
+        admin.add_role(role.id)
+      end
+    end
     if admin.present?
       sign_out_all_scopes
       flash[:success] = t('devise.omniauth_callbacks.success', kind: 'Google')

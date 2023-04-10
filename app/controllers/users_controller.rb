@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
     # need to check the role of the user
     @user = current_admin
-    if @user.role_id == 1 || @user.role_id >= -1 
+    if @user.has_role?("Admin")
       # check if user passed filter arguments when looking at user
       @users = if params[:first_name].present? || params[:last_name].present?
         Admin.where('is_approved = true AND first_name LIKE ? AND last_name LIKE ?', "%#{params[:first_name]}%", "%#{params[:last_name]}%")
@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def approval
     # need to check the role of the user
     @user = current_admin
-    if @user.role_id == 1 || @user.role_id >= -1 
+    if @user.has_role?("Admin")
       # check if user passed filter arguments when looking at user
       @users = if params[:first_name].present? || params[:last_name].present?
         Admin.where('is_approved = false AND first_name LIKE ? AND last_name LIKE ?', "%#{params[:first_name]}%", "%#{params[:last_name]}%")
@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   # DELETE /users/1 or /users/1.json
   def destroy
     # need to check the role of the user to allow for deletion
-    if @user.role_id == 1 || @user.role_id >= 0
+    if @user.has_role?("Admin")
       @user.destroy
       respond_to do |format|
         format.html { redirect_to(users_url, notice: "User was successfully destroyed.") }
