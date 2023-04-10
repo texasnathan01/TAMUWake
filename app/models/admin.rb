@@ -62,4 +62,8 @@ class Admin < ApplicationRecord
     # db issue - role not added to user
     return false
   end
+
+  def has_role?(role_name)
+    return (self.roles.map { |role| role.role_name }).include?(role_name)
+  end
 end
