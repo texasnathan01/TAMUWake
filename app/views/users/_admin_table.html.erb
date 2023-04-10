@@ -19,18 +19,8 @@
       </p>
     <% end %>
   </td>
-
-  <td>
-    <%= user_to_display.uin %>
-  </td>
-
-  <td>
-    <%= user_to_display.address %>
-  </td>
-
   <td>
     <%= user_to_display.aor_completed ? "yes" : "no" %>
-
   </td>
 
   <td>
@@ -40,17 +30,12 @@
   <td>
     <%= user_to_display.dues_completed ? "yes" : "no" %>
   </td>
-
- <td>
-    <%= user_to_display.is_approved ? "yes" : "no"  %>
-  </td>
-
-  <td>
-    <%= user_to_display.created_at%>
-  </td>
   <td>
    <%= link_to "Edit", edit_admin_path(user_to_display), class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100 text-center" %>
   </td>
  
+   <td>
+    <%= link_to "Show", user_to_display, class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100 text-center" %>
+  </td>
   
 </tr>

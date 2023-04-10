@@ -17,7 +17,7 @@
   
   <img src=<%=@user.avatar_url %> alt="Image not found" height="250" width="250">
   <%= render @user %>
-  <%= link_to 'Edit Account Info', edit_admin_path(@user) %> 
-  <%= link_to "Sign Out", destroy_admin_session_path %>
+  <%= link_to 'Edit Account Info', edit_admin_path(@user),class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> 
+  <%= link_to "Sign Out", destroy_admin_session_path,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
   
 </mainContentHolder>

@@ -13,21 +13,11 @@
 <mainContentHolder>
 
   <%= render @user %>
-  <table>
-    <thead> <th> Current Roles </th> </thead>
-    <% @roles.each do |role| %>
-      <tbody> 
-      <tr> 
-      <td> <%= role.role.role_name %> </td> 
-      </tr>
-      </tbody>
-    <% end %>
-  </table> 
 
 <div>
-  <%= link_to "Edit this user", edit_admin_path(@user) %> |
-  <%= link_to "Back to users", users_path %>
-  <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')" %>
+  <%= link_to "Edit this user", edit_admin_path(@user),class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> |
+  <%= link_to "Back to users", users_path, class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
+  <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')", class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 text-neutral-100" %>
 </div>
   
 </mainContentHolder>
