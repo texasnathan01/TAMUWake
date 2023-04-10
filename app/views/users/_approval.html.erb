@@ -17,11 +17,11 @@
   </td>
 
   <td>
-    <%= button_to "Approve User", update_approval_admin_path(user_to_display), method: :patch %>
+    <%= button_to "Approve User", update_approval_admin_path(user_to_display), method: :patch, class: "border rounded-md px-3 py-1 bg-green-500 hover:bg-green-700 text-neutral-100" %>
   </td>
 
    <td>
-      <%= button_to 'Deny User', user_to_display, method: :delete, :onclick => "return confirm('Are you sure you want to deny this user?')" %>
+    <%= button_to 'Deny User', user_to_display, method: :delete, :onclick => "return confirm('Are you sure you want to deny this user?')", class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 text-neutral-100" %>
   </td>
   
 </tr>

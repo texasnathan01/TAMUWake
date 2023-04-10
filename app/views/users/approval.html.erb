@@ -15,12 +15,12 @@
 
 <mainContentHolder>
 
-<%= link_to 'Current Users', users_path %>
-
+<%= link_to 'Current Users', users_path, class: "border rounded-md px-3 py-1 bg-red-900 hover:bg-red-950 text-neutral-100" %>
+  <br>
 <%= form_with url: users_to_approve_path, method: 'get', id: 'search-form' do |f| %>
   <%= f.text_field :first_name, placeholder: 'Search by first name....', class: 'form-control' %>
   <%= f.text_field :last_name, placeholder: 'Search by last name....', class: 'form-control' %>
-  <%= f.submit "Find Member", class: "btn" %>
+  <%= f.submit "Find Member (Case Sensitive)", class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
 <% end %>
 
 <div id="admins">
@@ -30,6 +30,7 @@
         <th>Email</th>
         <th>FirstName</th>
         <th>LastName</th>
+        <th>Creation Date</th>
       </tr>
     </thead>
     <% @users.each do |user_to_display| %>

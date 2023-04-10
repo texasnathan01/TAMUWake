@@ -3,7 +3,7 @@ class AdminsController < ApplicationController
 
   def update_approval
     # validate that the user is editing info is admin
-    if current_admin.role_id == 1 || current_admin.role_id >= 0
+    if current_admin.has_role?("Admin")
       respond_to do |format|
         if @user.update(is_approved: true)
           format.html { redirect_to(users_to_approve_path, notice: "User #{@user.first_name} #{@user.last_name} was successfully approved.") }
@@ -36,9 +36,8 @@ class AdminsController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     # validate that the user is editing info is either admin or same user
-    logger.info("params id: #{current_admin.email} and current_admin id #{@user.email}")
-    logger.info((current_admin.email == @user.email).to_s)
-    if current_admin.role_id == 1 || current_admin.role_id >= 0 || current_admin.email == @user.email
+    # logger.info("params id: #{current_admin.email} and current_admin id #{@user.email}")
+    if current_admin.has_role?("Admin") || current_admin.email == @user.email
       respond_to do |format|
         if @user.update(admin_params)
           format.html { redirect_to(user_url(@user), notice: "User was successfully updated.") }
@@ -57,7 +56,7 @@ class AdminsController < ApplicationController
   end
 
   def destroy
-    logger.info(params)
+    # logger.info(params)
     @user.destroy!
     respond_to do |format|
       if (params[:action] == "approval")

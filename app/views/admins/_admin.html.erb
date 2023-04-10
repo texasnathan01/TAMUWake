@@ -17,13 +17,11 @@
 
   <p>
   <strong> Roles: </strong>
-  <ul>
   <% admin.set_roles.each do |role| %>
-    <li>
+    <p>
     <%= role.role.role_name %>
-    </li>
+    </p>
   <% end %>
-  </ul>
   </p>
 
   <p>
