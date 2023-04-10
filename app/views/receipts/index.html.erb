@@ -2,6 +2,7 @@
 
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
+  <%- title "Receipts | TAMU Wakeboarding" %>
 </head>
 
 <%= render "/navbar"%>
@@ -19,7 +20,7 @@
 <mainContentHolder>
 
   <!-- This section will only be shown if the user is a driver (code 1) -->
-  <% if @user.role_id == 1 %>
+  <% if @user.has_role?("Driver") %>
     <h3 class="text-3xl mb-4"> Receipts for <%= @user.first_name%> <%= @user.last_name%> : </h3>
 	
     <p class="font-bold"> User ID: <%= @user.id%></p>
@@ -63,7 +64,7 @@
     </div>
   
   <!-- This section will only be shown if the user is a treasurer (code 3) -->
-  <% elsif @user.role_id == 3 %>
+  <% elsif @user.has_role?("Treasurer") %>
   
     <h3 class="text-3xl mb-4"> Treasurer Page, Showing All Receipts: </h3>
     
