@@ -12,22 +12,22 @@
     <%= user_to_display.last_name %>
   </td>
 
-  <td>
+  <td class="hidden md:table-cell">
     <% user_to_display.set_roles.each do |role| %>
       <p>
       <%= role.role.role_name %>
       </p>
     <% end %>
   </td>
-  <td>
+  <td class="hidden md:table-cell">
     <%= user_to_display.aor_completed ? "yes" : "no" %>
   </td>
 
-  <td>
+  <td class="hidden md:table-cell">
     <%= user_to_display.boat_waiver_completed ? "yes" : "no"%>
   </td>
 
-  <td>
+  <td class="hidden md:table-cell">
     <%= user_to_display.dues_completed ? "yes" : "no" %>
   </td>
   <td>
