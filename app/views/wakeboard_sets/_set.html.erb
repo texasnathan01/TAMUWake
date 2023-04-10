@@ -1,0 +1,19 @@
+<tr class="even:bg-white border-b last:border-b-0 border-slate-100">
+  <td class="p-4 border-t-0 border-x-0"><%= set.scheduled_date.strftime("%A at %l:%M %P") %></td>
+  <td class="p-4 border-t-0 border-x-0">
+    <% if set.set_drivers.length > 0 %>
+      <%= set.set_drivers[0].admin.first_name %>
+      <% if set.set_drivers.length > 1 %>
+        <%= "and " + set.set_drivers[1].admin.first_name %>
+      <% end %>
+    <% end %>
+  </td>
+  <td class="p-4 border-t-0 border-x-0"><%= set.dib_limit - set.dib_count %></td>
+  <td class="p-4 border-t-0 border-x-0"><%= set.chib_limit - set.chib_count %></td>
+  <td class="p-4 border-t-0 border-x-0">
+  <%# class: "rounded bg-slate-300 border border-slate-400 px-3 py-2 drop-shadow" %>
+    <%= link_to set, class: "text-gray-600" do %>
+      <span class="text-gray-600"><i class="fa-solid fa-eye text-gray-600"></i> View</span>
+    <% end %>
+  </td>
+</tr>

@@ -1,25 +1,28 @@
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
+  <%- title "New Receipt | TAMU Wakeboarding" %>
 </head>
 
-<ul>
-
-  <%= render "/navbar"%>
+<%= render "/navbar"%>
   
-  <p class="bannerBox"></p>
+<p class="bannerBox"></p>
 
-  <div hidden>
-    <p> <%= @user.id %> </p>
-  </div>
+<div hidden>
+  <p> <%= @user.id %> </p>
+</div>
   
-  <h1>New receipt</h1>
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>New Receipt</pageTitleHolder>
+</h1>
+  
+<mainContentHolder>
 
   <!-- This section will only be shown if the user is a driver (code 1) -->
-  <% if @user.role_id == 1 %>
+  <% if @user.has_role?("Driver") and !@user.has_role?("Treasurer") %>
     <%= render "form_driver", receipt: @receipt %>
   
   <!-- This section will only be shown if the user is a driver (code 1) -->
-  <% elsif @user.role_id == 3 %>
+  <% elsif @user.has_role?("Treasurer") %>
     <%= render "form", receipt: @receipt %>
 
   <!-- This section will only be shown if non driver or treasurer attempts to make -->
@@ -33,15 +36,4 @@
 	<%= link_to "Back to receipts", receipts_path %> |
   </div>
 
-</ul>
-
-
-
-
-
-
-
-
-
-
-
+</mainContentHolder>

@@ -1,14 +1,19 @@
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
+  <%- title "Create a Set | TAMU Wakeboarding" %>
 </head>
 
 <ul>
 
-  <%= render "/navbar"%>
+<%= render "/navbar"%>
   
-  <p class="bannerBox"></p>
+<p class="bannerBox"></p>
   
-  <h1>New wakeboard set</h1>
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>New Wakeboard Set</pageTitleHolder>
+</h1>
+
+<mainContentHolder>
 
   <%= render "form", wakeboard_set: @wakeboard_set %>
 
@@ -18,4 +23,4 @@
     <%= link_to "Back to wakeboard sets", wakeboard_sets_path %>
   </div>
   
-</ul>
+</mainContentHolder>

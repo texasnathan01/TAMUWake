@@ -1,14 +1,19 @@
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
+  <%- title "New User | TAMU Wakeboarding" %>
 </head>
 
-<ul>
+
 
   <%= render "/navbar"%>
   
   <p class="bannerBox"></p>
   
-  <h1>New user</h1>
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>New User</pageTitleHolder>
+</h1>
+  
+<mainContentHolder>
 
   <%= render "form", user: @user %>
 
@@ -18,4 +23,4 @@
     <%= link_to "Back to users", users_path %>
   </div>
   
-</ul>
+</mainContentHolder>

@@ -1,0 +1,9 @@
+<%= turbo_stream.append "sets" do %>
+    <%= render partial: "set", collection: @sets %>
+<% end %>
+
+<%= turbo_stream.update "next_link" do %>
+  <% if @pagy.next.present? %>
+    <%= button_to "Load More", pagy_url_for(@pagy, @pagy.next) %>
+  <% end %>
+<% end %>

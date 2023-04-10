@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_02_220214) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_05_032343) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,7 +34,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_220214) do
 
   create_table "receipts", force: :cascade do |t|
     t.integer "receipt_id"
-    t.integer "user_id"
     t.float "value"
     t.date "date_made"
     t.date "date_approved"
@@ -43,6 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_220214) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image_link"
+    t.bigint "admin_id"
+    t.index ["admin_id"], name: "index_receipts_on_admin_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -90,6 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_220214) do
     t.integer "driver_limit", default: 2
   end
 
+  add_foreign_key "receipts", "admins"
   add_foreign_key "set_drivers", "admins"
   add_foreign_key "set_drivers", "wakeboard_sets"
   add_foreign_key "set_riders", "admins"

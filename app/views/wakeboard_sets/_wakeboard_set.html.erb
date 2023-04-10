@@ -1,16 +1,114 @@
-<div id="<%= dom_id wakeboard_set %>">
-  <h2>
-    Set On
-    <%= wakeboard_set.scheduled_date.strftime("%A, %B %e at %l:%M %P") %>
-  </h2>
+<div id="<%= dom_id wakeboard_set %>" class="p-3 bg-white shadow rounded-lg">
+  <div class="grid grid-cols-2">  
+    <div>
+      <p class="text-gray-500">Drivers</p>
+    </div>
+    
+    <div class="flex flex-row flex-wrap first:m-0">
+      <%= render partial: "shared/profile_pill", collection: drivers, as: :user %>
+    </div>
+    
+    <div>
+      <p class="text-gray-500">Date</p>
+    </div>
+    
+    <div>
+      <p>
+        <%= wakeboard_set.scheduled_date.strftime("%A, %B %e") %>
+      </p>
+    </div>
 
-  <p>
-    <strong>Dib Spots Available:</strong>
-    <%= wakeboard_set.dib_limit - wakeboard_set.dib_count %>
-  </p>
-  <p>
-    <strong>Chib Spots Available:</strong>
-    <%= wakeboard_set.chib_limit - wakeboard_set.chib_count %>
-  </p>
+    <div>
+      <p class="text-gray-500">Time</p>
+    </div>
+    
+    <div>
+      <p>
+        <%= wakeboard_set.scheduled_date.strftime("%l:%M %P") %>
+      </p>
+    </div>
 
+    <div>
+      <p class="text-gray-500">Dib Spots</p>
+    </div>
+
+    <div>
+      <p>
+        <%= wakeboard_set.dib_limit - wakeboard_set.dib_count %>
+      </p>
+    </div>
+    
+    <div>
+      <p class="text-gray-500">Chib Spots</p>
+    </div>
+
+    <div>
+      <p>
+        <%= wakeboard_set.chib_limit - wakeboard_set.chib_count %>
+      </p>
+    </div>
+  </div>
+
+
+  <div class="flex mt-2 justify-end">
+    <% if SetRider.rider_exists?(current_admin.id, wakeboard_set.id) %>
+      <div>
+        <%= button_to "Leave Set", leave_wakeboard_set_path, class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 transition-all duration-250 text-neutral-100" %>
+      </div>
+    <% else %>
+      <div class="relative inline-block text-left">
+        <div>
+          <button type="button" class="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:bg-gray-200 disabled:cursor-not-allowed" id="dropdown-button" aria-expanded="true" aria-haspopup="true" onclick="renderDropdown()" <%= !joinable ? "disabled" : "" %>>
+            <i class="fa-solid fa-ship"></i> Join
+          </button>
+        </div>
+
+        <div class="absolute left-0 z-50 mt-2 w-24 origin-top-left rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transition-all opacity-0 scale-95" id="dropdown-menu" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+          <div class="py-1" role="none">
+            <%= button_to "As Dib", join_wakeboard_set_path, params: { as_dib: true }, method: :post, disabled: !joinable, class: "text-gray-700 block px-4 py-2 text-sm relative z-50" %>
+            <%= button_to "As Chib", join_wakeboard_set_path, params: { as_dib: false }, method: :post, disabled: !joinable, class: "text-gray-700 block px-4 py-2 text-sm relative z-50" %>
+            <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>
+
+<script type='text/javascript'>
+  let active = false
+  let dropdown_btn = document.querySelector("#dropdown-button")
+  let dropdown_menu = document.querySelector("#dropdown-menu")
+
+  function init() {
+    dropdown_menu.classList.add("opacity-0")
+    dropdown_menu.classList.add("scale-95")
+    dropdown_menu.classList.add("ease-out")
+    dropdown_menu.classList.add("duration-100")
+  }
+  
+  function renderDropdown() {
+    active = !active
+    
+    if (active) {
+      dropdown_menu.classList.remove("ease-in")
+      dropdown_menu.classList.remove("duration-75")
+      dropdown_menu.classList.add("ease-out")
+      dropdown_menu.classList.add("duration-100")
+      dropdown_menu.classList.remove("opacity-0")
+      dropdown_menu.classList.remove("scale-95")
+      dropdown_menu.classList.add("opacity-100")
+      dropdown_menu.classList.add("scale-100")
+    } else {
+      dropdown_menu.classList.remove("ease-out")
+      dropdown_menu.classList.remove("duration-100")
+      dropdown_menu.classList.add("ease-in")
+      dropdown_menu.classList.add("duration-75")
+      dropdown_menu.classList.remove("opacity-100")
+      dropdown_menu.classList.remove("scale-100")
+      dropdown_menu.classList.add("opacity-0")
+      dropdown_menu.classList.add("scale-95")
+    }
+  }
+  
+</script>

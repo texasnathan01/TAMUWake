@@ -1,3 +1,17 @@
+<style>
+  label {
+    display: inline-block;
+    width: 200px;
+    text-align: right;
+    padding-right: 10px;
+  }
+  input {
+    display: inline-block;
+    width: 200px;
+    text-align: left;
+  }
+</style>
+
 <%= form_with(model: admin) do |form| %>
   <% if admin.errors.any? %>
     <div style="color: red">
@@ -12,31 +26,26 @@
   <% end %>
 
   <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div>
-    <%= form.label :firstname, style: "display: block" %>
+    <%= form.label :firstname %>
     <%= form.text_field :first_name %>
   </div>
 
   <div>
-    <%= form.label :lastname, style: "display: block" %>
+    <%= form.label :lastname %>
     <%= form.text_field :last_name %>
   </div>
 
   <div>
-    <%= form.label :address, style: "display: block" %>
+    <%= form.label :address %>
     <%= form.text_field :address %>
   </div>
 
   <div>
-    <%= form.label :uin, style: "display: block" %>
+    <%= form.label :uin %>
     <%= form.number_field :uin %>
   </div>
 
   <div>
-    <%= form.submit "Update Account Info" %>
+    <%= form.submit "Update Account Info", class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 transition-all duration-250 text-neutral-100 text-center" %>
   </div>
 <% end %>
