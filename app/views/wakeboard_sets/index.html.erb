@@ -43,8 +43,10 @@
     <div class="flex w-full justify-between items-center">
       <h1 class="text-2xl">Available Sets</h1>
 
-      <%= link_to new_wakeboard_set_path, class: "text-sm p-3 bg-sky-800 hover:bg-sky-600 transition-all ease-in-out duration-250 rounded-md" do %>
-        <span class="text-gray-100"><i class="fa-solid fa-circle-plus"></i> Create Set</span>
+      <% if current_admin.has_role?("Driver") || current_admin.has_role?("Admin") %>
+        <%= link_to new_wakeboard_set_path, class: "text-sm p-3 bg-sky-800 hover:bg-sky-600 transition-all ease-in-out duration-250 rounded-md" do %>
+          <span class="text-gray-100"><i class="fa-solid fa-circle-plus"></i> Create Set</span>
+        <% end %>
       <% end %>
     </div>
 
