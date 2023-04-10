@@ -14,6 +14,99 @@
 </h1>
 
 <mainContentHolder>
-	Theres nothing here....
+	<p style="color: green"><%= notice %></p>
+
+<head>
+	<%= stylesheet_link_tag "styles.css" %>
+
+</head>
+
+<%= render "/navbar"%>
+
+<p class="bannerBox"></p>
+  
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>Welcome to TAMU Wakeboarding!</pageTitleHolder>
+</h1>
+
+<mainContentHolder>
+	<style>
+	  .carousel {
+	    position: relative;
+	    height: 1000px;
+	    overflow: hidden;
+	  }
+
+	  .carousel-item {
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    width: 100%;
+	    height: 100%;
+	    opacity: 0;
+	    transition: opacity 1s ease-in-out;
+	  }
+
+	  .carousel-item.active {
+	    opacity: 1;
+	  }
+	</style>
+
+	<div class="carousel">
+	  <div id="slide1" class="carousel-item active">
+	    <img src="https://lh3.googleusercontent.com/pw/AMWts8BEGKSxtVByZeRuUcpc5tOGxc7hwPQEwZf7xLaaDOIQXwxaIHtFLSsm6z8cth1LzObwzmXMyOL4TOW8lyN0PjochSOoBGSbeWT_jgMzSLm9tmt__vcZFRu2KCHs2g0csbPdKPXsOJSg0k6j9kGmfuJN=w625-h937-s-no?authuser=0" class="w-full" />
+	  </div> 
+	  <div id="slide2" class="carousel-item">
+	    <img src="https://lh3.googleusercontent.com/pw/AMWts8BjVnEBebijEK3aBxBDfK9DZY_yEqlx4YYyjGTTM1bhnXhAbOF5bKQyY1SdakIkoRBbIow48HhcKsN6oRIE4r4DwL6yCNBb1Nf79AWNEYD1QmjGTs1ZM-omvfmHvQiaUayxEINUSr63Sa_6X6z8Ep4p=w1406-h937-s-no?authuser=0" class="w-full" />
+	  </div> 
+	  <div id="slide3" class="carousel-item">
+	    <img src="https://lh3.googleusercontent.com/pw/AMWts8DG6b-SsxeG_pIwmG2TKXxdTHCM8wEwnG1sngZNWcgoryZFKRdfzU8JTnx8BOjUthKX4EAh-gvJXUOQkOvV6hCR-U14URutsc4RUGBtPkauU30QneINLuxWXaq4z9Wkr8XKTBl7sOtDmhHglY4CnsFf=w625-h937-s-no?authuser=0" class="w-full" />
+	  </div> 
+	  <div id="slide4" class="carousel-item">
+	    <img src="https://lh3.googleusercontent.com/pw/AMWts8B08HHSPvvmB0MG5kh1Gs7fGKx8NAbtVWUXoS8a84Mk3HXVCqfk9Js_LJ7w11lYeW8-OMOUVXGScJlDLyvEphuH7rMWBwgScusx5b19WXhpYQDjQZjeGO2_Ou7u6uW7f858Z1_PMdkrAsdL0HOM6y66=w1406-h937-s-no?authuser=0" class="w-full" />
+	  </div>
+	  <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+	    <a href="#" class="btn btn-circle" onclick="prevSlide()">❮</a> 
+	    <a href="#" class="btn btn-circle" onclick="nextSlide()">❯</a>
+	  </div>
+	</div>
+
+	<script>
+	  var currentSlide = 1;
+
+	  function showSlide(slideIndex) {
+	    var slides = document.getElementsByClassName("carousel-item");
+	    for (var i = 0; i < slides.length; i++) {
+	      slides[i].classList.remove("active");
+	    }
+	    slides[slideIndex - 1].classList.add("active");
+	    currentSlide = slideIndex;
+	  }
+
+	  function prevSlide() {
+	    if (currentSlide == 1) {
+	      showSlide(4);
+	    } else {
+	      showSlide(currentSlide - 1);
+	    }
+	  }
+
+	  function nextSlide() {
+	    if (currentSlide == 4) {
+	      showSlide(1);
+	    } else {
+	      showSlide(currentSlide + 1);
+	    }
+	  }
+	</script>
+
+
+
+
+
+
+</mainContentHolder>
+
+
 </mainContentHolder>
 

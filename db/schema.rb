@@ -53,10 +53,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_032343) do
   end
 
   create_table "set_drivers", force: :cascade do |t|
+    t.bigint "admin_id", null: false
+    t.bigint "wakeboard_set_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "admin_id"
-    t.bigint "wakeboard_set_id"
     t.index ["admin_id"], name: "index_set_drivers_on_admin_id"
     t.index ["wakeboard_set_id"], name: "index_set_drivers_on_wakeboard_set_id"
   end
@@ -74,8 +74,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_05_032343) do
 
   create_table "set_roles", force: :cascade do |t|
     t.bigint "role_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.bigint "admin_id"
     t.index ["admin_id"], name: "index_set_roles_on_admin_id"
     t.index ["role_id"], name: "index_set_roles_on_role_id"
