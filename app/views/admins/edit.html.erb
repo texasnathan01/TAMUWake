@@ -1,5 +1,6 @@
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
+  <%- title("Edit " + @user.first_name + "'s Profile | TAMU Wakeboarding") %>
 </head>
 
 
@@ -15,7 +16,7 @@
 <mainContentHolder>
 
   <!-- This section is shown if whoever is editing is an admin-->
-  <% if (current_admin.role_id == 1) or (current_admin.role_id >= -1) %>
+  <% if current_admin.has_role?("Admin") %>
     <h1>Editing Member</h1>
       <%= render "form", admin: @user %>
         <%= form_with url: add_role_admin_path, method: :post do |form| %>

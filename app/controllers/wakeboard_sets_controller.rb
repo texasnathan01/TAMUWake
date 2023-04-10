@@ -21,21 +21,32 @@ class WakeboardSetsController < ApplicationController
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
     @joinable = helpers.set_available?(current_admin.id, @wakeboard_set)
-	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :avatar_url)
+	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :avatar_url, :id)
   end
 
   # GET /wakeboard_sets/new
   def new
+    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+      redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can create sets") and return
+    end
+
     @wakeboard_set = WakeboardSet.new
   end
 
   # GET /wakeboard_sets/1/edit
   def edit
+    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+      redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can edit sets") and return
+    end
   end
 
   # POST /wakeboard_sets or /wakeboard_sets.json
   def create
     @wakeboard_set = WakeboardSet.new(wakeboard_set_params.merge(driver_count: 1))
+
+    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+      redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can create sets") and return
+    end
 
     respond_to do |format|
       if @wakeboard_set.save
@@ -54,6 +65,10 @@ class WakeboardSetsController < ApplicationController
 
   # PATCH/PUT /wakeboard_sets/1 or /wakeboard_sets/1.json
   def update
+    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+      redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can update sets") and return
+    end
+
     respond_to do |format|
       if @wakeboard_set.update(wakeboard_set_params)
         format.html { redirect_to(wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully updated.") }
@@ -67,6 +82,10 @@ class WakeboardSetsController < ApplicationController
 
   # DELETE /wakeboard_sets/1 or /wakeboard_sets/1.json
   def destroy
+    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+      redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can delete sets") and return
+    end
+
     @wakeboard_set.destroy
 
     respond_to do |format|
