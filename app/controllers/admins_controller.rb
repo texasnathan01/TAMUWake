@@ -76,10 +76,10 @@ class AdminsController < ApplicationController
 
     respond_to do |format|
       if !user.add_role(role.id)
-        format.html { redirect_to edit_admin_path(user), notice: "Role has been assigned to the user." }
+        format.html { redirect_to edit_admin_path(user), notice: "Role has already been assigned to the user. Could not assign it again" }
         format.json { render json:{ message: "Role has already been assigned to the user. Could not assign it again" }, status: :expectation_failed }
       else
-        format.html { redirect_to edit_admin_path(user), notice: "Unable to add Role to user." }
+        format.html { redirect_to edit_admin_path(user), notice: "Role has been assigned to the user." }
         format.json { render :show, status: :ok, location: user }
       end
     end
@@ -93,10 +93,10 @@ class AdminsController < ApplicationController
     # rendering the view to display the status message
     respond_to do |format|
       if !user.remove_role(role.id)
-        format.html { redirect_to edit_admin_path(user), notice: "Role has been removed successfully." }
+        format.html { redirect_to edit_admin_path(user), notice: "Role does not exist for the user. Could not remove it." }
         format.json { render json:{ message: "Role does not exist for the user. Could not remove it." }, status: :expectation_failed}
       else
-        format.html { redirect_to edit_admin_path(user), notice: "Unable to remove Role for user." }
+        format.html { redirect_to edit_admin_path(user), notice: "Role has been removed successfully." }
         format.json { render :show, status: :ok, location: user}
       end
     end

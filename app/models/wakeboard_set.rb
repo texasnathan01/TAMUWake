@@ -35,6 +35,9 @@ class WakeboardSet < ApplicationRecord
   # on sunday after 8pm
   def self.sunday_registration_open?(scheduled_date, current_date = DateTime.current)
     limit = DateTime.new(current_date.year, current_date.month, current_date.day, 20, 0, 0, current_date.zone)
+    if scheduled_date.before?(limit) and scheduled_date.before?(current_date)
+      return false
+    end
     if current_date.before?(limit) and (scheduled_date.after?(limit) or scheduled_date.to_i == limit.to_i)
       return false
     end
