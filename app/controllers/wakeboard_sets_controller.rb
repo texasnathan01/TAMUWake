@@ -21,7 +21,7 @@ class WakeboardSetsController < ApplicationController
   # GET /wakeboard_sets/1 or /wakeboard_sets/1.json
   def show
     @joinable = helpers.set_available?(current_admin.id, @wakeboard_set)
-	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :avatar_url, :id)
+	  @drivers = SetDriver.where("wakeboard_set_id = ?", params[:id]).joins(:admin).select(:first_name, :last_name, :avatar_url, :admin_id)
   end
 
   # GET /wakeboard_sets/new
@@ -106,15 +106,12 @@ class WakeboardSetsController < ApplicationController
     respond_to do |format|
       if has_documents_signed?
         if @wakeboard_set.join(user, as_dib)
-          format.html { redirect_to(wakeboard_set_url(@wakeboard_set), notice: "Successfully joined set") }
-          format.json { render(:show, status: :ok, location: @wakeboard_set) }
+          format.html { redirect_to(wakeboard_set_url(@wakeboard_set), flash: { success: "Joined set"}) }
         else
-          format.html { redirect_to(wakeboard_set_url(@wakeboard_set)) }
-          format.json { render(json: { message: "Unable to join set" }, status: :expectation_failed) }
+          format.html { redirect_to(wakeboard_set_url(@wakeboard_set), flash: { error: "Unable to join set" }) }
         end
       else
         format.html { redirect_to(wakeboard_set_url(@wakeboard_set)) }
-        format.json { render(json: { message: "Unable to join set" }, status: :expectation_failed) }
       end
     end
 
@@ -129,7 +126,7 @@ class WakeboardSetsController < ApplicationController
 
     respond_to do |format|
       if @set.leave(user)
-        format.html { redirect_to(wakeboard_set_url(@set), notice: "Successfully left set") }
+        format.html { redirect_to(wakeboard_set_url(@set), flash: { success: "Left set"}) }
         format.json { render(:show, status: :ok, location: @set) }
       else
         format.html { redirect_to(wakeboard_set_url(@set), notice: "Unable to leave set") }
