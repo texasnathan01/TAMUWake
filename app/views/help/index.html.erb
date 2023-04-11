@@ -3,24 +3,16 @@
   <%- title "FAQs and Help Documents | TAMU Wakeboarding" %>
 </head>
 
-<<<<<<< HEAD
-=======
-<%= render "/navbar"%>
-
->>>>>>> origin/main
 <p class="bannerBox"></p>
   
 <h1 class="text-5xl mb-5 text-center">
   <pageTitleHolder>FAQs</pageTitleHolder>
 </h1>
 
-<<<<<<< HEAD
 <div hidden>
   <p> <%= @user=current_admin %> </p>
 </div>
 
-=======
->>>>>>> origin/main
 <mainContentHolder>
 
   <%# Rider FAQs %>
@@ -38,7 +30,6 @@
   <p class="mb-3">Yes all 3 waiver and liability documents must be signed and process in order to be able to sign up for sets.</p>
   
   <%# Driver FAQs %>
-<<<<<<< HEAD
   <% if @user.has_role?("Driver") %>
     <h3 class="text-3xl">Creating Sets</h3>
     <h5 class="text-sm mb-4"><i>*Only available to Drivers</i></h5>
@@ -82,12 +73,5 @@
   <p class="font-bold">If you find any bugs in our site, please let us know by filling out the form below:</p>
   <a href="https://forms.gle/M1UtFzxZhrNfUn5g7" class="mb-3">https://forms.gle/M1UtFzxZhrNfUn5g7</a>
 
-=======
-  <h3 class="text-3xl">Creating Sets</h3>
-  <h5 class="text-sm mb-4"><i>*Only available to Drivers</i></h5>
- 
-  <p class="font-bold">How can I create a set?</p>
-  <p class="mb-3">You can create a set by clicking the “Rides” button in the top right navigation bar. Once the page loads, click on the “create set” button. From there, you can enter the date of the set and add up to 1 additional driver.</p>
->>>>>>> origin/main
 
 </mainContentHolder>

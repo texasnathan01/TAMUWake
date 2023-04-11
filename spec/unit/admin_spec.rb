@@ -10,12 +10,9 @@ RSpec.describe Admin, type: :model do
     expect(subject).to be_valid
   end
 
-<<<<<<< HEAD
   it 'is valid with when attributes changed' do
     subject.first_name = "Axel"
     expect(subject).to be_valid
   end
 
-=======
->>>>>>> origin/main
 end

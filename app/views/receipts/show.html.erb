@@ -13,7 +13,6 @@
   <p> <%= @receipt.admin_id %> </p>
 </div>
 
-<<<<<<< HEAD
 
 
 <body>
@@ -49,29 +48,3 @@
     
   </mainContentHolder>
 </body>
-=======
-<mainContentHolder>
-
-  <!-- This section will only be shown if the user is a treasurer (code 3) -->
-  <% if @user.has_role?("Treasurer") %>
-    <%= render @receipt %>
-    <%= link_to "Edit this receipt", edit_receipt_path(@receipt) %> |
-    <%= link_to "Back to receipts", receipts_path %>
-    <%= button_to "Destroy this receipt", @receipt, method: :delete %>
-
-  <!-- This section will only be shown if the user is the driver who uploaded the receipt (code 2) -->
-  <% elsif @user.has_role?("Driver") and (@receipt.admin_id == @user.id) %>
-    <%= render @receipt %>
-    <% if @receipt.stage == 2 %>
-      <%= link_to "I got my refund", edit_receipt_path(@receipt) %> |
-    <% end %>
-    <%= link_to "Back to receipts", receipts_path %>
-
-  <!-- This section will be shown to all other users-->
-  <% else %>
-    <h1> You are unauthorized to see this page </h1>
-    <%= link_to "Back to receipts", receipts_path %>
-  <% end %>
-  
-</mainContentHolder>
->>>>>>> origin/main

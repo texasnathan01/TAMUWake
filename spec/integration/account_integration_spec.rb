@@ -1,11 +1,7 @@
 # location: spec/feature/integration_spec.rb
 require 'rails_helper'
 
-<<<<<<< HEAD
 RSpec.describe('Using Account Page and Tools as a Rider', type: :feature) do
-=======
-RSpec.describe('Using Account Page and Tools as a Driver', type: :feature) do
->>>>>>> origin/main
   let(:admin) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last", is_approved: true, role_id: -2) }
 
   before do

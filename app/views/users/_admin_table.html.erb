@@ -12,18 +12,13 @@
     <%= user_to_display.last_name %>
   </td>
 
-<<<<<<< HEAD
   <td class="hidden md:table-cell">
-=======
-  <td>
->>>>>>> origin/main
     <% user_to_display.set_roles.each do |role| %>
       <p>
       <%= role.role.role_name %>
       </p>
     <% end %>
   </td>
-<<<<<<< HEAD
   <td class="hidden md:table-cell">
     <%= user_to_display.aor_completed ? "yes" : "no" %>
   </td>
@@ -35,46 +30,12 @@
   <td class="hidden md:table-cell">
     <%= user_to_display.dues_completed ? "yes" : "no" %>
   </td>
-=======
-
-  <td>
-    <%= user_to_display.uin %>
-  </td>
-
-  <td>
-    <%= user_to_display.address %>
-  </td>
-
-  <td>
-    <%= user_to_display.aor_completed ? "yes" : "no" %>
-
-  </td>
-
-  <td>
-    <%= user_to_display.boat_waiver_completed ? "yes" : "no"%>
-  </td>
-
-  <td>
-    <%= user_to_display.dues_completed ? "yes" : "no" %>
-  </td>
-
- <td>
-    <%= user_to_display.is_approved ? "yes" : "no"  %>
-  </td>
-
-  <td>
-    <%= user_to_display.created_at%>
-  </td>
->>>>>>> origin/main
   <td>
    <%= link_to "Edit", edit_admin_path(user_to_display), class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100 text-center" %>
   </td>
  
-<<<<<<< HEAD
    <td>
     <%= link_to "Show", user_to_display, class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100 text-center" %>
   </td>
-=======
->>>>>>> origin/main
   
 </tr>
