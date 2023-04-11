@@ -3,9 +3,6 @@
   <%- title("Edit " + @user.first_name + "'s Profile | TAMU Wakeboarding") %>
 </head>
 
-
-
-  <%= render "/navbar"%>
   
   <p class="bannerBox"></p>
   
@@ -42,6 +39,8 @@
             </tbody>
           <% end %>
         </table>     
+    <br>
+    <br>
     <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')", class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 text-neutral-100" %>
 
   <!-- This section is shown to anyone else-->
@@ -55,8 +54,8 @@
   <br>
 
 <div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
+  <%= link_to "Show this user", @user,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> |
+  <%= link_to "Back to users", users_path, class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
 </div>
   
 </mainContentHolder>
