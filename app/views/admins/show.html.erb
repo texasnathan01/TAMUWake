@@ -9,6 +9,16 @@
 <mainContentHolder>
 
   <%= render @user %>
+  <table>
+    <thead> <th> Current Roles </th> </thead>
+    <% @roles.each do |role| %>
+      <tbody> 
+      <tr> 
+      <td> <%= role.role.role_name %> </td> 
+      </tr>
+      </tbody>
+    <% end %>
+  </table> 
 
 <div>
   <%= link_to "Edit this user", edit_admin_path(@user),class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> |

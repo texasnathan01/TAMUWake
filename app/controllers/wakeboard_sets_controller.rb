@@ -126,7 +126,11 @@ class WakeboardSetsController < ApplicationController
 
     respond_to do |format|
       if @set.leave(user)
+<<<<<<< HEAD
         format.html { redirect_to(wakeboard_set_url(@set), flash: { success: "Left set"}) }
+=======
+        format.html { redirect_to(wakeboard_set_url(@set), notice: "Successfully left set") }
+>>>>>>> main
         format.json { render(:show, status: :ok, location: @set) }
       else
         format.html { redirect_to(wakeboard_set_url(@set), notice: "Unable to leave set") }
