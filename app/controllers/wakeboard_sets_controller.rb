@@ -26,7 +26,7 @@ class WakeboardSetsController < ApplicationController
 
   # GET /wakeboard_sets/new
   def new
-    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+    if !current_admin.has_role?("Driver") && !current_admin.has_role?("Admin")
       redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can create sets") and return
     end
 
@@ -35,7 +35,7 @@ class WakeboardSetsController < ApplicationController
 
   # GET /wakeboard_sets/1/edit
   def edit
-    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+    if !current_admin.has_role?("Driver") && !current_admin.has_role?("Admin")
       redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can edit sets") and return
     end
   end
@@ -44,7 +44,7 @@ class WakeboardSetsController < ApplicationController
   def create
     @wakeboard_set = WakeboardSet.new(wakeboard_set_params.merge(driver_count: 1))
 
-    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+    if !current_admin.has_role?("Driver") && !current_admin.has_role?("Admin")
       redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can create sets") and return
     end
 
@@ -65,7 +65,7 @@ class WakeboardSetsController < ApplicationController
 
   # PATCH/PUT /wakeboard_sets/1 or /wakeboard_sets/1.json
   def update
-    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+    if !current_admin.has_role?("Driver") && !current_admin.has_role?("Admin")
       redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can update sets") and return
     end
 
@@ -82,7 +82,7 @@ class WakeboardSetsController < ApplicationController
 
   # DELETE /wakeboard_sets/1 or /wakeboard_sets/1.json
   def destroy
-    if !current_admin.has_role?("Driver") || !current_admin.has_role?("Admin")
+    if !current_admin.has_role?("Driver") && !current_admin.has_role?("Admin")
       redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can delete sets") and return
     end
 
