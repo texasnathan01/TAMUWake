@@ -5,6 +5,7 @@
   <%- title "Approve New Users | TAMU Wakeboarding" %>
 </head>
 
+<<<<<<< HEAD
 <p class="bannerBox"></p>
 
 <h1 class="text-5xl mb-5 text-center">
@@ -14,6 +15,19 @@
 <mainContentHolder>
 
 <%= link_to 'Current Users', users_path, class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
+=======
+<%= render "/navbar"%>
+
+<p class="bannerBox"></p>
+
+<h1 class="text-5xl mb-5 text-center">
+  <pageTitleHolder>Users to Approve</pageTitleHolder>
+</h1>
+
+<mainContentHolder>
+
+<%= link_to 'Current Users', users_path, class: "border rounded-md px-3 py-1 bg-red-900 hover:bg-red-950 text-neutral-100" %>
+>>>>>>> origin/main
   <br>
 <%= form_with url: users_to_approve_path, method: 'get', id: 'search-form' do |f| %>
   <%= f.text_field :first_name, placeholder: 'Search by first name....', class: 'form-control' %>

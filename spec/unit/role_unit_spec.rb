@@ -1,5 +1,5 @@
-# location: spec/unit/role_unit_spec.rb
-require 'rails_helper'
+# # location: spec/unit/role_unit_spec.rb
+# require 'rails_helper'
 
 RSpec.describe Role, type: :model do
   subject do
