@@ -16,11 +16,26 @@
   </head>
 
   <body>
-    <% if flash.any? %>
-      <% flash.each do |key, value| -%>
-        <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
-      <% end -%>
+    <div class="w-full flex">
+      <%= render "/navbar"%>
+    </div>
+
+    <% if flash[:error]%>
+      <div class="px-5 py-2 text-lg font-mono flex flex-row items-center"><i class="fa-solid fa-triangle-exclamation text-red-600 text-2xl mr-2"></i> <%= flash[:error] %></div>
     <% end %>
+
+    <% if flash[:alert]%>
+      <div class="px-5 py-2 text-lg font-mono flex flex-row items-center"><i class="fa-solid fa-triangle-exclamation text-yellow-600 text-2xl mr-2"></i> <%= flash[:alert] %></div>
+    <% end %>
+
+    <% if flash[:notice]%>
+      <div class="px-5 py-2 text-lg font-mono flex flex-row items-center"><i class="fa-solid fa-anchor text-2xl mr-2"></i> <%= flash[:notice] %></div>
+    <% end %>
+
+    <% if flash[:success]%>
+      <div class="px-5 py-2 text-lg font-mono flex flex-row items-center"><i class="fa-regular fa-circle-check text-emerald-500 text-2xl mr-2"></i> <%= flash[:success] %></div>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
