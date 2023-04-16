@@ -53,12 +53,12 @@
   <div class="flex mt-2 justify-end">
     <% if SetRider.rider_exists?(current_admin.id, wakeboard_set.id) %>
       <div>
-        <%= button_to "Leave Set", leave_wakeboard_set_path, class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 transition-all duration-250 text-neutral-100" %>
+        <%= button_to "Leave Set", leave_wakeboard_set_path, class: "z-50 border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 transition-all duration-250 text-neutral-100" %>
       </div>
     <% else %>
       <div class="relative inline-block text-left">
         <div>
-          <button type="button" class="inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:bg-gray-200 disabled:cursor-not-allowed" id="dropdown-button" aria-expanded="true" aria-haspopup="true" onclick="renderDropdown()" <%= !joinable ? "disabled" : "" %>>
+          <button type="button" class="z-50 inline-flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:bg-gray-200 disabled:cursor-not-allowed" id="dropdown-button" aria-expanded="true" aria-haspopup="true" onclick="renderDropdown()" <%= !joinable ? "disabled" : "" %>>
             <i class="fa-solid fa-ship"></i> Join
           </button>
         </div>
