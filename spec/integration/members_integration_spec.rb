@@ -15,12 +15,14 @@ RSpec.describe('Member Pages Without Access', type: :feature) do
   end
 end
 
-RSpec.describe('Member Pages With Access', type: :feature) do
-  let(:chris) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last", role_id: 3, is_approved: true) }
 
-  before do
+RSpec.describe('Member Pages With Access', type: :feature) do
+  let(:chris) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last", is_approved: true) }
+
+  before :each do
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(chris))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(true))
   end
 
   it 'visiting member page with sufficient permissions' do
@@ -29,13 +31,13 @@ RSpec.describe('Member Pages With Access', type: :feature) do
   end
 
   it 'visiting member approval page with sufficient permissions' do
-      Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test", role_id: 0, is_approved: false)
+      Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test", is_approved: false)
       visit users_to_approve_path
       expect(page).to(have_content("realemailreal@tamu.edu"))
   end
 
   it 'approving member page with sufficient permissions' do
-      Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test", role_id: 0, is_approved: false)
+      Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test", is_approved: false)
       visit users_to_approve_path
       click_on("Approve User")
       visit users_path
@@ -43,10 +45,29 @@ RSpec.describe('Member Pages With Access', type: :feature) do
   end
 
   it 'denying member page with sufficient permissions' do
-    Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test", role_id: 0, is_approved: false)
+    Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test", is_approved: false)
     visit users_to_approve_path
     click_on("Deny User")
     visit users_to_approve_path
     expect(page).not_to(have_content("realemailreal@tamu.edu"))
   end
+
+  it 'editing a members information' do
+    visit users_path
+    click_on("Edit")
+    fill_in 'Firstname:', :with => 'Chris'
+    click_on 'Update Account Info'
+    expect(page).to(have_content("Chris"))
+  end
+
+  it 'deleting a member' do
+    temp = Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test", is_approved: true)
+    visit users_path
+    expect(page).to(have_content("realemailreal@tamu.edu"))
+    visit edit_admin_path(temp)
+    click_on("Destroy")
+    visit users_path
+    expect(page).not_to(have_content("realemailreal@tamu.edu"))
+  end
 end
+
