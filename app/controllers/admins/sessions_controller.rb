@@ -1,4 +1,6 @@
 class Admins::SessionsController < Devise::SessionsController
+  layout false
+  
   def after_sign_out_path_for(_resource_or_scope)
     new_admin_session_path
   end

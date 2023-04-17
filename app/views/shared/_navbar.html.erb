@@ -1,0 +1,39 @@
+<div class="flex flex-row w-full border-b bg-tamu-red">
+    <nav class="flex flex-row flex-wrap px-3 py-5 w-full items-center">
+        <div class="">
+            <div class="w-32">
+                <%= link_to home_path do %>
+                    <%= image_tag "TAMUWake_Logo_1.png", class: "w-full" %>
+                <% end %>
+            </div>
+        </div>
+        <div class="ml-5">
+            <% if current_admin and (current_admin.has_role?("Admin") or current_admin.has_role?("Treasurer") or current_admin.has_role?("Driver")) %>
+                <%= link_to "Receipts", receipts_path, class: "text-white mx-1" %>
+            <% end %>
+            <% if current_admin and current_admin.has_role?("Admin") %>
+                <%= link_to "Members", users_path, class: "text-white mx-1" %>
+            <% end %>
+            <%= link_to "Rides", wakeboard_sets_path, class: "text-white mx-1" %>
+            <%= link_to "Help", help_path, class: "text-white mx-1" %>
+        </div>
+        <div class="ml-auto">
+            <% if current_admin %>
+                <%= link_to accounts_path, class: "group" do %>
+                    <div class="w-10 h-10">
+                        <% if current_admin.avatar_url.present? %>
+                            <%= image_tag current_admin.avatar_url, alt: "Your Profile", title: "Your Profile", class: "w-full rounded-full" %>
+                        <% else %>
+                            <div class="border rounded-full h-full flex justify-center items-center">
+                                <i class="fa-solid fa-user text-slate-100"></i>
+                            </div>
+                        <% end %>
+                    </div>
+                    <div class="absolute opacity-0 group-hover:block group-hover:opacity-100 text-xs text-center bg-white p-1 rounded text-slate-900 transition-all duration-150">Profile</div>
+                <% end %>
+            <% else %>
+                <%= link_to "Sign In", admin_google_oauth2_omniauth_authorize_path %>
+            <% end %>
+        </div>
+    </nav>
+</div>
