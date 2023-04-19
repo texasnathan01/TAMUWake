@@ -2,20 +2,29 @@
 	<%= stylesheet_link_tag "styles.css" %>
   <%- title "Your Account | TAMU Wakeboarding" %>
 </head>
-
-  <p class="bannerBox"></p>
+ <p class="bannerBox"></p>
   
 <h1 class="text-5xl mb-5 text-center">
   <pageTitleHolder>  Welcome to the TAMUWake Website <%=@user.first_name%>!</pageTitleHolder>
 </h1>
 
-<mainContentHolder>
 
-  <%= link_to "My History", set_history_path %>
-  
-  <img src=<%=@user.avatar_url %> alt="Image not found" height="250" width="250">
-  <%= render @user %>
-  <%= link_to 'Edit Account Info', edit_admin_path(@user),class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> 
+<br>
+<br>
+<br>
+<br>
+  <div class="container mx-auto px-4 text-center ">
+       
+      <div class="grid grid-cols-2 gap-4 bg-white shadow-md rounded-lg p-6">
+        <div>
+            <img src="<%=@user.avatar_url %>" alt="Image not found" class="mx-auto rounded-full" style="width: 250px; height: 250px;">
+        </div>
+        <div>
+          <%= render @user %>
+        </div>
+    </div>
+     <%= link_to 'Edit Account Info', edit_admin_path(@user),class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> 
+  <%= link_to "My Set History", set_history_path,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100"%>
   <%= link_to "Sign Out", destroy_admin_session_path,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
-  
-</mainContentHolder>
+  </div>
+ 

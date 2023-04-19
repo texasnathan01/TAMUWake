@@ -49,5 +49,24 @@ RSpec.describe('Member Pages With Access', type: :feature) do
     click_on("Deny User")
     visit users_to_approve_path
     expect(page).not_to(have_content("realemailreal@tamu.edu"))
+  end  
+  
+  it 'destroying member page with sufficient permissions' do
+    user = Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test", role_id: 0, is_approved: false)
+    visit edit_admin_path(user)
+    click_on("Destroy")
+    visit users_path
+    expect(page).not_to(have_content("realemailreal@tamu.edu"))
   end
+
+  it 'editing member page with sufficient permissions' do
+    user = Admin.create!(email: "realemailreal@tamu.edu", first_name: "test", last_name: "test", role_id: 0, is_approved: true)
+    visit edit_admin_path(user)
+    fill_in "admin[first_name]", with: 'Chris'
+    click_on 'Update Account Info'
+    visit users_path
+    expect(page).to(have_content("Chris"))
+  end
+
+
 end
