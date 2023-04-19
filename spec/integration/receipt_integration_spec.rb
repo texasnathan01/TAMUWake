@@ -1,12 +1,14 @@
 # # location: spec/feature/receipt_integration_spec.rb
-# require 'rails_helper'
+require 'rails_helper'
 
 RSpec.describe('Go to receipts page as treasurer', type: :feature) do
   let(:admin) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "first", last_name: "last", role_id: 3, is_approved: true, uin: 123, address: "123 place") }
 
-  before do
+  before :each do
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(true))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
   end
 
   it 'valid inputs' do
@@ -18,9 +20,11 @@ end
 RSpec.describe('Go to receipts page as driver', type: :feature) do
   let(:admin) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "Nathan", last_name: "Wilke", role_id: 1, is_approved: true, uin: 123, address: "123 place") }
 
-  before do
+  before :each do
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(true))
   end
 
   it 'valid inputs' do
@@ -32,9 +36,11 @@ end
 RSpec.describe('Go to receipts page as non driver and non treasurer', type: :feature) do
   let(:admin) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "Nathan", last_name: "Wilke", role_id: -1, is_approved: true, uin: 123, address: "123 place") }
 
-  before do
+  before :each do
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
   end
 
   it 'valid inputs' do
@@ -46,9 +52,11 @@ end
 RSpec.describe('Driver creating a new receipt', type: :feature) do
   let(:admin) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "Nathan", last_name: "Wilke", role_id: 1, is_approved: true, uin: 123, address: "123 place") }
 
-  before do
+  before :each do
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(true))
   end
 
   it 'valid inputs' do
@@ -71,9 +79,11 @@ end
 RSpec.describe('Treasurer creating a new receipt', type: :feature) do
   let(:admin) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "chris", last_name: "pasala", role_id: 3, id: 2, is_approved: true, uin: 123, address: "123 place") }
 
-  before do
+  before :each do
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(true))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
   end
 
   it 'valid inputs' do

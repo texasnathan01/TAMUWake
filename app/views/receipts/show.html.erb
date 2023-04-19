@@ -1,4 +1,7 @@
-<p style="color: green"><%= notice %></p>
+<head>
+	<%= stylesheet_link_tag "styles.css" %>
+  <%- title "Receipt #" + @receipt.id.to_s + " | TAMU Wakeboarding" %>
+</head>
 
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
@@ -13,7 +16,6 @@
 
 
 <body>
-  <%= render "/navbar"%>
 
   <p class="bannerBox"></p>
 

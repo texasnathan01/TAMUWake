@@ -10,4 +10,20 @@ RSpec.describe Admin, type: :model do
     expect(subject).to be_valid
   end
 
+  it 'is valid with when attributes changed' do
+    subject.first_name = "Axel"
+    expect(subject).to be_valid
+  end
+
+  describe 'role helper methods - rider_can_join' do
+    before :each do
+      @user = Admin.find_or_create_by(email: "aramone@tamu.edu")
+      @set = WakeboardSet.create(
+        dib_count: 0,
+        chib_count: 0,
+        driver_count: 1,
+        scheduled_date: (DateTime.current).tomorrow
+      )
+    end
+
 end

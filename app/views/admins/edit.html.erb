@@ -3,18 +3,15 @@
   <%- title("Edit " + @user.first_name + "'s Profile | TAMU Wakeboarding") %>
 </head>
 
-
-
-  <%= render "/navbar"%>
   
   <p class="bannerBox"></p>
   
 <h1 class="text-5xl mb-5 text-center">
-  <pageTitleHolder>Editing User</pageTitleHolder>
+    Editing <%=@user.first_name %> <%=@user.last_name %>'s Account
 </h1>
 
-<mainContentHolder>
 
+<div class="container mx-auto px-20 bg-white shadow-md rounded-lg">
   <!-- This section is shown if whoever is editing is an admin-->
   <% if (current_admin.has_role?("Admin")) %>
     
@@ -25,40 +22,52 @@
       <br>
       <br>
       <br>
-        <h1 class="text-2xl">Editing Member Roles</h1>
-        <%= form_with url: add_role_admin_path, method: :post do |form| %>
+       <h1 class="text-2xl flex justify-center ">Editing Member Roles</h1>
+      <div class="grid grid-cols-1 gap-4">
+        <div class = "mx-auto">
+          <table class = "table-auto">
+            <thead> <th> Roles </th> </thead>
+            <% @roles.each do |role| %>
+              <tbody> 
+              <tr> 
+              <td> <%= role.role.role_name %> </td> 
+              <td> <%= button_to 'Delete Role', remove_role_admin_path(:id=> @user.id, :role_id=> role.role_id) , :method=>:post, class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 text-neutral-100"  %> </td>
+              </tr>
+              </tbody>
+            <% end %>
+          </table>
+        </div>
+          <div class = "mx-auto ">
+            <%= form_with url: add_role_admin_path, method: :post do |form| %>
         <%= form.select :role_id, Role.all.map { |role| [role.role_name, role.id] } %>
-        <%= form.submit "Add Role", class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100"%>
+        <%= form.submit "Add Role", class: "border text-center rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100"%>
         <% end %>
-        
-        <table>
-          <thead> <th> Roles </th> </thead>
-          <% @roles.each do |role| %>
-            <tbody> 
-            <tr> 
-            <td> <%= role.role.role_name %> </td> 
-            <td> <%= button_to 'Delete Role', remove_role_admin_path(:id=> @user.id, :role_id=> role.role_id) , :method=>:post, class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 text-neutral-100"  %> </td>
-            </tr>
-            </tbody>
-          <% end %>
-        </table>     
+        </div>
+    </div>
+
     <br>
     <br>
-    <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')", class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-red-700 text-neutral-100" %>
+    <div class = "flex text-center justify-center">
+      <%= link_to "Show this user", @user,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
+      <%= link_to "Back to users", users_path, class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
+      <%= button_to 'Destroy', @user, method: :delete, :onclick => "return confirm('Are you sure you want to delete this user?')", class: "border rounded-md px-3 py-1 bg-red-500 hover:bg-white text-neutral-100" %>
+  </div>
 
   <!-- This section is shown to anyone else-->
   <% else %>
-    <h1 class="text-2xl flex justify-center">Editing Account Info</h1>
-    <div class = "flex justify-center">
-     <%= render "form_for_nonadmin", admin: @user %>
+    
+    <div>
+    <h1 class="flex justify-center">Editing Account Info</h1>
+      <div class = "flex justify-center">
+        <%= render "form_for_nonadmin", admin: @user %>
+      </div>
+      <br>
+      <div class = "flex justify-center py-4">
+        <%= link_to "Show this Account", @user,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> 
+        <%= link_to "Back to Account", accounts_path, class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> 
+      </div>
     </div>
+
+    
   <% end %>
-
-  <br>
-
-<div>
-  <%= link_to "Show this user", @user,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> |
-  <%= link_to "Back to users", users_path, class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
 </div>
-  
-</mainContentHolder>
