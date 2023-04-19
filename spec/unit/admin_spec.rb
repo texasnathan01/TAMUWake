@@ -1,10 +1,12 @@
 # location: spec/unit/admin_spec.rb
 require 'rails_helper'
 
-RSpec.describe "a user" do
+RSpec.describe Admin, type: :model do
+  subject do
+    described_class.new(email: "chrispasala@tamu.edu" ,first_name: 'Chris',last_name: 'Pasala')
+  end
 
-  it "has their information using a helper" do
-    user = 
+  it 'is valid with valid attributes' do
     expect(subject).to be_valid
   end
 
@@ -12,5 +14,4 @@ RSpec.describe "a user" do
     subject.first_name = "Axel"
     expect(subject).to be_valid
   end
-
 end
