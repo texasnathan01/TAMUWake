@@ -32,7 +32,10 @@
   </div>
 
   <div class="flex flex-row justify-end">
-    <%= button_tag class: "border border-emerald-400 bg-emerald-600 text-emerald-50 px-4 py-2 rounded-lg hover:cursor-pointer" do %>
+    <%= link_to wakeboard_set, class: "mr-3 text-center px-4 py-2 rounded-lg border border-sky-400 text-sky-600" do %>
+      Discard
+    <% end %>
+    <%= button_tag class: "border border-sky-400 bg-sky-600 text-sky-50 px-4 py-2 rounded-lg hover:cursor-pointer", type: "submit" do %>
       Save
     <% end %>
   </div>
@@ -45,11 +48,4 @@
     create: false,
     maxItems: 1
   });
-
-  /*document.addEventListener("DOMContentLoaded", () => {
-    input = document.querySelector(".ts-control")
-    searchIcon = document.createElement("i")
-    searchIcon.className = "fa-solid fa-magnifying-glass"
-    document.querySelector(".ts-wrapper").insertBefore(searchIcon, input)
-  })*/
 </script>
