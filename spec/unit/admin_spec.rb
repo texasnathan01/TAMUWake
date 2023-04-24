@@ -14,5 +14,4 @@ RSpec.describe Admin, type: :model do
     subject.first_name = "Axel"
     expect(subject).to be_valid
   end
-
 end
