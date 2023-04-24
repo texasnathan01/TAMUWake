@@ -4,16 +4,6 @@ body {
   overflow-x: hidden;
 }
 
-@font-face {
-   font-family: 'Americancaptain';
-   src: url('AMERICANCAPTAIN.otf');
-}
-
-@font-face {
-   font-family: 'Indoscreen';
-   src: url('INDOSCREEN.ttf');
-}
-
 mainContentHolder {
 	position: absolute;
 	margin-left: 100px;
@@ -37,65 +27,6 @@ pageTitleHolder {
 	padding-right: 100px;
 	padding-bottom:100px;
 	background-color: #d1d1d1;
-}
-
-a:link {
-	color: white;
-}
-
-a:visited { 
-	color: #AFAFAF;
-}
-
-.navbar {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  background-color: #3C0000;
-  display: inline;
-  text-align: center;
-  color: white;
-  font-size: 25px;
-  float: left;
-  border-right-style: solid;
-  border-color: black;
-  font-family: Indoscreen;
-}
-
-.title {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 2px;
-  padding-bottom: 1px;
-  background-color: #3C0000;
-  display: inline;
-  text-align: center;
-  color: white;
-  float: left;
-  border-right-style: solid;
-  border-color: black;
-  font-family: 'Americancaptain', sans-serif;
-  font-size: 55px;
-  line-height: 55px;
-}
-
-.navbar:hover {
-	background-color: #094169;
-}
-
-.navbarRightEnd {
-  border-radius: 0px 25px 25px 0px;
-  margin-right: 50px;
-}
-
-.navbarLeftEnd {
-  border-radius: 25px 0px 0px 25px;
-  border-left-style: solid;
-}
-
-.currentPage {
-	background-color: #206C9D;
 }
 
 banner {

@@ -2,6 +2,7 @@
 <html>
   <head>
     <title> Sign In | TAMU Wakeboarding </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
@@ -39,7 +40,7 @@
 
       <div class="flex-1 flex">
         <div class="h-full w-full">
-          <%= image_tag "wave_bg.jpg", class: "object-cover h-full" %>
+          <%= image_tag "wave_bg.jpg", class: "object-cover h-full w-full" %>
           </div>
       </div>
     </div>

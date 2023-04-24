@@ -1,5 +1,10 @@
-<div class="flex flex-row w-full border-b bg-tamu-red">
-    <nav class="flex flex-row flex-wrap px-3 py-5 w-full items-center">
+<div class="sticky top-0 z-50 flex flex-col w-full border-b bg-tamu-red">
+    <nav class="flex flex-row flex-wrap px-3 py-5 w-full items-center justify-between md:justify-start">
+        <div class="md:hidden pr-3">
+            <button role="button" type="button" class="p-2" id="nav-dropdown-btn" onclick="toggle()">
+                <i class="fa-solid fa-bars text-white"></i>
+            </button>
+        </div>
         <div class="">
             <div class="w-32">
                 <%= link_to home_path do %>
@@ -7,7 +12,7 @@
                 <% end %>
             </div>
         </div>
-        <div class="ml-5">
+        <div class="hidden ml-5 md:flex">
             <% if current_admin and (current_admin.has_role?("Admin") or current_admin.has_role?("Treasurer") or current_admin.has_role?("Driver")) %>
                 <%= link_to "Receipts", receipts_path, class: "text-white mx-1" %>
             <% end %>
@@ -17,7 +22,7 @@
             <%= link_to "Rides", wakeboard_sets_path, class: "text-white mx-1" %>
             <%= link_to "Help", help_path, class: "text-white mx-1" %>
         </div>
-        <div class="ml-auto">
+        <div class="md:ml-auto">
             <% if current_admin %>
                 <%= link_to accounts_path, class: "group" do %>
                     <div class="w-10 h-10">
@@ -36,4 +41,21 @@
             <% end %>
         </div>
     </nav>
+    <div class="hidden md:hidden box-shadow bg-tamu-red px-1 py-2 border-t border-slate-600 w-full flex flex-col space-y-2" id="nav-dropdown">
+        <% if current_admin and (current_admin.has_role?("Admin") or current_admin.has_role?("Treasurer") or current_admin.has_role?("Driver")) %>
+            <%= link_to "Receipts", receipts_path, class: "text-white mx-1" %>
+        <% end %>
+        <% if current_admin and current_admin.has_role?("Admin") %>
+            <%= link_to "Members", users_path, class: "text-white mx-1" %>
+        <% end %>
+        <%= link_to "Rides", wakeboard_sets_path, class: "text-white mx-1" %>
+        <%= link_to "Help", help_path, class: "text-white mx-1" %>
+    </div>
 </div>
+
+<script type="text/javascript">
+    dropdown = document.querySelector("#nav-dropdown")
+    const toggle = () => {
+        dropdown.classList.toggle("hidden")
+    }
+</script>
