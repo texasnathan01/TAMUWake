@@ -7,6 +7,9 @@ RSpec.describe('Member Pages Without Access', type: :feature) do
   before :each do
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
   end
 
   it 'visiting member page without sufficient permissions' do
@@ -22,6 +25,8 @@ RSpec.describe('Member Pages With Access', type: :feature) do
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(chris))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(true))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
   end
 
   it 'visiting member page with sufficient permissions' do

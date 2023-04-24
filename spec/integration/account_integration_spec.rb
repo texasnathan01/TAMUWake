@@ -7,6 +7,9 @@ RSpec.describe('Using Account Page and Tools as a Rider', type: :feature) do
   before do
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
   end
 
   it 'and visiting account page' do
