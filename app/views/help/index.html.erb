@@ -71,15 +71,26 @@
   <%# Additional Support Documents %>
   <h3 class="text-3xl mb-4">Additional Support Documents</h3>
   <p class="font-bold">These documents can be used for further guidence in using this website:</p>
-  <p>Using the Treasury:  <a href="/support_docs/treasury.pdf">View</a></p>
-  <p>Transferring Ownership:  <a href="/support_docs/transfer.pdf">View</a></p>
+
   <p>Rider Controls:  <a href="/support_docs/rider.pdf">View</a></p>
-  <p>Recovering Website:  <a href="/support_docs/recovery.pdf">View</a></p>
-  <p>Making Database Backups:  <a href="/support_docs/backups.pdf">View</a></p>
-  <p>App Instillation/Setup:  <a href="/support_docs/setup.pdf">View</a></p>
-  <p>Driver Controls:  <a href="/support_docs/driver.pdf">View</a></p>
-  <p>Admin Controls:  <a href="/support_docs/admin.pdf">View</a></p>
-  <p>Updating the Slideshow:  <a href="/support_docs/slideshow.pdf">View</a></p>
+
+  <% if @user.has_role?("Driver") %>
+    <p>Driver Controls:  <a href="/support_docs/driver.pdf">View</a></p>
+    <p>Using the Treasury:  <a href="/support_docs/treasury.pdf">View</a></p>
+  <% end %>
+
+  <% if @user.has_role?("Treasurer") %>
+    <p>Using the Treasury:  <a href="/support_docs/treasury.pdf">View</a></p>
+  <% end %>
+
+  <% if @user.has_role?("Admin") %>
+    <p>Admin Controls:  <a href="/support_docs/admin.pdf">View</a></p>
+    <p>Recovering Website:  <a href="/support_docs/recovery.pdf">View</a></p>
+    <p>Making Database Backups:  <a href="/support_docs/backups.pdf">View</a></p>
+    <p>App Installation/Setup:  <a href="/support_docs/setup.pdf">View</a></p>
+    <p>Transferring Ownership:  <a href="/support_docs/transfer.pdf">View</a></p>
+    <p>Updating the Slideshow:  <a href="/support_docs/slideshow.pdf">View</a></p>
+  <% end %>
 
   <%# Report any Bugs %>
   <h3 class="text-3xl mb-4">Reporting Bugs</h3>
