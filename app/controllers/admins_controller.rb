@@ -22,15 +22,27 @@ class AdminsController < ApplicationController
   end
 
   def show 
-    user = Admin.find(params[:id])
-    # retrieving the roles associated to the user
-    @roles = user.set_roles 
+    if current_admin.has_role?("Admin") || current_admin.email == @user.email
+      # retrieving the roles associated to the user
+      @roles = @user.set_roles 
+    else
+      # redirect to account if they do not have permission
+      respond_to do |format|
+        format.html { redirect_to(accounts_url, notice: "You do not have access to that page. Contact your adminstrator for help.") }
+      end
+    end
   end
   
   def edit
-    user = Admin.find(params[:id])
-    # retrieving the roles associated to the user
-    @roles = user.set_roles 
+    if current_admin.has_role?("Admin") || current_admin.email == @user.email
+      # retrieving the roles associated to the user
+      @roles = @user.set_roles 
+    else
+      # redirect to account if they do not have permission
+      respond_to do |format|
+        format.html { redirect_to(accounts_url, notice: "You do not have access to that page. Contact your adminstrator for help.") }
+      end
+    end
   end
 
   # PATCH/PUT /users/1 or /users/1.json
