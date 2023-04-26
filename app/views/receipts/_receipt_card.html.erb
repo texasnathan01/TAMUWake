@@ -20,7 +20,7 @@
         <p class="text-emerald-400 font-medium">$<%= receipt.value %></p>
       </div>
 
-      <p class="text-sm text-neutral-500"><%= receipt.date_made.strftime("%-d %b, %Y") %></p>
+      <p class="text-sm text-neutral-500"><%= receipt.date_made.strftime("%-d %b, %Y") if !receipt.date_made.nil? %></p>
     </div>
   </div>
 <% end %>
