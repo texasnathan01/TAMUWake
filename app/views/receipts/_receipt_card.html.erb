@@ -12,7 +12,11 @@
 
     <div class="flex-3 w-full items-between">
       <div class="flex flex-row justify-between">
-        <p><%= receipt.admin.try(:first_name) + " " + receipt.admin.try(:last_name) %></p>
+        <% unless receipt.admin.nil? %>
+          <p><%= receipt.admin.try(:first_name) + " " + receipt.admin.try(:last_name) %></p>
+        <% else %>
+          <p>Deleted User</p>
+        <% end %>
         <p class="text-emerald-400 font-medium">$<%= receipt.value %></p>
       </div>
 
