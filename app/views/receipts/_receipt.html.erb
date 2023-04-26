@@ -46,20 +46,32 @@
     <div class="flex flex-col border rounded-lg p-3">
       <p class="text-gray-500 mb-2">User</p>
       <div class="">
-        <%= link_to admin_path(@receipt.admin) do %>
-          <%= render partial: "shared/profile_pill", locals: { user: @receipt.admin } %>
+        <% unless @receipt.admin.nil? %>
+          <%= link_to admin_path(@receipt.admin) do %>
+            <%= render partial: "shared/profile_pill", locals: { user: @receipt.admin } %>
+          <% end %>
+        <% else %>
+          <p class="font-medium">Deleted User</p>
         <% end %>
       </div>
     </div>
 
     <div class="flex flex-col border rounded-lg p-3">
       <p class="text-gray-500 mb-2">UIN</p>
-      <p class="font-medium"><%= @receipt.admin.uin %></p>
+      <% unless @receipt.admin.nil? %>
+        <p class="font-medium"><%= @receipt.admin.uin %></p>
+      <% else %>
+        <p class="font-medium">N/A</p>
+      <% end %>
     </div>
 
     <div class="flex flex-col border rounded-lg p-3">
       <p class="text-gray-500 mb-2">Address</p>
-      <p class="font-medium"><%= @receipt.admin.address %></p>
+      <% unless @receipt.admin.nil? %>
+        <p class="font-medium"><%= @receipt.admin.address %></p>
+      <% else %>
+        <p class="font-medium">N/A</p>
+      <% end %>
     </div>
 
     <div class="flex flex-col border rounded-lg p-3">
