@@ -1,0 +1,22 @@
+<div class="md:mx-5 h-full max-h-96 overflow-y-auto bg-neutral-50 rounded-lg drop-shadow-lg">
+  <div class="py-2 px-3 mb-2 border-b sticky bg-neutral-50 top-0 z-30">
+    <p class="text-neutral-700">
+      <span class="relative inline-flex h-3 w-3 mr-1">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full <%= pulse_color %> opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-3 w-3 <%= pulse_color %>"></span>
+      </span>
+      <%= card_title %>
+      <span class="rounded-full bg-sky-700 text-gray-100 px-2 py-1 text-sm"><%= receipts.length %></span></p>
+  </div>
+
+  <div class="w-full px-5 mt-3">
+    <% if receipts.length > 0 %>
+      <%= render partial: "receipt_card", collection: receipts, as: :receipt %>
+    <% else %>
+      <div class="flex flex-col items-center justify-center w-full">
+        <p class="text-neutral-400 text-2xl"><i class="fa-solid fa-receipt"></i></p>
+        <p class="text-sm text-neutral-400">No Receipts Available</p>
+      </div>
+    <% end %>
+  </div>
+</div>

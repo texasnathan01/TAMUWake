@@ -1,30 +1,36 @@
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
   <%- title "Your Account | TAMU Wakeboarding" %>
+
+  <style>
+  </style>
 </head>
- <p class="bannerBox"></p>
-  
-<h1 class="text-5xl mb-5 text-center">
-  <pageTitleHolder>  Welcome to the TAMUWake Website <%=@user.first_name%>!</pageTitleHolder>
-</h1>
+ <%# <p class="bannerBox"></p> %>
 
-
-<br>
-<br>
-<br>
-<br>
-  <div class="container mx-auto px-4 text-center ">
-       
-      <div class="grid grid-cols-2 gap-4 bg-white shadow-md rounded-lg p-6">
-        <div>
-            <img src="<%=@user.avatar_url %>" alt="Image not found" class="mx-auto rounded-full" style="width: 250px; height: 250px;">
-        </div>
-        <div>
-          <%= render @user %>
-        </div>
+  <div class="container mt-10 mx-auto px-4 py-5 text-center ">
+    <div class="flex flex-row">
+      <h1 class="text-3xl mb-2 text-left">
+        Welcome, <%=@user.first_name%>!
+      </h1>
     </div>
-     <%= link_to 'Edit Account Info', edit_admin_path(@user),class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> 
-  <%= link_to "My Set History", set_history_path,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100"%>
-  <%= link_to "Sign Out", destroy_admin_session_path,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
+    <div class="flex flex-row flex-wrap justify-between items-center">
+      <h1 class="text-lg mb-5 text-left text-gray-400">
+        Your Profile
+      </h1>
+      <div class="flex flex-row w-full md:w-auto space-x-2 justify-center pb-5">
+        <%= link_to 'Edit Account Info', edit_admin_path(@user),class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %> 
+        <%= link_to "My Set History", set_history_path,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100"%>
+        <%= link_to "Sign Out", destroy_admin_session_path,class: "border rounded-md px-3 py-1 bg-sky-500 hover:bg-sky-700 text-neutral-100" %>
+      </div>
+    </div>
+       
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-white shadow-md rounded-lg p-6">
+      <div>
+          <img src="<%=@user.avatar_url %>" alt="Image not found" class="mx-auto rounded-full" style="width: 250px; height: 250px;">
+      </div>
+      <div>
+        <%= render @user %>
+      </div>
+    </div>
   </div>
  
