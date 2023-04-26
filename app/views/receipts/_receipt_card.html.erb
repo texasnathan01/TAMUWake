@@ -12,7 +12,7 @@
 
     <div class="flex-3 w-full items-between">
       <div class="flex flex-row justify-between">
-        <p><%= receipt.admin.first_name + " " + receipt.admin.last_name %></p>
+        <p><%= receipt.admin.try(:first_name) + " " + receipt.admin.try(:last_name) %></p>
         <p class="text-emerald-400 font-medium">$<%= receipt.value %></p>
       </div>
 
