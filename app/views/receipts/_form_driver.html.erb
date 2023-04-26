@@ -11,14 +11,8 @@
     </div>
   <% end %>
 
-  <div hidden>
-    <%= @user = Admin.find_by(:email => current_admin.email) %>
-    <p> <%= @user.id %> </p>
-  </div>
-
   <div>
-    <%= form.hidden_field :admin_id, value: @user.id %>
-    <!-- <p> Driver ID: <%= @user.id %> </p> -->
+    <%= form.hidden_field :admin_id, value: current_admin.id %>
   </div>
 
   <div>

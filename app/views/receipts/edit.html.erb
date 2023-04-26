@@ -4,12 +4,8 @@
 </head>
   
 <p class="bannerBox"></p>
-
-<div hidden>
-  <p> <%= @user.id %> </p>
-</div>
  
-<mainContentHolder>
+<div class="container mx-auto px-10 py-4 rounded-lg bg-neutral-300">
 
   <!-- This section will only be shown if the user is a treasurer (code 3) -->
   <% if @user.has_role?("Treasurer") %>
@@ -33,4 +29,4 @@
     <%= link_to "Back to receipts", receipts_path %>
   </div>
  
-</mainContentHolder>
+</div>

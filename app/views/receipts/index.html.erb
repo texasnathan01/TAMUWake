@@ -5,108 +5,48 @@
   
 <p class="bannerBox"></p>
   
-<h1 class="text-5xl mb-5 text-center">
-  <pageTitleHolder>Reciepts</pageTitleHolder>
-</h1>
-  
-<div hidden>
-  <p> <%= @user.id %> </p>
+<div class="container md:mx-auto px-10 py-5 bg-neutral-300 rounded-lg">
+  <h1 class="text-4xl mb-5">
+    Dashboard
+  </h1>
+
+  <div class="flex flex-row justify-between items-center mb-5">
+    <h3 class="text-xl"><%= @user.has_role?("Driver") and !(@user.has_role?("Treasurer") or @user.has_role?("Admin")) ? "Your Receipts" : "All Receipts" %></h3>
+    <%= link_to new_receipt_path, class: "text-neutral-50 text-sm p-3 bg-sky-800 hover:bg-sky-600 transition-all ease-in-out duration-250 rounded-md" do %>
+      <i class="fa-solid fa-circle-plus"></i> New Receipt
+    <% end %>
+  </div>
+
+
+  <div class="grid grid-cols-1 grid-rows-3 gap-y-3 md:grid-rows-1 md:grid-cols-3 md:gap-y-0 justify-between items-center">
+    <!-- This section will only be shown if the user is a driver (code 1) -->
+    <% if @user.has_role?("Driver") and !(@user.has_role?("Admin") or @user.has_role?("Treasurer") ) %>
+      <!-- Stage 1 -->
+      <%= render partial: "stage_card", locals: { pulse_color: "bg-red-600", card_title: "Pending Approval", receipts: @receipts.where(stage: 1, admin_id: @user.id) } %>
+
+      <!-- Stage 2 -->
+      <%= render partial: "stage_card", locals: { pulse_color: "bg-yellow-300", card_title: "Approved", receipts: @receipts.where(stage: 2, admin_id: @user.id) } %>
+
+      <!-- Stage 3 -->
+      <%= render partial: "stage_card", locals: { pulse_color: "bg-green-600", card_title: "Refund Received", receipts: @receipts.where(stage: 3, admin_id: @user.id) } %>
+    
+    <!-- This section will only be shown if the user is a treasurer (code 3) -->
+    <% elsif @user.has_role?("Treasurer") or @user.has_role?("Admin") %>
+      
+      <!-- Stage 1 -->
+      <%= render partial: "stage_card", locals: { pulse_color: "bg-red-600", card_title: "Pending Approval", receipts: @receipts.where(stage: 1) } %>
+
+      <!-- Stage 2 -->
+      <%= render partial: "stage_card", locals: { pulse_color: "bg-yellow-300", card_title: "Approved", receipts: @receipts.where(stage: 2) } %>
+
+      <!-- Stage 3 -->
+      <%= render partial: "stage_card", locals: { pulse_color: "bg-green-600", card_title: "Refund Received", receipts: @receipts.where(stage: 3) } %>
+
+    <!-- This section will only be shown if the user isn't -->
+    <% else %>
+      <p class="font-bold"> Welcome to the treasury! Only drivers or the treasurer can see this page. If you think you should be seeing this page but cannot, please contact your administrator </p>
+
+    <% end %>
+  </div>
+
 </div>
-  
-<mainContentHolder>
-
-  <!-- This section will only be shown if the user is a driver (code 1) -->
-  <% if @user.has_role?("Driver") %>
-    <h3 class="text-3xl mb-4"> Receipts for <%= @user.first_name%> <%= @user.last_name%> : </h3>
-	
-    <p class="font-bold"> User ID: <%= @user.id%></p>
-
-    <%= link_to "Create new receipt", new_receipt_path %>
- 
-    <div id="stage_1">
-	  <p class="font-bold">Pending Treasurer Approval (Stage 1)</p>
-    <% @receipts.where(stage: 1, admin_id: @user.id).each do |receipt| %>
-      <p>
-        <strong>Receipt ID:</strong>
-        <%= receipt.id %>
-        </br>
-        <%= link_to "Show this receipt", receipt %>
-      </p>
-    <% end %>
-    </div>
-    
-    <div id="stage_2">
-	  <p class="font-bold">Approved By Treasurer, Awaiting Refund (Stage 2)</p>
-      <% @receipts.where(stage: 2, admin_id: @user.id).each do |receipt| %>
-        <p>
-          <strong>Receipt ID:</strong>
-          <%= receipt.id %>
-          </br>
-          <%= link_to "Show this receipt", receipt %>
-        </p>
-      <% end %>
-    </div>
-
-    <div id="stage_3">
-	  <p class="font-bold">Refund Received (Stage 3)</p>
-      <% @receipts.where(stage: 3, admin_id: @user.id).each do |receipt| %>
-        <p>
-          <strong>Receipt ID:</strong>
-          <%= receipt.id %>
-          </br>
-          <%= link_to "Show this receipt", receipt %>
-        </p>
-      <% end %>
-    </div>
-  
-  <!-- This section will only be shown if the user is a treasurer (code 3) -->
-  <% elsif @user.has_role?("Treasurer") %>
-  
-    <h3 class="text-3xl mb-4"> Treasurer Page, Showing All Receipts: </h3>
-    
-
-    <%= link_to "New receipt", new_receipt_path %>
- 
-    <div id="stage_1">
-    <p class="font-bold"> Pending Treasurer Approval (Stage 1)</p>
-    <% @receipts.where(stage: 1).each do |receipt| %>
-      <p>
-        <strong>Receipt ID:</strong>
-        <%= receipt.id %>
-        </br>
-        <%= link_to "Show this receipt", receipt %>
-      </p>
-    <% end %>
-    </div>
-    
-    <div id="stage_2">
-      <p class="font-bold"> Approved By Treasurer, Awaiting Refund (Stage 2)</p>
-      <% @receipts.where(stage: 2).each do |receipt| %>
-        <p>
-          <strong>Receipt ID:</strong>
-          <%= receipt.id %>
-          </br>
-          <%= link_to "Show this receipt", receipt %>
-        </p>
-      <% end %>
-    </div>
-
-    <div id="stage_3">
-      <p class="font-bold"> Refund Received (Stage 3)</p>
-      <% @receipts.where(stage: 3).each do |receipt| %>
-        <p>
-          <strong>Receipt ID:</strong>
-          <%= receipt.id %>
-          </br>
-          <%= link_to "Show this receipt", receipt %>
-        </p>
-      <% end %>
-    </div>
-
-  <!-- This section will only be shown if the user isn't -->
-  <% else %>
-    <p class="font-bold"> Welcome to the treasury! Only drivers or the treasurer can see this page. If you think you should be seeing this page but cannot, please contact your administrator </p>
-
-  <% end %>
-
-</mainContentHolder>
