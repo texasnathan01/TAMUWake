@@ -5,7 +5,11 @@
     </div>
     
     <div class="flex flex-row flex-wrap first:m-0">
-      <%= render partial: "shared/profile_pill", collection: drivers, as: :user %>
+      <% if drivers.length > 0 %>
+        <%= render partial: "shared/profile_pill", collection: drivers, as: :user %>
+      <% else %>
+        <p>No Drivers</p>
+      <% end %>
     </div>
     
     <div>

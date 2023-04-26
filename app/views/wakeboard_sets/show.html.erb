@@ -1,4 +1,4 @@
-<% driver_names = (@drivers.length > 1) ? @drivers[0].first_name + " and " + @drivers[1].first_name : @drivers[0].first_name %>
+<% driver_names = (@drivers.length > 1) ? @drivers[0].try(:first_name) + " and " + @drivers[1].try(:first_name) : @drivers[0].try(:first_name) %>
 
 <head>
 	<%= stylesheet_link_tag "styles.css" %>
