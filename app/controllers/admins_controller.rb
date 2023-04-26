@@ -52,7 +52,7 @@ class AdminsController < ApplicationController
     if current_admin.has_role?("Admin") || current_admin.email == @user.email
       respond_to do |format|
         if @user.update(admin_params)
-          format.html { redirect_to(user_url(@user), notice: "User was successfully updated.") }
+          format.html { redirect_to(admin_path(@user), notice: "User was successfully updated.") }
           format.json { render(:show, status: :ok, location: @user) }
         else
           format.html { render(:edit, status: :unprocessable_entity) }

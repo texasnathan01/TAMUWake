@@ -25,10 +25,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1 or /users/1.json
-  def show
-  end
-
   def approval
     # need to check the role of the user
     @user = current_admin
@@ -45,11 +41,6 @@ class UsersController < ApplicationController
         format.html { redirect_to(accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help.") }
       end
     end
-  end
-
-  # GET /users/new
-  def new
-    @user = User.new
   end
 
   # DELETE /users/1 or /users/1.json
