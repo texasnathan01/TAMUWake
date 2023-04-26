@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
     include Pagy::Backend
 
   private
+
     # need to validate the user can access the page
     def check_user_approval
         logger.info(params)

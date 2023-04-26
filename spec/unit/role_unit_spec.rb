@@ -3,7 +3,7 @@
 
 RSpec.describe Role, type: :model do
   subject do
-    described_class.new(id: 1 ,role_name: 'team')
+    described_class.new(id: 1,role_name: 'team')
   end
 
   it 'is valid with valid attributes' do

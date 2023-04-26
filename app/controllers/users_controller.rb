@@ -25,10 +25,6 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/1 or /users/1.json
-  def show
-  end
-
   def approval
     # need to check the role of the user
     @user = current_admin
@@ -47,29 +43,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  def new
-    @user = User.new
-  end
-
-  # DELETE /users/1 or /users/1.json
-  def destroy
-    # need to check the role of the user to allow for deletion
-    if @user.has_role?("Admin")
-      @user.destroy
-      respond_to do |format|
-        format.html { redirect_to(users_url, notice: "User was successfully destroyed.") }
-        format.json { head(:no_content) }
-      end
-    else
-      # redirect to account if they do not have permission
-      respond_to do |format|
-        format.html { redirect_to(accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help.") }
-      end
-    end
-  end
-
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = Admin.find(params[:id])
