@@ -1,7 +1,7 @@
 <%= link_to receipt do %>
   <div class="flex flex-row py-3 px-3 mb-3 bg-neutral-200 items-center rounded-lg z-10">
     <div class="w-10 mr-4">
-      <% if receipt.admin.avatar_url.present?%>
+      <% if !receipt.admin.nil? and receipt.admin.avatar_url.present?%>
         <img src="<%= receipt.admin.avatar_url %>" class="w-full object-fit rounded-full" />
       <% else %>
         <div class="flex w-8 h-8 justify-center items-center rounded-full bg-sky-600 text-neutral-50">
