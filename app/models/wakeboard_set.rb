@@ -127,4 +127,72 @@ class WakeboardSet < ApplicationRecord
   rescue ActiveRecord::Rollback
     false
   end
+
+  # edit function for sets, allows
+  # drivers to edit the start and end
+  # time and the secondary driver
+  # associated with the set
+  def edit(params, user_id, driver_id)
+    if user_id.blank?
+      return false
+    end
+
+    # exit if the person editing is not a driver
+    if !self.set_drivers.find { |d| d.admin_id == user_id }
+      return false
+    end
+
+    # find first driver who is not the current user
+    # submitting the edit request (there should only be 2 drivers)
+    additional_driver = self.set_drivers.find { |d| d.admin_id != user_id }
+    
+    # the secondary driver is being replaced
+    if additional_driver.try(:admin_id) != driver_id and !driver_id.blank?
+      transaction do
+        additional_driver.destroy! if !additional_driver.nil?
+        SetDriver.create!(wakeboard_set_id: self.id, admin_id: driver_id)
+        self.update!(params)
+      end
+
+      return true
+    # otherwise no change in driver and can simply save the set
+    else
+      return self.update(params)
+    end
+  rescue ActiveRecord::Rollback
+    return false
+  end
+
+  # creates a set with drivers associated
+  # a new set does not need to be created with
+  # a secondary driver but must have at least
+  # one driver (current user creating the set)
+  def create_with_driver(user_id, driver_id)
+    if user_id.blank?
+      return false
+    end
+
+    # create 2 new entries in the driver join table
+    # and save the new set
+    if !driver_id.blank?
+      self.driver_count = 2
+      transaction do
+        self.save!
+        SetDriver.create!(wakeboard_set_id: self.id, admin_id: user_id)
+        SetDriver.create!(wakeboard_set_id: self.id, admin_id: driver_id)
+      end
+    else
+      self.driver_count = 1
+      transaction do
+        self.save!
+        SetDriver.create!(wakeboard_set_id: self.id, admin_id: user_id)
+      end
+    end
+
+    return true
+  rescue ActiveRecord::Rollback, ActiveRecord::RecordInvalid
+    return false
+  end
 end
+
+

@@ -1,7 +1,48 @@
-<head>
-  <%- title "Sign In | TAMU Wakeboarding" %>
-</head>
+<!DOCTYPE html>  
+<html>
+  <head>
+    <title> Sign In | TAMU Wakeboarding </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
 
-<h1 style="padding: 50px;" class = "center">  
-Welcome to the official TAMU Wakeboarding website, please <%= link_to "sign in with your TAMU account to continue", admin_google_oauth2_omniauth_authorize_path%>
-</h1>
+  <body class="w-screen h-screen overflow-x-0 m-0 p-0 bg-white">
+    <div class="flex flex-row h-full w-full">
+      <div class="flex flex-col justify-center px-10">
+        <div class="px-10 mt-20">
+          <div class="w-36 rounded-lg bg-tamu-red px-2">
+            <%= image_tag "TAMUWake_Logo_1.png" %>
+          </div>
+        </div>
+
+        <div class="px-10 py-4 my-auto h-1/2 flex flex-col justify-around">
+          <div class="">
+            <h1 class="font-poppins text-3xl font-bold">Welcome</h1>
+            <h5 class="text-md text-gray-500 mt-2">Sign in with your TAMU account to continue.</h5>
+          </div>
+          
+          <div class="">
+            <%= link_to admin_google_oauth2_omniauth_authorize_path, class: "group" do %>
+              <div class="w-full flex items-center justify-center border border-gray-400 rounded-full py-2 bg-white group-hover:bg-gray-100 transition-all duration-150">
+                <div class="w-8 h-8 mr-3">
+                  <%= image_tag "https://companieslogo.com/img/orig/GOOG-0ed88f7c.png?t=1633218227", class: "rounded-full w-full" %>
+                </div>
+                <span class="font-semibold">Sign in with Google</span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1 flex">
+        <div class="h-full w-full">
+          <%= image_tag "wave_bg.jpg", class: "object-cover h-full w-full" %>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

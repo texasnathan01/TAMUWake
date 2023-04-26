@@ -9,6 +9,7 @@ RSpec.describe('Go to receipts page as treasurer', type: :feature) do
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(true))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
   end
 
   it 'valid inputs' do
@@ -25,6 +26,7 @@ RSpec.describe('Go to receipts page as driver', type: :feature) do
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(true))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
   end
 
   it 'valid inputs' do
@@ -41,6 +43,7 @@ RSpec.describe('Go to receipts page as non driver and non treasurer', type: :fea
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
   end
 
   it 'valid inputs' do
@@ -57,6 +60,7 @@ RSpec.describe('Driver creating a new receipt', type: :feature) do
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(true))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
   end
 
   it 'valid inputs' do
@@ -84,6 +88,7 @@ RSpec.describe('Treasurer creating a new receipt', type: :feature) do
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(true))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
   end
 
   it 'valid inputs' do
