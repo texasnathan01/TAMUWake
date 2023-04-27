@@ -18,17 +18,31 @@
     
     <div>
       <p>
-        <%= wakeboard_set.scheduled_date.strftime("%A, %B %e") %>
+        <%= wakeboard_set.scheduled_date.strftime("%a, %B %e") %>
       </p>
     </div>
 
     <div>
-      <p class="text-gray-500">Time</p>
+      <p class="text-gray-500">Start</p>
     </div>
     
     <div>
       <p>
         <%= wakeboard_set.scheduled_date.strftime("%l:%M %P") %>
+      </p>
+    </div>
+
+    <div>
+      <p class="text-gray-500">End</p>
+    </div>
+    
+    <div>
+      <p>
+        <% unless wakeboard_set.end_time.nil? %>
+          <%= wakeboard_set.end_time.strftime("%l:%M %P") %>
+        <% else %>
+          N/A
+        <% end %>
       </p>
     </div>
 

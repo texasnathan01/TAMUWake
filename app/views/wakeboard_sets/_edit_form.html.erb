@@ -1,6 +1,6 @@
 <%= form_with(model: wakeboard_set) do |form| %>
   <div class="flex flex-row mb-3">
-    <h5 class="text-gray-700 text-lg">Create a Set</h5>
+    <h5 class="text-gray-700 text-lg">Edit Set <%= wakeboard_set.id %></h5>
   </div>
 
   <% if wakeboard_set.errors.any? %>
@@ -15,10 +15,15 @@
     </div>
   <% end %>
 
-  <div class="flex flex-row mb-5">
+  <div class="flex flex-row mb-5 justify-between flex-wrap">
     <div>
       <%= form.label :scheduled_date, "Start Time", class: "text-gray-700 block" %>
       <%= form.datetime_field :scheduled_date, class: "rounded-lg bg-gray-200 border-0 focus:outline-none focus:ring-gray-700 focus:border-0" %>
+    </div>
+
+    <div>
+      <%= form.label :end_time, "End", class: "text-gray-700 block" %>
+      <%= form.time_field :end_time, class: "rounded-lg bg-gray-200 border-0 focus:outline-none focus:ring-gray-700 focus:border-0", value: wakeboard_set.end_time.try(:strftime,'%H:%M') %>
     </div>
   </div>
 
@@ -31,7 +36,7 @@
     </div>
   </div>
 
-  <div class="flex flex-row justify-end">
+  <div class="flex flex-row justify-between md:justify-end">
     <%= link_to wakeboard_set, class: "mr-3 text-center px-4 py-2 rounded-lg border border-sky-400 text-sky-600" do %>
       Discard
     <% end %>
