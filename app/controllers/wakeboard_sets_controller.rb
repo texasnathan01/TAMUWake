@@ -157,7 +157,8 @@ class WakeboardSetsController < ApplicationController
         :chib_limit,
         :driver_count,
         :driver_limit,
-        :scheduled_date 
+        :scheduled_date,
+        :end_time
       )
     end
 end

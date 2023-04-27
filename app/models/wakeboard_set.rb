@@ -6,7 +6,9 @@ class WakeboardSet < ApplicationRecord
   validates :chib_count, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
   validates :driver_count, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validates :scheduled_date, presence: true, not_in_past: true
+  validates :end_time, presence: true, allow_blank: false
   validate :counts_under_limit
+  validate :end_after_start_time
 
   # checks to ensure all count attributes are under
   # their respective limits
@@ -16,6 +18,25 @@ class WakeboardSet < ApplicationRecord
     errors.add(:chib_count, "exceeds the chib limit") if chib_count > chib_limit
 
     errors.add(:driver_count, "exceeds the driver limit") if driver_count > driver_limit
+  end
+
+  def end_after_start_time
+    return if end_time.blank? or scheduled_date.blank?
+
+    # convert end_time to a usuable format with the
+    # schedule date, time in ruby is stored with a date
+    # see https://stackoverflow.com/questions/34978905/rails-activerecord-postgres-time-format/34979912#34979912
+    formatted_end_time = Time.new(
+      scheduled_date.year, 
+      scheduled_date.month, 
+      scheduled_date.day,
+      end_time.hour,
+      end_time.min,
+      end_time.sec,
+      scheduled_date.formatted_offset(false)
+    )
+
+    errors.add(:end_time, "is before the scheduled start time") if formatted_end_time.before?(scheduled_date.to_time)
   end
 
   # returns the dates that bound the sets
