@@ -8,6 +8,7 @@ RSpec.describe WakeboardSet, type: :model do
       chib_count: 0,
       driver_count: 1,
       scheduled_date: (DateTime.current).tomorrow,
+      end_time: Time.current.advance(hours: 1)
     )
   end
 
@@ -100,7 +101,8 @@ RSpec.describe WakeboardSet, type: :model do
         dib_count: 0,
         chib_count: 0,
         driver_count: 1,
-        scheduled_date: (DateTime.current).tomorrow
+        scheduled_date: (DateTime.current).tomorrow,
+        end_time: Time.current.advance(hours: 1)
       )
     end
 
@@ -214,7 +216,8 @@ RSpec.describe WakeboardSet, type: :model do
       dib_count: 0,
       chib_count: 0,
       driver_count: 1,
-      scheduled_date: (DateTime.current).tomorrow
+      scheduled_date: (DateTime.current).tomorrow,
+      end_time: Time.current.advance(hours: 1)
     )}
     let(:user) { Admin.create(email: "aramone@tamu.edu", first_name: "Axel", last_name: "Ramone") }
 
@@ -397,7 +400,7 @@ RSpec.describe WakeboardSet, type: :model do
     # )}
     # let(:user) { Admin.create(email: "aramone@tamu.edu", first_name: "Axel", last_name: "Ramone") }
     before :each do
-      @set = WakeboardSet.create!(dib_count: 0, chib_count: 0, driver_count: 1, scheduled_date: (DateTime.current.tomorrow))
+      @set = WakeboardSet.create!(dib_count: 0, chib_count: 0, driver_count: 1, scheduled_date: (DateTime.current.tomorrow), end_time: Time.current.advance(hours: 1))
       @user = Admin.create!(email: "aramone@tamu.edu", first_name: "Axel", last_name: "Ramone") 
     end
 
@@ -448,7 +451,7 @@ RSpec.describe WakeboardSet, type: :model do
     # let(:user) { Admin.create(email: "aramone@tamu.edu", first_name: "Axel", last_name: "Ramone") }
 
     before :each do
-      @set = WakeboardSet.create!(dib_count: 0, chib_count: 0, driver_count: 1, scheduled_date: (DateTime.current.tomorrow))
+      @set = WakeboardSet.create!(dib_count: 0, chib_count: 0, driver_count: 1, scheduled_date: (DateTime.current.tomorrow), end_time: Time.current.advance(hours: 1))
       @user = Admin.create!(email: "aramone@tamu.edu", first_name: "Axel", last_name: "Ramone") 
     end
     it 'returns false if the rider isn\'t on the set' do

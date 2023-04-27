@@ -39,23 +39,24 @@ RSpec.describe 'Driver Creating a set', type: :feature do
   scenario "Driver creating a valid set" do
     date = DateTime.current.tomorrow
     visit new_wakeboard_set_path
-    fill_in 'Start Time', with: date
+    fill_in 'Start', with: date
+    fill_in 'End', with: Time.current.advance(hours: 1)
     click_on 'Save'
-    expect(page).not_to have_content('Error')
-    visit wakeboard_sets_path
+    expect(page).not_to have_content('errors prohibited')
     expect(page).to have_content(admin.first_name)
-    expect(page).to have_content(date.strftime("%A"))
+    expect(page).to have_content(date.strftime("%a"))
   end
 
   scenario "Driver creating set with date in the past" do
-    date = DateTime.current.tomorrow
+    date = DateTime.current.prev_day
     visit new_wakeboard_set_path
-    fill_in 'Start Time', with: date
+    fill_in 'Start', with: date
+    fill_in 'End', with: Time.new(date.year, date.month, date.day, date.hour + 1, date.min)
     click_on 'Save'
-    expect(page).not_to have_content('Error')
+    expect(page).to have_content('errors prohibited')
     visit wakeboard_sets_path
-    expect(page).to have_content(admin.first_name)
-    expect(page).to have_content(date.strftime("%A"))
+    expect(page).not_to have_content(admin.first_name)
+    expect(page).not_to have_content(date.strftime("%a"))
   end
 
 end
@@ -74,7 +75,8 @@ RSpec.describe 'Joining a set', type: :feature do
       dib_count: 0,
       chib_count: 0,
       driver_count: 1,
-      scheduled_date: DateTime.current.tomorrow
+      scheduled_date: DateTime.current.tomorrow,
+      end_time: Time.current.advance(hours: 1)
     )
     SetDriver.create!(wakeboard_set_id: @set.id, admin_id:admin.id)
   end
@@ -142,7 +144,8 @@ RSpec.describe 'Leaving a set', type: :feature do
       dib_count: 0,
       chib_count: 0,
       driver_count: 1,
-      scheduled_date: DateTime.current.tomorrow
+      scheduled_date: DateTime.current.tomorrow,
+      end_time: Time.current.advance(hours: 1)
     )
     SetDriver.create!(wakeboard_set_id: @set.id, admin_id:admin.id)
   end
