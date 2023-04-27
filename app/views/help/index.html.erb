@@ -4,16 +4,14 @@
 </head>
 
 <p class="bannerBox"></p>
-  
-<h1 class="text-5xl mb-5 text-center">
-  <pageTitleHolder>FAQs</pageTitleHolder>
-</h1>
 
-<div hidden>
-  <p> <%= @user=current_admin %> </p>
-</div>
 
-<mainContentHolder>
+  <% @user=current_admin %> </p>
+
+<div class="container mx-auto px-1 py-4 bg-neutral-50">
+  <h1 class="text-5xl mb-5 text-center">
+    FAQs
+  </h1>
 
   <%# Rider FAQs %>
   <h3 class="text-3xl mb-4">Joining Sets</h3>
@@ -68,10 +66,34 @@
     <p class="mb-3">When you see a receipt in stage 1, that means it is pending your approval. Open up the receipt and click "Edit this receipt" to move it to the next stage. Once opened, fill out the "Date approved" catory, and change the status column to Stage 2. Then as the treasurer you must use the info of this receipt to submit a refund request to SOFC. If you wish to deny a refund request, when opening a receipt simply click "Destroy this receipt."</p>
   <% end %>
 
+  <%# Additional Support Documents %>
+  <h3 class="text-3xl mb-4">Additional Support Documents</h3>
+  <p class="font-bold">These documents can be used for further guidence in using this website:</p>
+
+  <p>Rider Controls:  <a href="/support_docs/rider.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+
+  <% if @user.has_role?("Driver") %>
+    <p>Driver Controls:  <a href="/support_docs/driver.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+    <p>Using the Treasury:  <a href="/support_docs/treasury.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+  <% end %>
+
+  <% if @user.has_role?("Treasurer") %>
+    <p>Using the Treasury:  <a href="/support_docs/treasury.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+  <% end %>
+
+  <% if @user.has_role?("Admin") %>
+    <p>Admin Controls:  <a href="/support_docs/admin.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+    <p>Recovering Website:  <a href="/support_docs/recovery.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+    <p>Making Database Backups:  <a href="/support_docs/backups.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+    <p>App Installation/Setup:  <a href="/support_docs/setup.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+    <p>Transferring Ownership:  <a href="/support_docs/transfer.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+    <p>Updating the Slideshow:  <a href="/support_docs/slideshow.pdf" class="underline decoration-solid decoration-2 decoration-sky-400">View</a></p>
+  <% end %>
+
   <%# Report any Bugs %>
   <h3 class="text-3xl mb-4">Reporting Bugs</h3>
   <p class="font-bold">If you find any bugs in our site, please let us know by filling out the form below:</p>
-  <a href="https://forms.gle/M1UtFzxZhrNfUn5g7" class="mb-3">https://forms.gle/M1UtFzxZhrNfUn5g7</a>
+  <a href="https://forms.gle/M1UtFzxZhrNfUn5g7" class="underline decoration-solid decoration-2 decoration-sky-400 mb-3">https://forms.gle/M1UtFzxZhrNfUn5g7</a>
 
 
 </mainContentHolder>

@@ -1,62 +1,29 @@
-Inspecting 84 files
-......CC....C......C......C....................C.CC.................................
+Inspecting 82 files
+.......C...........C...........C...............C.CCC..............................
 
 Offenses:
 
-app/controllers/admins_controller.rb:19:57: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
-        format.html { redirect_to(accounts_url, notice: "You do not have access to this page. Contact your adminstrator for help.") }
-                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/admins_controller.rb:35:62: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
-          format.html { redirect_to(user_url(@user), notice: "User was successfully updated.") }
-                                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/admins_controller.rb:45:57: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
-        format.html { redirect_to(accounts_url, notice: "You do not have access to that update action. Contact your adminstrator for help.") }
-                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/admins_controller.rb:53:53: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
-      format.html { redirect_to(users_path, notice: "User was successfully destroyed.") }
-                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/admins_controller.rb:64:57: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
-      format.html { redirect_to(user_url(user), notice: "Role has been successfully assigned to the user.") }
-                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/application_controller.rb:14:151: C: Layout/LineLength: Line is too long. [271/150]
+app/controllers/application_controller.rb:15:151: C: Layout/LineLength: Line is too long. [271/150]
         if current_admin && !current_admin.is_approved? && (!(params[:controller] == "account" && params[:action] == "index") && !(params[:controller] == "admins/sessions" && params[:action] == "destroy") && !(params[:controller] == "home" && params[:action] == "index"))
                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/application_controller.rb:15:41: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
-                        flash[:alert] = "Your account is not approved yet. Please wait for approval or contact your Administrators."
-                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/roles_controller.rb:26:60: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
-        format.html { redirect_to(role_url(@role), notice: "Role was successfully created.") }
-                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/roles_controller.rb:39:60: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
-        format.html { redirect_to(role_url(@role), notice: "Role was successfully updated.") }
-                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/controllers/roles_controller.rb:53:52: C: Rails/I18nLocaleTexts: Move locale texts to the locale files in the config/locales directory.
-      format.html { redirect_to(roles_url, notice: "Role was successfully destroyed.") }
-                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/helpers/users_helper.rb:2:9: C: Naming/PredicateName: Rename has_documents_signed? to documents_signed?.
-    def has_documents_signed?
-        ^^^^^^^^^^^^^^^^^^^^^
 app/helpers/users_helper.rb:5:151: C: Layout/LineLength: Line is too long. [195/150]
               "Documents Not Yet Completed: #{current_admin.dues_completed ? '' : 'Dues '}#{current_admin.aor_completed ? '' : 'AOR '}#{current_admin.boat_waiver_completed ? '' : 'Boat Waiver '}"
                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/helpers/users_helper.rb:12:9: C: Naming/PredicateName: Rename has_info_filled_out? to info_filled_out?.
-    def has_info_filled_out?(user_id)
-        ^^^^^^^^^^^^^^^^^^^^
 app/helpers/users_helper.rb:17:151: C: Layout/LineLength: Line is too long. [194/150]
               "Info Not Yet Filled Out on Account: #{user_to_check.uin.present? ? '' : 'UIN '}#{user_to_check.address.present? ? '' : 'Address '}. Please fill this info out on the Account Page."
                                                                                                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-app/models/role.rb:2:5: C: Rails/HasManyOrHasOneDependent: Specify a :dependent option.
-    has_many :set_role
-    ^^^^^^^^
+app/models/wakeboard_set.rb:51:3: C: Metrics/CyclomaticComplexity: Cyclomatic complexity for rider_can_join? is too high. [12/10]
+  def rider_can_join?(user_id, as_dib) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+app/models/wakeboard_set.rb:51:3: C: Metrics/PerceivedComplexity: Perceived complexity for rider_can_join? is too high. [13/10]
+  def rider_can_join?(user_id, as_dib) ...
+  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 spec/integration/account_integration_spec.rb:8:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 spec/integration/account_integration_spec.rb:9:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/members_integration_spec.rb:4:1: C: RSpec/MultipleDescribes: Do not use multiple top-level example groups - try to nest them.
-RSpec.describe('Member Pages Without Access', type: :feature) do
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 spec/integration/members_integration_spec.rb:8:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -69,41 +36,116 @@ spec/integration/members_integration_spec.rb:22:5: C: RSpec/AnyInstance: Avoid s
 spec/integration/members_integration_spec.rb:23:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(chris))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:4:1: C: RSpec/MultipleDescribes: Do not use multiple top-level example groups - try to nest them.
-RSpec.describe('Go to receipts page as treasurer', type: :feature) do
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/members_integration_spec.rb:24:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 spec/integration/receipt_integration_spec.rb:8:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 spec/integration/receipt_integration_spec.rb:9:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:22:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+spec/integration/receipt_integration_spec.rb:10:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:11:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:24:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:23:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+spec/integration/receipt_integration_spec.rb:25:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:36:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+spec/integration/receipt_integration_spec.rb:26:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:27:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:40:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:37:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+spec/integration/receipt_integration_spec.rb:41:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:50:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+spec/integration/receipt_integration_spec.rb:42:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:43:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:56:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:51:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+spec/integration/receipt_integration_spec.rb:57:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:73:3: C: RSpec/OverwritingSetup: admin is already defined.
-  let(:admin) { Admin.create!(email: "chrispasala@tamu.edu", first_name: "chris", last_name: "pasala", role_id: 3, id: 2, is_approved: true, uin: 123, address: "123 place") }
-  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:76:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+spec/integration/receipt_integration_spec.rb:58:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:59:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:83:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:authenticate_admin!).and_return(true))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-spec/integration/receipt_integration_spec.rb:77:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+spec/integration/receipt_integration_spec.rb:84:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
     allow_any_instance_of(ApplicationController).to(receive(:current_admin).and_return(admin))
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:85:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/receipt_integration_spec.rb:86:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:8:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:9:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:10:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:11:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:31:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:32:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:33:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(true))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:34:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:65:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:66:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:67:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:68:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:131:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_admin!).and_return(true)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:132:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:133:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+spec/integration/set_integration_spec.rb:134:5: C: RSpec/AnyInstance: Avoid stubbing using allow_any_instance_of.
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-84 files inspected, 34 offenses detected
+82 files inspected, 48 offenses detected

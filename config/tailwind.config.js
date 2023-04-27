@@ -10,8 +10,12 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ['Roboto', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif']
       },
+      colors: {
+        'tamu-red': '#500000',
+      }
     },
   },
   plugins: [

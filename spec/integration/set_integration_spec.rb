@@ -9,6 +9,7 @@ RSpec.describe 'Rider Creating a set', type: :feature do
     allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
   end
 
   scenario "Rider viewing create button on sets page" do
@@ -32,28 +33,30 @@ RSpec.describe 'Driver Creating a set', type: :feature do
     allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(true))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
   end
 
   scenario "Driver creating a valid set" do
     date = DateTime.current.tomorrow
     visit new_wakeboard_set_path
-    fill_in 'Scheduled date', with: date
-    click_on 'Create Set'
-    expect(page).not_to have_content('Error')
-    visit wakeboard_sets_path
+    fill_in 'Start', with: date
+    fill_in 'End', with: Time.current.advance(hours: 1)
+    click_on 'Save'
+    expect(page).not_to have_content('errors prohibited')
     expect(page).to have_content(admin.first_name)
-    expect(find('table')).to have_content(date.strftime("%A"))
+    expect(page).to have_content(date.strftime("%a"))
   end
 
   scenario "Driver creating set with date in the past" do
-    date = DateTime.current.tomorrow
+    date = DateTime.current.prev_day
     visit new_wakeboard_set_path
-    fill_in 'Scheduled date', with: date
-    click_on 'Create Set'
-    expect(page).not_to have_content('Error')
+    fill_in 'Start', with: date
+    fill_in 'End', with: Time.new(date.year, date.month, date.day, date.hour + 1, date.min)
+    click_on 'Save'
+    expect(page).to have_content('errors prohibited')
     visit wakeboard_sets_path
-    expect(find('table')).to have_content(admin.first_name)
-    expect(find('table')).to have_content(date.strftime("%A"))
+    expect(page).not_to have_content(admin.first_name)
+    expect(page).not_to have_content(date.strftime("%a"))
   end
 
 end
@@ -66,11 +69,14 @@ RSpec.describe 'Joining a set', type: :feature do
     allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
+
     @set = WakeboardSet.create!(
       dib_count: 0,
       chib_count: 0,
       driver_count: 1,
-      scheduled_date: DateTime.current.tomorrow
+      scheduled_date: DateTime.current.tomorrow,
+      end_time: Time.current.advance(hours: 1)
     )
     SetDriver.create!(wakeboard_set_id: @set.id, admin_id:admin.id)
   end
@@ -132,11 +138,14 @@ RSpec.describe 'Leaving a set', type: :feature do
     allow_any_instance_of(ApplicationController).to receive(:current_admin).and_return(admin)
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Driver").and_return(false))
     allow_any_instance_of(Admin).to(receive(:has_role?).with("Admin").and_return(false))
+    allow_any_instance_of(Admin).to(receive(:has_role?).with("Treasurer").and_return(false))
+
     @set = WakeboardSet.create!(
       dib_count: 0,
       chib_count: 0,
       driver_count: 1,
-      scheduled_date: DateTime.current.tomorrow
+      scheduled_date: DateTime.current.tomorrow,
+      end_time: Time.current.advance(hours: 1)
     )
     SetDriver.create!(wakeboard_set_id: @set.id, admin_id:admin.id)
   end

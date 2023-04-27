@@ -1,78 +1,121 @@
-<head>
-	<%= stylesheet_link_tag "styles.css" %>
-</head>
+<style>
+  .receipt-bottom {
+    
+  }
+</style>
 
-<ul>
-
-  <div id="<%= dom_id receipt %>">
-
-  <div hidden>
-    <%= @receipt_user = Admin.find_by(:id => receipt.admin_id) %>
+<div id="<%= dom_id receipt %>" class="w-3/4 px-4 pt-10 pb-5 mt-5 drop-shadow-xl bg-white border rounded-lg relative">
+  
+  <div class="absolute top-0 left-0 w-full flex justify-center" style="margin-top: -1.5em;">
+    <% if @receipt.stage == 1 %>
+      <div class="w-5 h-5 flex items-center justify-center drop-shadow-lg outline outline-8 outline-white p-5 bg-red-600 text-neutral-50 rounded-full">
+        <i class="fa-solid fa-exclamation"></i>
+      </div>
+    <% elsif @receipt.stage == 2 %>
+      <div class="w-5 h-5 flex items-center justify-center drop-shadow-lg outline outline-8 outline-white p-5 bg-yellow-300 text-neutral-50 rounded-full">
+        <i class="fa-regular fa-thumbs-up"></i>
+      </div>
+    <% else %>
+      <div class="w-5 h-5 flex items-center justify-center drop-shadow-lg outline outline-8 outline-white p-5 bg-green-600 text-neutral-50 rounded-full">
+        <i class="fa-solid fa-check"></i>
+      </div>
+    <% end %>
   </div>
 
-  <p>
-    <strong>Receipt ID:</strong>
-    <%= receipt.id %>
-  </p>
+  <div class="w-full text-center">
+    <div class="pb-4 border-b">
+      <% if @receipt.stage == 1 %>
+        <p class="text-xl font-semibold">Pending Approval</p>
+        <p class="">A Treasurer will review the receipt shortly</p>
+      <% elsif @receipt.stage == 2 %>
+        <p class="text-xl font-semibold">Approved</p>
+        <p class="">You should receive a refund soon</p>
+      <% else %>
+        <p class="text-xl font-semibold">Refunded</p>
+        <p class="">Your refund has been processed</p>
+      <% end %>
+    </div>
 
-  <p>
-    <strong>Receipt Uploader's User ID:</strong>
-    <%= receipt.admin_id %>
-  </p>
+    <div class="py-4">
+      <p class="mb-1">Total Amount</p>
+      <h3 class="text-4xl font-bold">$<%= @receipt.value %></h3>
+    </div>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 md:grid-rows-3 gap-4">
+    <div class="flex flex-col border rounded-lg p-3">
+      <p class="text-gray-500 mb-2">User</p>
+      <div class="">
+        <% unless @receipt.admin.nil? %>
+          <%= link_to admin_path(@receipt.admin) do %>
+            <%= render partial: "shared/profile_pill", locals: { user: @receipt.admin } %>
+          <% end %>
+        <% else %>
+          <p class="font-medium">Deleted User</p>
+        <% end %>
+      </div>
+    </div>
 
-  <p>
-    <strong>Receipt's Uploader's Name:</strong>
-    <%= @receipt_user.first_name %> <%= @receipt_user.last_name %>
-  </p>
+    <div class="flex flex-col border rounded-lg p-3">
+      <p class="text-gray-500 mb-2">UIN</p>
+      <% unless @receipt.admin.nil? %>
+        <p class="font-medium"><%= @receipt.admin.uin %></p>
+      <% else %>
+        <p class="font-medium">N/A</p>
+      <% end %>
+    </div>
 
-  <p>
-    <strong>Receipt's Uploader's UIN:</strong>
-    <%= @receipt_user.uin %>
-  </p>
+    <div class="flex flex-col border rounded-lg p-3">
+      <p class="text-gray-500 mb-2">Address</p>
+      <% unless @receipt.admin.nil? %>
+        <p class="font-medium"><%= @receipt.admin.address %></p>
+      <% else %>
+        <p class="font-medium">N/A</p>
+      <% end %>
+    </div>
 
-  <p>
-    <strong>Receipt's Uploader's Address:</strong>
-    <%= @receipt_user.address %>
-  </p>
+    <div class="flex flex-col border rounded-lg p-3">
+      <p class="text-gray-500 mb-2">Date made</p>
+      <p class="font-medium">
+        <% if receipt.date_made.blank? %>
+          N/A
+        <% else %>
+          <%= receipt.date_made.strftime("%-d %b, %Y") %>
+        <% end %>
+      </p>
+    </div>
 
-  <p>
-    <strong>Receipt Value: $</strong>
-    <%= receipt.value %>
-  </p>
+    <div class="flex flex-col border rounded-lg p-3">
+      <p class="text-gray-500 mb-2">Date Approved</p>
+      <p class="font-medium">
+        <% if receipt.date_approved.blank? %>
+          N/A
+        <% else %>
+          <%= receipt.date_approved.strftime("%-d %b, %Y") %>
+        <% end %>
+      </p>
+    </div>
 
-  <p>
-    <strong>Date made:</strong>
-    <%= receipt.date_made %>
-  </p>
+    <div class="flex flex-col border rounded-lg p-3">
+      <p class="text-gray-500 mb-2">Date Refunded</p>
+      <p class="font-medium">
+        <% if receipt.date_refunded.blank? %>
+          N/A
+        <% else %>
+          <%= receipt.date_refunded.strftime("%-d %b, %Y")%>
+        <% end %>
+      </p>
+    </div>
+  </div>
 
-  <p>
-    <strong>Date approved:</strong>
-    <%= receipt.date_approved %>
-  </p>
-
-  <p>
-    <strong>Date refunded:</strong>
-    <%= receipt.date_refunded %>
-  </p>
-
-  <p>
-    <strong>Stage:</strong>
-    <%= receipt.stage %>
-  </p>
-
-  <p>
-    <strong>Image Link:</strong>
-    <%= receipt.image_link %>
-  </p>
-
-    <strong>Image:</strong>
-    </br>
-    <img src=<%=receipt.image_link %> alt="Image not found" height="500" width="500">
-  </p>
-
-
+  <div class="w-full justify-center items-center text-center mt-3 py-2">
+    <%= link_to receipt.image_link, class: "py-2 px-3" do %>
+      <i class="fa-regular fa-circle-down"></i> Download Receipt
+    <% end %>
+  </div>
+  
+  <%= image_tag "perforation.png", class: "w-full absolute bottom-0 left-0", style: "margin-bottom: -1em;" %>
 </div>
-</ul>
 
 
 

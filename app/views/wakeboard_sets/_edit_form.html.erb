@@ -1,0 +1,56 @@
+<%= form_with(model: wakeboard_set) do |form| %>
+  <div class="flex flex-row mb-3">
+    <h5 class="text-gray-700 text-lg">Edit Set <%= wakeboard_set.id %></h5>
+  </div>
+
+  <% if wakeboard_set.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(wakeboard_set.errors.count, "error") %> prohibited this set from being saved:</h2>
+
+      <ul>
+        <% wakeboard_set.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="flex flex-row mb-5 justify-between flex-wrap">
+    <div>
+      <%= form.label :scheduled_date, "Start Time", class: "text-gray-700 block" %>
+      <%= form.datetime_field :scheduled_date, class: "rounded-lg bg-gray-200 border-0 focus:outline-none focus:ring-gray-700 focus:border-0" %>
+    </div>
+
+    <div>
+      <%= form.label :end_time, "End", class: "text-gray-700 block" %>
+      <%= form.time_field :end_time, class: "rounded-lg bg-gray-200 border-0 focus:outline-none focus:ring-gray-700 focus:border-0", value: wakeboard_set.end_time.try(:strftime,'%H:%M') %>
+    </div>
+  </div>
+
+  <div class="flex flex-col mb-5">
+    <%= label_tag :additional_driver, "Add a Driver", class: "text-gray-700 block" %>
+    <div>
+      <% other_driver_id = wakeboard_set.set_drivers.find { |d| d.admin_id != current_admin.id }.try(:admin_id) %>
+      <% options = drivers.map { |d| [d.first_name + " " + d.last_name, d.id] } %>
+      <%= select_tag :additional_driver, options_for_select(options, other_driver_id), include_blank: "Search drivers" %>
+    </div>
+  </div>
+
+  <div class="flex flex-row justify-between md:justify-end">
+    <%= link_to wakeboard_set, class: "mr-3 text-center px-4 py-2 rounded-lg border border-sky-400 text-sky-600" do %>
+      Discard
+    <% end %>
+    <%= button_tag class: "border border-sky-400 bg-sky-600 text-sky-50 px-4 py-2 rounded-lg hover:cursor-pointer", type: "submit" do %>
+      Save
+    <% end %>
+  </div>
+<% end %>
+
+<script>
+  new TomSelect("#additional_driver",{
+    persist: true,
+    createOnBlur: false,
+    create: false,
+    maxItems: 1
+  });
+</script>

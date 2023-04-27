@@ -31,6 +31,7 @@ class WakeboardSetsController < ApplicationController
     end
 
     @wakeboard_set = WakeboardSet.new
+    @drivers = Admin.where.not(id: current_admin.id,).joins(:roles).where("role_name = ?", "Driver")
   end
 
   # GET /wakeboard_sets/1/edit
@@ -38,21 +39,23 @@ class WakeboardSetsController < ApplicationController
     if !current_admin.has_role?("Driver") && !current_admin.has_role?("Admin")
       redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can edit sets") and return
     end
+
+    @drivers = Admin.where.not(id: current_admin.id,).joins(:roles).where("role_name = ?", "Driver")
   end
 
   # POST /wakeboard_sets or /wakeboard_sets.json
   def create
-    @wakeboard_set = WakeboardSet.new(wakeboard_set_params.merge(driver_count: 1))
+    @wakeboard_set = WakeboardSet.new(wakeboard_set_params)
 
     if !current_admin.has_role?("Driver") && !current_admin.has_role?("Admin")
       redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can create sets") and return
     end
 
+    @drivers = Admin.where.not(id: current_admin.id,).joins(:roles).where("role_name = ?", "Driver")
+    additional_driver = params[:additional_driver]
+
     respond_to do |format|
-      if @wakeboard_set.save
-        user = current_admin
-        driver1 = SetDriver.create(admin_id: user.id, wakeboard_set_id: @wakeboard_set.id)
-        driver2 = SetDriver.create(admin_id: params[:wakeboard_set][:admin_id], wakeboard_set_id: @wakeboard_set.id)
+      if @wakeboard_set.create_with_driver(current_admin.id, additional_driver)
 
         format.html { redirect_to(wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully created.") }
         format.json { render(:show, status: :created, location: @wakeboard_set) }
@@ -69,8 +72,11 @@ class WakeboardSetsController < ApplicationController
       redirect_to(wakeboard_sets_path, notice: "Unauthorized: only Drivers and Admins can update sets") and return
     end
 
+    @drivers = Admin.where.not(id: current_admin.id,).joins(:roles).where("role_name = ?", "Driver")
+    additional_driver = params[:additional_driver]
+
     respond_to do |format|
-      if @wakeboard_set.update(wakeboard_set_params)
+      if @wakeboard_set.edit(wakeboard_set_params, current_admin.id, additional_driver)
         format.html { redirect_to(wakeboard_set_url(@wakeboard_set), notice: "Wakeboard set was successfully updated.") }
         format.json { render(:show, status: :ok, location: @wakeboard_set) }
       else
@@ -136,6 +142,7 @@ class WakeboardSetsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_wakeboard_set
       @wakeboard_set = WakeboardSet.find(params[:id])
@@ -150,7 +157,8 @@ class WakeboardSetsController < ApplicationController
         :chib_limit,
         :driver_count,
         :driver_limit,
-        :scheduled_date 
+        :scheduled_date,
+        :end_time
       )
     end
 end
